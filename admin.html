@@ -2,154 +2,140 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Confessions Admin 💌</title>
-
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<title>Admin — Confessions Inbox 💌</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #f4e8ff, #e1d2ff);
-  display: flex;
-  justify-content: center;
-  padding: 40px;
-  color: #6d42d9;
-}
+    body {
+        margin: 0;
+        padding: 40px 20px;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #f3d9ff, #d9c9ff);
+        color: #6a34c9;
+        overflow-x: hidden;
+    }
 
-/* Container */
-.panel {
-  background: white;
-  width: 100%;
-  max-width: 650px;
-  padding: 30px;
-  border-radius: 26px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
-  animation: fadeUp 0.6s ease-out;
-  position: relative;
-  overflow: hidden;
-}
+    .box {
+        background: white;
+        max-width: 650px;
+        margin: auto;
+        padding: 35px 30px;
+        border-radius: 22px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+        animation: pop 0.7s ease;
+        position: relative;
+        text-align: center;
+    }
 
-/* Subtle floating sparkles */
-.panel::before {
-  content: "✨";
-  position: absolute;
-  font-size: 28px;
-  left: 20px;
-  top: 20px;
-  opacity: 0.5;
-  animation: float1 4s infinite ease-in-out;
-}
-.panel::after {
-  content: "✨";
-  position: absolute;
-  font-size: 24px;
-  right: 25px;
-  bottom: 25px;
-  opacity: 0.4;
-  animation: float2 4s infinite ease-in-out;
-}
+    @keyframes pop {
+        0% { transform: scale(0.7); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
 
-@keyframes fadeUp {
-  0% { opacity: 0; transform: translateY(25px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
+    /* Header Emoji */
+    .emoji {
+        font-size: 55px;
+        animation: float 2s infinite ease-in-out;
+        margin-bottom: 5px;
+    }
 
-@keyframes float1 {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
-}
-@keyframes float2 {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-  100% { transform: translateY(0); }
-}
+    @keyframes float {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-7px); }
+        100% { transform: translateY(0); }
+    }
 
-/* Heading */
-h1 {
-  text-align: center;
-  font-size: 34px;
-  font-weight: 600;
-  margin-bottom: 15px;
-  color: #8d54e2;
-}
+    h1 {
+        font-size: 30px;
+        margin-bottom: 15px;
+        color: #8c4fd6;
+    }
 
-/* Icon */
-.emoji {
-  text-align: center;
-  font-size: 50px;
-  margin-bottom: 10px;
-  animation: float1 2.5s infinite ease-in-out;
-}
+    p {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #7044b6;
+    }
 
-/* Text */
-p, h3 {
-  line-height: 1.6;
-  font-size: 16px;
-}
+    h3 {
+        color: #8c4fd6;
+        margin-top: 25px;
+    }
 
-/* Button */
-button {
-  display: block;
-  width: 100%;
-  background: #b68afc;
-  color: white;
-  padding: 14px;
-  border: none;
-  border-radius: 14px;
-  font-size: 16px;
-  margin-top: 18px;
-  cursor: pointer;
-  transition: 0.2s;
-  font-weight: 500;
-}
-button:hover {
-  background: #a47aee;
-  transform: translateY(-2px);
-}
+    /* Button */
+    button {
+        background: #b784f7;
+        color: white;
+        border: none;
+        padding: 14px 22px;
+        border-radius: 14px;
+        cursor: pointer;
+        font-size: 15px;
+        margin-top: 18px;
+        transition: 0.2s;
+    }
 
-/* Back button */
-.back {
-  display: block;
-  text-align: center;
-  margin-top: 12px;
-  font-size: 15px;
-  color: #7549d0;
-  text-decoration: none;
-}
-.back:hover {
-  text-decoration: underline;
-}
+    button:hover {
+        background: #a277e8;
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        font-size: 20px;
+        color: #c083ff;
+        animation: floatUp 6s linear infinite;
+        z-index: 1;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-900px); opacity: 0; }
+    }
 </style>
+
 </head>
 
 <body>
 
-<div class="panel">
-  <div class="emoji">📥💜</div>
-  <h1>Confessions Admin</h1>
+<!-- Floating hearts -->
+<div id="heartContainer"></div>
 
-  <p>
-    All anonymous confessions submitted through your website are securely stored in
-    <b>FormSubmit</b>.  
-    This page is your shortcut to the dashboard where you can read everything.
-  </p>
+<div class="box">
+    <div class="emoji">📥💜</div>
+    <h1>Confessions Admin Panel</h1>
 
-  <h3>🔑 How to View Your Confessions</h3>
-  <p>
-    1️⃣ Go to <b>https://formsubmit.co/dashboard</b><br>
-    2️⃣ Log in with: <b>meriembenachit14@gmail.com</b><br>
-    3️⃣ Your confessions will appear instantly inside the inbox.
-  </p>
+    <p>
+        All anonymous confessions submitted on your website are stored inside your
+        <b>FormSubmit Dashboard</b>.
+        <br><br>
+        Since FormSubmit does not offer a public inbox API,  
+        <u>your dashboard is the official admin panel</u>.
+    </p>
 
-  <button onclick="window.open('https://formsubmit.co/dashboard','_blank')">
-    Open Confessions Inbox 💌
-  </button>
+    <h3>🔑 How to Access Your Inbox</h3>
+    <p>
+        1️⃣ Go to <b>https://formsubmit.co/dashboard</b><br>
+        2️⃣ Log in using: <b>meriembenachit14@gmail.com</b><br>
+        3️⃣ Your confessions will appear instantly in the inbox list.
+    </p>
 
-  <a href="index.html" class="back">← Back to Home</a>
+    <button onclick="window.open('https://formsubmit.co/dashboard', '_blank')">
+        Open Inbox Dashboard 💌
+    </button>
 </div>
+
+<script>
+/* Floating Hearts Generator */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💜";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (18 + Math.random() * 18) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 500);
+</script>
 
 </body>
 </html>
