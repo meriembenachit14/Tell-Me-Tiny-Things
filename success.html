@@ -1,26 +1,66 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Message Sent!</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Sent 💜</title>
 
-<!-- Favicon -->
-<link rel="icon" type="image/png" href="favicon.png">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
 
-<style>
-body {
-    background: #f3e5ff;
-    font-family: "Poppins", sans-serif;
-    text-align: center;
-    padding-top: 120px;
-    color: #8c4fd6;
-}
-h1 { font-size: 32px; }
-p { font-size: 16px; }
-</style>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #f3d9ff, #d9c9ff);
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+      color: #7a44c9;
+      animation: fadeIn 1s ease;
+    }
 
+    h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+      animation: pop 0.7s ease;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .emoji {
+      font-size: 60px;
+      animation: float 2s infinite ease-in-out;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.6); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+      100% { transform: translateY(0); }
+    }
+  </style>
 </head>
+
 <body>
-<h1>💜 Your confession was sent!</h1>
-<p>You may now close this tab.</p>
+  <div class="emoji">💌✨</div>
+  <h1>Your Message Was Sent!</h1>
+  <p>You may now close this tab. Thank you 💜</p>
 </body>
 </html>
