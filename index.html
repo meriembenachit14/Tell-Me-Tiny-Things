@@ -1,200 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Send Me a Secret 💌</title>
-
-<!-- FAVICON -->
 <link rel="icon" type="image/png" href="favicon.png">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
 body {
-    margin: 0;
-    padding: 0;
-    background: #f3e5ff;
-    font-family: "Poppins", sans-serif;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #ffd6f3, #ffe6fa);
+  color: #b64aa8;
+  padding: 40px 20px;
+  text-align: center;
 }
 
-/* Loading Screen */
-#loadingScreen {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: #f4dfff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 28px;
-    color: #8c4fd6;
-    z-index: 999;
+/* Container */
+.box {
+  background: white;
+  border-radius: 30px;
+  max-width: 700px;
+  margin: auto;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(255, 130, 190, 0.25);
+  border: 3px solid #ffbde9;
+  animation: pop 0.6s ease;
 }
 
-.loader {
-    animation: blink 1.2s infinite;
+@keyframes pop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
-@keyframes blink {
-    50% { opacity: 0.4; }
+/* Cute floating icon */
+.emoji {
+  font-size: 60px;
+  margin-bottom: 10px;
+  animation: float 2s infinite ease-in-out;
 }
 
-/* Hearts */
-#heartContainer .heart {
-    position: fixed;
-    bottom: -20px;
-    animation: floatUp 6s linear;
-    pointer-events: none;
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
 }
 
-@keyframes floatUp {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-110vh); opacity: 0; }
+/* Input + Textarea */
+input, textarea {
+  width: 100%;
+  padding: 16px;
+  margin-top: 12px;
+  border-radius: 15px;
+  border: 2px solid #ffbde9;
+  background: #fff7fc;
+  font-size: 15px;
 }
 
-.container {
-    padding: 30px;
-    max-width: 420px;
-    margin: 80px auto;
-    background: white;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    animation: fadeIn 0.7s ease;
+input:focus, textarea:focus {
+  border-color: #ff94d6;
+  outline: none;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-textarea {
-    width: 100%;
-    height: 130px;
-    border-radius: 12px;
-    border: 2px solid #caa8ff;
-    padding: 12px;
-    font-size: 15px;
-    outline: none;
-    resize: none;
-}
-
-textarea:focus {
-    border-color: #8c4fd6;
-}
-
+/* Button */
 button {
-    margin-top: 15px;
-    padding: 12px 20px;
-    background: #b784f7;
-    border: none;
-    color: white;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 16px;
+  width: 100%;
+  background: #ff94d6;
+  border: none;
+  padding: 16px;
+  border-radius: 15px;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  margin-top: 18px;
+  transition: 0.2s;
 }
 
 button:hover {
-    background: #a472f7;
-}
-
-#counter {
-    margin-top: 10px;
-    color: #8c4fd6;
-    font-size: 14px;
-}
-
-#successMessage {
-    margin-top: 15px;
-    color: #5bbf5b;
-    font-size: 16px;
-    display: none;
+  background: #ff7ac6;
 }
 </style>
 </head>
 
-
-
-
 <body>
-<div id="loadingScreen"><div class="loader">🌸 Loading...</div></div>
 
-<script>
-window.onload = () => {
-    setTimeout(() => {
-        document.getElementById("loadingScreen").style.display = "none";
-    }, 800);
-};
-</script>
+<div class="box">
+  <div class="emoji">🎀💌</div>
 
-<div id="heartContainer"></div>
+  <h1 style="margin-bottom: 5px; font-size: 32px;">Send Me a Secret</h1>
+  <p style="margin-top: 0; font-size: 15px;">
+    Totally anonymous ✨
+  </p>
 
-<div class="container">
-    <div style="font-size:40px">💌</div>
-    <h1>Send Me a Secret</h1>
+  <form action="https://formsubmit.co/meriembenachit14@gmail.com" method="POST">
 
-    <textarea id="confession" placeholder="Type your confession..."></textarea>
-    <button onclick="sendConfession()">Send Anonymously</button>
+    <input type="hidden" name="_next" value="https://meriem-benachit.github.io/success.html">
 
-    <div id="counter">Confessions sent: <span id="count">0</span></div>
-    <div id="successMessage">✓ Sent!</div>
+    <textarea name="message" rows="6" placeholder="Write your secret here... （＾・ω・＾✿）" required></textarea>
+
+    <button type="submit">Send 💌</button>
+  </form>
 </div>
-
-<audio id="popSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f5b67fa9fb.mp3?filename=click-124467.mp3"></audio>
-<audio id="sendSound" src="https://cdn.pixabay.com/download/audio/2021/09/20/audio_5b9e319a36.mp3?filename=whoosh-6316.mp3"></audio>
-
-<script>
-/* Hearts */
-setInterval(() => {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerHTML = '💜';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = (20 + Math.random() * 20) + 'px';
-    document.getElementById('heartContainer').appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}, 500);
-
-
-/* Auto-save */
-const area = document.getElementById('confession');
-if (localStorage.getItem('draft')) {
-    area.value = localStorage.getItem('draft');
-}
-area.addEventListener('input', () => {
-    localStorage.setItem('draft', area.value);
-});
-
-
-/* Counter */
-let count = localStorage.getItem('sentCount') || 0;
-document.getElementById('count').innerText = count;
-
-
-/* FormSubmit — redirect mode */
-function sendConfession() {
-    const text = area.value.trim();
-    if (!text) return alert('Please type something!');
-
-    document.getElementById('popSound').play();
-
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = "https://formsubmit.co/meriembenachit14@gmail.com";
-
-    form.innerHTML = `
-        <input type="hidden" name="confession" value="${text}">
-        <input type="hidden" name="_next" value="https://meriembenachit.github.io/success.html">
-        <input type="hidden" name="_captcha" value="false">
-    `;
-
-    document.body.appendChild(form);
-
-    count++;
-    localStorage.setItem('sentCount', count);
-    document.getElementById('count').innerText = count;
-
-    form.submit();
-}
-</script>
 
 </body>
 </html>
