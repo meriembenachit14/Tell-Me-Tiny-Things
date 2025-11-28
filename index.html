@@ -1,204 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anonymous Confessions</title>
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png" />
-
-    <!-- OG / IG Preview Card -->
-    <meta property="og:title" content="Send Me Anonymous Confessions 💌" />
-    <meta property="og:description" content="Tell me anything anonymously. No logs, no names—just honesty." />
-    <meta property="og:image" content="preview.jpg" />
-    <meta property="og:type" content="website" />
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
-    <!-- CSS Styles -->
-    <style>
-        body {
-            margin: 0;
-            font-family: "Poppins", sans-serif;
-            background: #ffeef7;
-            overflow-x: hidden;
-        }
-
-        /* Floating hearts */
-        .heart {
-            position: fixed;
-            bottom: -10px;
-            font-size: 18px;
-            animation: floatUp 6s linear infinite;
-            opacity: 0.7;
-            user-select: none;
-        }
-        @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 0.7; }
-            100% { transform: translateY(-120vh) scale(1.5); opacity: 0; }
-        }
-
-        /* Main container */
-        .container {
-            max-width: 450px;
-            background: white;
-            padding: 25px;
-            margin: 80px auto;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
-        h1 {
-            color: #ff6fa8;
-            margin-bottom: 10px;
-        }
-
-        p.subtitle {
-            color: #555;
-            margin-top: -5px;
-            margin-bottom: 25px;
-        }
-
-        textarea {
-            width: 100%;
-            padding: 15px;
-            height: 130px;
-            border-radius: 15px;
-            border: 2px solid #ffc4dd;
-            outline: none;
-            resize: none;
-            font-size: 15px;
-        }
-
-        button {
-            margin-top: 15px;
-            background: #ff8fbc;
-            border: none;
-            padding: 12px 20px;
-            width: 100%;
-            border-radius: 15px;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background: #ff6fa8;
-        }
-
-        /* Counter */
-        #counter {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #777;
-        }
-
-        /* Loading screen */
-        #loadingScreen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #ffe7f3;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 9999;
-        }
-
-        .loaderHeart {
-            font-size: 50px;
-            animation: beat 1s infinite;
-            color: #ff6fa8;
-        }
-
-        @keyframes beat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-        }
-
-    </style>
+#counter {
+margin-top: 10px;
+color: #8c4fd6;
+font-size: 14px;
+}
+</style>
 </head>
 
+
 <body>
-
-    <!-- Loading Screen -->
-    <div id="loadingScreen">
-        <div class="loaderHeart">💖</div>
-        <p>Loading your kawaii space...</p>
-    </div>
-
-    <!-- Main content -->
-    <div class="container">
-        <h1>💌 Anonymous Confessions</h1>
-        <p class="subtitle">Tell me anything — no names, no logs.</p>
-
-        <textarea id="confessionInput" placeholder="Type your secret here..."></textarea>
-        <button onclick="sendConfession()">Send Anonymously 💞</button>
-
-        <div id="counter">Total confessions: <span id="countNum">0</span></div>
-    </div>
+<div id="loadingScreen"><div class="loader">🌸 Loading...</div></div>
 
 
-    <!-- Floating hearts generator -->
-    <script>
-        function spawnHeart() {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerText = "💖";
-            heart.style.left = Math.random() * 100 + "vw";
-            heart.style.animationDuration = (4 + Math.random() * 4) + "s";
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 7000);
-        }
-        setInterval(spawnHeart, 800);
-    </script>
+<div id="heartContainer"></div>
 
 
-    <!-- Loading screen script -->
-    <script>
-        window.addEventListener("load", () => {
-            setTimeout(() => {
-                document.getElementById("loadingScreen").style.display = "none";
-            }, 1400);
-        });
-    </script>
+<div class="container">
+<div style="font-size:40px">💌</div>
+<h1>Send Me a Secret</h1>
+<p>Totally anonymous & pastel cute ✨</p>
 
 
-    <!-- Confession counter script -->
-    <script>
-        let count = localStorage.getItem("confessionCount") || 0;
-        document.getElementById("countNum").innerText = count;
+<textarea id="confession" placeholder="Type your confession..."></textarea>
+<button onclick="sendConfession()">Send Anonymously</button>
+<div id="counter">Confessions sent: <span id="count">0</span></div>
+<div id="successMessage" style="display:none;color:#5bbf5b;margin-top:15px;font-size:16px;">✓ Sent!</div>
+</div>
 
-        function sendConfession() {
-            let text = document.getElementById("confessionInput").value.trim();
-            if (!text) return alert("Please type something first 💗");
 
-            // Increment counter
-            count++;
-            localStorage.setItem("confessionCount", count);
-            document.getElementById("countNum").innerText = count;
+<audio id="popSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f5b67fa9fb.mp3?filename=click-124467.mp3"></audio>
+<audio id="sendSound" src="https://cdn.pixabay.com/download/audio/2021/09/20/audio_5b9e319a36.mp3?filename=whoosh-6316.mp3"></audio>
 
-            // Send email
-            fetch("https://formsubmit.co/ajax/meriembenachit14@gmail.com", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ confession: text })
-            })
-            .then(() => {
-                alert("Sent anonymously! 💌");
-                document.getElementById("confessionInput").value = "";
-            })
-            .catch(() => alert("Something went wrong. Try again!"));
-        }
-    </script>
 
+<script>
+/* Hearts */
+setInterval(() => {
+const heart = document.createElement('div');
+heart.classList.add('heart');
+heart.innerHTML = '💜';
+heart.style.left = Math.random() * 100 + 'vw';
+heart.style.fontSize = (20 + Math.random() * 20) + 'px';
+document.getElementById('heartContainer').appendChild(heart);
+setTimeout(() => heart.remove(), 6000);
+}, 500);
+
+
+/* Auto-save */
+const area = document.getElementById('confession');
+if(localStorage.getItem('draft')){
+area.value = localStorage.getItem('draft');
+}
+area.addEventListener('input',()=>{
+localStorage.setItem('draft', area.value);
+});
+
+
+/* Counter */
+let count = localStorage.getItem('sentCount') || 0;
+document.getElementById('count').innerText = count;
+
+
+function sendConfession() {
+const text = area.value.trim();
+if (!text) return alert('Please type something!');
+
+
+document.getElementById('popSound').play();
+
+
+fetch('https://formsubmit.co/meriembenachit14@gmail.com', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({ confession: text })
+})
+.then(() => {
+document.getElementById('sendSound').play();
+
+
+document.getElementById('successMessage').style.display = 'block';
+setTimeout(()=>{
+document.getElementById('successMessage').style.display = 'none';
+},2500);
+
+
+area.value = '';
+localStorage.removeItem('draft');
+
+
+count++;
+localStorage.setItem('sentCount', count);
+document.getElementById('count').innerText = count;
+});
+}
+</script>
 </body>
 </html>
