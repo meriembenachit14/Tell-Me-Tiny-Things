@@ -3,29 +3,55 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Send Me a Secret 💌</title>
+<title>Send Me a Secret 💌🎀</title>
 <link rel="icon" type="image/png" href="favicon.png">
 
 <style>
+/* Base kawaii theme */
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #ffd6f3, #ffe6fa);
-  color: #b64aa8;
+  background: linear-gradient(135deg, #ffe6f6, #ffd0eb, #ffe9f9);
+  background-size: 300% 300%;
+  animation: softMove 12s ease infinite;
+  color: #c652b8;
   padding: 40px 20px;
   text-align: center;
 }
 
+@keyframes softMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Sparkle animation */
+.sparkles::before {
+  content: "✧ ✦ ✧";
+  font-size: 25px;
+  color: #ffbde9;
+  position: absolute;
+  top: -20px;
+  animation: sparkle 2s infinite ease-in-out;
+}
+
+@keyframes sparkle {
+  0% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.3); }
+  100% { opacity: 0.3; transform: scale(1); }
+}
+
 /* Container */
 .box {
+  position: relative;
   background: white;
-  border-radius: 30px;
+  border-radius: 35px;
   max-width: 700px;
   margin: auto;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(255, 130, 190, 0.25);
-  border: 3px solid #ffbde9;
-  animation: pop 0.6s ease;
+  padding: 35px;
+  box-shadow: 0 12px 40px rgba(255, 100, 180, 0.25);
+  border: 4px solid #ffbde9;
+  animation: pop 0.7s ease;
 }
 
 @keyframes pop {
@@ -33,72 +59,84 @@ body {
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* Cute floating icon */
+/* Floating hearts */
 .emoji {
-  font-size: 60px;
+  font-size: 70px;
   margin-bottom: 10px;
   animation: float 2s infinite ease-in-out;
 }
 
 @keyframes float {
   0% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-10px); }
   100% { transform: translateY(0); }
 }
 
-/* Input + Textarea */
-input, textarea {
+/* Inputs */
+textarea {
   width: 100%;
-  padding: 16px;
+  padding: 18px;
   margin-top: 12px;
-  border-radius: 15px;
-  border: 2px solid #ffbde9;
-  background: #fff7fc;
-  font-size: 15px;
-}
-
-input:focus, textarea:focus {
-  border-color: #ff94d6;
-  outline: none;
-}
-
-/* Button */
-button {
-  width: 100%;
-  background: #ff94d6;
-  border: none;
-  padding: 16px;
-  border-radius: 15px;
-  color: white;
-  font-size: 17px;
-  cursor: pointer;
-  margin-top: 18px;
+  border-radius: 20px;
+  border: 3px solid #ffc6ed;
+  background: #fff2fb;
+  font-size: 16px;
+  resize: none;
   transition: 0.2s;
 }
 
+textarea:focus {
+  border-color: #ff9cda;
+  box-shadow: 0 0 12px #ffc9ee;
+  outline: none;
+}
+
+/* Kawaii Button */
+button {
+  width: 100%;
+  background: #ff9cda;
+  border: none;
+  padding: 18px;
+  border-radius: 20px;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.25s;
+  box-shadow: 0 5px 15px rgba(255, 120, 200, 0.3);
+}
+
 button:hover {
-  background: #ff7ac6;
+  background: #ff85cf;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.97);
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
-  <div class="emoji">🎀💌</div>
+<div class="box sparkles">
+  <div class="emoji">💗💌🎀</div>
 
-  <h1 style="margin-bottom: 5px; font-size: 32px;">Send Me a Secret</h1>
-  <p style="margin-top: 0; font-size: 15px;">
-    Totally anonymous ✨
+  <h1 style="margin-bottom: 5px; font-size: 36px;">
+    Send Me a Secret 💞
+  </h1>
+  <p style="margin-top: 0; font-size: 16px;">
+    100% anonymous, safe & sparkly ✧  
   </p>
 
   <form action="https://formsubmit.co/meriembenachit14@gmail.com" method="POST">
-
     <input type="hidden" name="_next" value="https://meriem-benachit.github.io/success.html">
 
-    <textarea name="message" rows="6" placeholder="Write your secret here... （＾・ω・＾✿）" required></textarea>
+    <textarea name="message" rows="6"
+      placeholder="Write your secret here… (๑˃ᴗ˂)ﻭ 💗"
+      required></textarea>
 
-    <button type="submit">Send 💌</button>
+    <button type="submit">Send My Cute Secret 💌🎀</button>
   </form>
 </div>
 
