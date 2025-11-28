@@ -1,28 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Message Sent!</title>
-<style>
-    body {
-        background: #f3e5ff;
-        font-family: Arial, sans-serif;
-        text-align: center;
-        padding-top: 120px;
-        color: #8c4fd6;
-    }
-    h1 {
-        font-size: 32px;
-        margin-bottom: 10px;
-    }
-    p {
-        font-size: 18px;
-        opacity: 0.8;
-    }
-</style>
+    <meta charset="UTF-8">
+    <title>Message Sent!</title>
+
+    <style>
+        body {
+            background: #f3e5ff;
+            font-family: "Poppins", sans-serif;
+            text-align: center;
+            padding-top: 120px;
+            color: #8c4fd6;
+        }
+
+        h1 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 18px;
+            opacity: 0.85;
+        }
+
+        /* Cute floating hearts */
+        .heart {
+            position: absolute;
+            font-size: 22px;
+            color: #d08cff;
+            animation: floatUp 5s linear infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes floatUp {
+            0%   { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-600px); opacity: 0; }
+        }
+    </style>
 </head>
 
 <body>
+
     <h1>💜 Your confession was sent!</h1>
     <p>You may now close this tab.</p>
+
+    <script>
+        /* Floating hearts */
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '💜';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (18 + Math.random() * 15) + 'px';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }, 400);
+    </script>
+
 </body>
 </html>
