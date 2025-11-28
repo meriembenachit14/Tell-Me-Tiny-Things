@@ -1,61 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Message Sent!</title>
+<meta charset="UTF-8">
+<title>Confession Sent 💜</title>
 
-    <style>
-        body {
-            background: #f3e5ff;
-            font-family: "Poppins", sans-serif;
-            text-align: center;
-            padding-top: 120px;
-            color: #8c4fd6;
-        }
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #f3d9ff, #d9c9ff);
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #6a34c9;
+        text-align: center;
+        overflow: hidden;
+    }
 
-        h1 {
-            font-size: 34px;
-            margin-bottom: 12px;
-        }
+    .box {
+        background: white;
+        padding: 35px 30px;
+        border-radius: 22px;
+        max-width: 360px;
+        width: 90%;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+        animation: pop 0.7s ease;
+        position: relative;
+        z-index: 2;
+    }
 
-        p {
-            font-size: 18px;
-            opacity: 0.85;
-        }
+    @keyframes pop {
+        0% { transform: scale(0.7); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
+    }
 
-        /* Cute floating hearts */
-        .heart {
-            position: absolute;
-            font-size: 22px;
-            color: #d08cff;
-            animation: floatUp 5s linear infinite;
-            opacity: 0.9;
-        }
+    .emoji {
+        font-size: 50px;
+        margin-bottom: 10px;
+        animation: float 2s infinite ease-in-out;
+    }
 
-        @keyframes floatUp {
-            0%   { transform: translateY(0); opacity: 1; }
-            100% { transform: translateY(-600px); opacity: 0; }
-        }
-    </style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
+
+    h1 {
+        font-size: 26px;
+        margin-bottom: 8px;
+        color: #8c4fd6;
+    }
+
+    p {
+        font-size: 14px;
+        color: #7044b6;
+        margin: 0;
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        font-size: 18px;
+        color: #c083ff;
+        animation: floatUp 6s linear infinite;
+        z-index: 1;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-800px); opacity: 0; }
+    }
+</style>
+
 </head>
-
 <body>
 
-    <h1>💜 Your confession was sent!</h1>
-    <p>You may now close this tab.</p>
+<!-- Floating hearts -->
+<div id="heartContainer"></div>
 
-    <script>
-        /* Floating hearts */
-        setInterval(() => {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerHTML = '💜';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = (18 + Math.random() * 15) + 'px';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 5000);
-        }, 400);
-    </script>
+<div class="box">
+    <div class="emoji">💜✨</div>
+    <h1>Confession Sent!</h1>
+    <p>Your anonymous message has been delivered 💌<br>You may now close this tab.</p>
+</div>
+
+<script>
+/* Floating Hearts Animation */
+setInterval(() => {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = '💜';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (18 + Math.random() * 15) + 'px';
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 500);
+</script>
 
 </body>
 </html>
