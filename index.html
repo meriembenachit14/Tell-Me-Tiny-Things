@@ -1,97 +1,233 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tell Me Tiny Things 💌</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="favicon.png" />
+
+<style>
+/* PAGE STYLE */
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #f3d9ff, #d9c9ff);
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* HEARTS */
+.heart {
+  position: absolute;
+  color: #b784f7;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-800px); opacity: 0; }
+}
+
+/* CONTAINER */
+.container {
+  background: white;
+  width: 90%;
+  max-width: 420px;
+  padding: 30px;
+  border-radius: 22px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 5;
+  animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* TITLE */
+h1 {
+  color: #8c4fd6;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+/* TEXTAREA */
+textarea {
+  width: 100%;
+  height: 130px;
+  border-radius: 15px;
+  border: 2px solid #d8b7ff;
+  padding: 12px;
+  resize: none;
+  outline: none;
+  font-size: 15px;
+  background-image: radial-gradient(circle, rgba(170,127,255,0.3) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+textarea:focus {
+  border-color: #b784f7;
+  animation: sparkle 1s infinite;
+}
+
+@keyframes sparkle {
+  0% { background-position: 0 0; }
+  100% { background-position: 18px 18px; }
+}
+
+/* BUTTON */
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  background: #b784f7;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+button:hover {
+  background: #a06be8;
+}
+
+/* COUNTER */
 #counter {
-margin-top: 10px;
-color: #8c4fd6;
-font-size: 14px;
+  margin-top: 10px;
+  color: #8c4fd6;
+  font-size: 14px;
+}
+
+/* SUCCESS MESSAGE */
+#successMessage {
+  color: #5bbf5b;
+  font-size: 16px;
+  margin-top: 15px;
+  display: none;
+}
+
+/* LOADING SCREEN */
+#loadingScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.loader {
+  font-size: 22px;
+  color: #b784f7;
+  animation: pulse 1.3s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
 }
 </style>
 </head>
 
-
 <body>
+
+<!-- LOADING -->
 <div id="loadingScreen"><div class="loader">🌸 Loading...</div></div>
 
-
+<!-- HEARTS -->
 <div id="heartContainer"></div>
 
-
+<!-- MAIN BOX -->
 <div class="container">
-<div style="font-size:40px">💌</div>
-<h1>Send Me a Secret</h1>
-<p>Totally anonymous & pastel cute ✨</p>
+  <div style="font-size:40px">💌</div>
+  <h1>Send Me a Secret</h1>
+  <p style="color:#666; margin-top:0;">Totally anonymous & pastel cute ✨</p>
 
+  <textarea id="confession" placeholder="Type your confession..."></textarea>
+  <button onclick="sendConfession()">Send Anonymously</button>
 
-<textarea id="confession" placeholder="Type your confession..."></textarea>
-<button onclick="sendConfession()">Send Anonymously</button>
-<div id="counter">Confessions sent: <span id="count">0</span></div>
-<div id="successMessage" style="display:none;color:#5bbf5b;margin-top:15px;font-size:16px;">✓ Sent!</div>
+  <div id="counter">Confessions sent: <span id="count">0</span></div>
+  <div id="successMessage">✓ Sent!</div>
 </div>
 
-
+<!-- SOUNDS -->
 <audio id="popSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f5b67fa9fb.mp3?filename=click-124467.mp3"></audio>
 <audio id="sendSound" src="https://cdn.pixabay.com/download/audio/2021/09/20/audio_5b9e319a36.mp3?filename=whoosh-6316.mp3"></audio>
 
-
 <script>
-/* Hearts */
+/* REMOVE LOADING */
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("loadingScreen").style.display = "none";
+  }, 800);
+};
+
+/* FLOATING HEARTS */
 setInterval(() => {
-const heart = document.createElement('div');
-heart.classList.add('heart');
-heart.innerHTML = '💜';
-heart.style.left = Math.random() * 100 + 'vw';
-heart.style.fontSize = (20 + Math.random() * 20) + 'px';
-document.getElementById('heartContainer').appendChild(heart);
-setTimeout(() => heart.remove(), 6000);
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "💜";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (20 + Math.random() * 20) + "px";
+  document.getElementById("heartContainer").appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
 }, 500);
 
-
-/* Auto-save */
-const area = document.getElementById('confession');
-if(localStorage.getItem('draft')){
-area.value = localStorage.getItem('draft');
-}
-area.addEventListener('input',()=>{
-localStorage.setItem('draft', area.value);
+/* AUTO SAVE DRAFT */
+const area = document.getElementById("confession");
+if (localStorage.getItem("draft")) area.value = localStorage.getItem("draft");
+area.addEventListener("input", () => {
+  localStorage.setItem("draft", area.value);
 });
 
+/* COUNTER */
+let count = localStorage.getItem("sentCount") || 0;
+document.getElementById("count").innerText = count;
 
-/* Counter */
-let count = localStorage.getItem('sentCount') || 0;
-document.getElementById('count').innerText = count;
-
-
+/* SEND CONFESSION */
 function sendConfession() {
-const text = area.value.trim();
-if (!text) return alert('Please type something!');
+  const text = area.value.trim();
+  if (!text) return alert("Please type something!");
 
+  document.getElementById("popSound").play();
 
-document.getElementById('popSound').play();
+  fetch("https://formsubmit.co/meriembenachit14@gmail.com", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ confession: text })
+  })
+  .then(() => {
+    document.getElementById("sendSound").play();
 
+    document.getElementById("successMessage").style.display = "block";
+    setTimeout(() => {
+      document.getElementById("successMessage").style.display = "none";
+    }, 2500);
 
-fetch('https://formsubmit.co/meriembenachit14@gmail.com', {
-method: 'POST',
-headers: { 'Content-Type': 'application/json' },
-body: JSON.stringify({ confession: text })
-})
-.then(() => {
-document.getElementById('sendSound').play();
+    area.value = "";
+    localStorage.removeItem("draft");
 
-
-document.getElementById('successMessage').style.display = 'block';
-setTimeout(()=>{
-document.getElementById('successMessage').style.display = 'none';
-},2500);
-
-
-area.value = '';
-localStorage.removeItem('draft');
-
-
-count++;
-localStorage.setItem('sentCount', count);
-document.getElementById('count').innerText = count;
-});
+    count++;
+    localStorage.setItem("sentCount", count);
+    document.getElementById("count").innerText = count;
+  });
 }
 </script>
+
 </body>
 </html>
