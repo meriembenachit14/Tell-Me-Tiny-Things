@@ -1,191 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Tell Me Tiny Things 💜</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Send Me a Secret 💜</title>
 
-<style>
+  <style>
     body {
-        background: #f4e6ff;
-        font-family: 'Comic Sans MS', Arial;
-        text-align: center;
-        padding-top: 40px;
-        overflow-x: hidden;
-        color: #8c4fd6;
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #e8d4ff, #f7e9ff);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
 
-    #loadingScreen {
-        position: fixed;
-        inset: 0;
-        background: #f4e6ff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 999;
-        font-size: 22px;
-    }
-
-    .loader {
-        animation: pulse 1s infinite alternate;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(1); opacity: 0.7; }
-        100% { transform: scale(1.2); opacity: 1; }
-    }
-
-    .container {
-        background: #fff;
-        width: 90%;
-        max-width: 430px;
-        margin: auto;
-        padding: 25px;
-        border-radius: 25px;
-        box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-    }
-
-    textarea {
-        width: 100%;
-        height: 130px;
-        border-radius: 12px;
-        border: 2px solid #d3b6ff;
-        padding: 12px;
-        resize: none;
-        font-size: 15px;
-        outline: none;
-        background: #faf5ff;
-    }
-
-    button {
-        margin-top: 15px;
-        background: #c59bff;
-        color: white;
-        padding: 12px 18px;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: 0.2s;
-    }
-
-    button:hover {
-        background: #b487ff;
-        transform: scale(1.05);
-    }
-
+    /* Floating hearts */
     .heart {
-        position: fixed;
-        bottom: -10px;
-        animation: floatUp 6s linear forwards;
-        opacity: 0.7;
+      position: absolute;
+      color: #b57bff;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
     }
 
     @keyframes floatUp {
-        to { transform: translateY(-120vh); opacity: 0; }
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-800px); opacity: 0; }
     }
 
+    /* Main Card */
+    .container {
+      background: #ffffff;
+      padding: 30px;
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      border-radius: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      animation: pop 0.6s ease;
+      position: relative;
+      z-index: 5;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      color: #9b4fe3;
+      animation: bounce 1.5s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    p {
+      margin-top: 0;
+      font-size: 14px;
+      color: #777;
+    }
+
+    /* Textarea + sparkles */
+    textarea {
+      width: 100%;
+      height: 130px;
+      border-radius: 15px;
+      border: 2px solid #d7b8ff;
+      padding: 12px;
+      resize: none;
+      outline: none;
+      font-size: 15px;
+      transition: 0.2s;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    textarea:focus {
+      border-color: #b57bff;
+      animation: sparkle 1s infinite;
+    }
+
+    @keyframes sparkle {
+      0% { background-position: 0 0; }
+      100% { background-position: 20px 20px; }
+    }
+
+    button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 12px;
+      background: #b57bff;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover { background: #9b4fe3; }
+
+    /* Loading screen */
+    #loadingScreen {
+      position: fixed;
+      inset: 0;
+      background: #f3e5ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 9999;
+    }
+
+    .loader {
+      font-size: 20px;
+      animation: pulse 1.2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+
+    /* Counter */
     #counter {
-        margin-top: 10px;
-        font-size: 14px;
-        color: #8c4fd6;
+      margin-top: 10px;
+      color: #8c4fd6;
+      font-size: 14px;
     }
-</style>
-
+  </style>
 </head>
+
 <body>
 
-<div id="loadingScreen"><div class="loader">🌸 Loading...</div></div>
+  <!-- Loading -->
+  <div id="loadingScreen"><div class="loader">🌸 Loading...</div></div>
 
-<div id="heartContainer"></div>
+  <!-- Floating hearts -->
+  <div id="heartContainer"></div>
 
-<div class="container">
+  <!-- Main Card -->
+  <div class="container">
     <div style="font-size:40px">💌</div>
     <h1>Send Me a Secret</h1>
-    <p>Cute • Anonymous • Pastel • Safe ✨</p>
+    <p>Totally anonymous ✨</p>
 
     <textarea id="confession" placeholder="Type your confession..."></textarea>
-
     <button onclick="sendConfession()">Send Anonymously</button>
 
     <div id="counter">Confessions sent: <span id="count">0</span></div>
 
     <div id="successMessage" style="display:none;color:#5bbf5b;margin-top:15px;font-size:16px;">
-        ✓ Sent!
+      ✓ Sent!
     </div>
-</div>
+  </div>
 
-<!-- Sounds -->
-<audio id="popSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f5b67fa9fb.mp3?filename=click-124467.mp3"></audio>
-<audio id="sendSound" src="https://cdn.pixabay.com/download/audio/2021/09/20/audio_5b9e319a36.mp3?filename=whoosh-6316.mp3"></audio>
+  <!-- Sounds -->
+  <audio id="popSound" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_f5b67fa9fb.mp3?filename=click-124467.mp3"></audio>
+  <audio id="sendSound" src="https://cdn.pixabay.com/download/audio/2021/09/20/audio_5b9e319a36.mp3?filename=whoosh-6316.mp3"></audio>
 
-<script>
-/* Loading screen fade */
-window.onload = () => {
-    setTimeout(() => {
-        document.getElementById("loadingScreen").style.display = "none";
+  <script>
+    /* Floating hearts */
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerHTML = '💜';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = (20 + Math.random() * 20) + 'px';
+      document.getElementById('heartContainer').appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
     }, 500);
-};
 
-/* Floating hearts */
-setInterval(() => {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
-    heart.innerHTML = '💜';
-    heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.fontSize = (20 + Math.random() * 20) + 'px';
-    document.getElementById('heartContainer').appendChild(heart);
+    /* Auto-save draft */
+    const area = document.getElementById('confession');
+    if (localStorage.getItem('draft')) {
+      area.value = localStorage.getItem('draft');
+    }
+    area.addEventListener('input', () => {
+      localStorage.setItem('draft', area.value);
+    });
 
-    setTimeout(() => heart.remove(), 6000);
-}, 500);
+    /* Counter */
+    let count = localStorage.getItem('sentCount') || 0;
+    document.getElementById('count').innerText = count;
 
-/* Autosave */
-const area = document.getElementById('confession');
+    function sendConfession() {
+      const text = area.value.trim();
+      if (!text) return alert('Please type something!');
 
-if(localStorage.getItem('draft')){
-    area.value = localStorage.getItem('draft');
-}
+      document.getElementById('popSound').play();
 
-area.addEventListener('input', () => {
-    localStorage.setItem('draft', area.value);
-});
-
-/* Counter */
-let count = localStorage.getItem('sentCount') || 0;
-document.getElementById('count').innerText = count;
-
-/* SEND MESSAGE */
-function sendConfession() {
-
-    const text = area.value.trim();
-    if (!text) return alert("Please type something!");
-
-    document.getElementById("popSound").play();
-
-    fetch("https://formsubmit.co/ajax/meriembenachit14@gmail.com", {
-        method: "POST",
+      fetch('https://formsubmit.co/meriembenachit14@gmail.com', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            confession: text,
-            _redirect: "https://meriembenachit14.github.io/Tell-Me-Tiny-Things/success.html"
-        })
-    })
-    .then(() => {
-        document.getElementById("sendSound").play();
+        body: JSON.stringify({ confession: text })
+      })
+      .then(() => {
+        document.getElementById('sendSound').play();
 
-        area.value = "";
-        localStorage.removeItem("draft");
+        document.getElementById('successMessage').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('successMessage').style.display = 'none';
+        }, 2500);
+
+        area.value = '';
+        localStorage.removeItem('draft');
 
         count++;
-        localStorage.setItem("sentCount", count);
-        document.getElementById("count").innerText = count;
+        localStorage.setItem('sentCount', count);
+        document.getElementById('count').innerText = count;
+      });
+    }
 
-        document.getElementById("successMessage").style.display = "block";
-        setTimeout(() => {
-            document.getElementById("successMessage").style.display = "none";
-        }, 2000);
+    /* Hide loading */
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loadingScreen").style.display = "none";
+      }, 600);
     });
-}
-</script>
+  </script>
 
 </body>
 </html>
