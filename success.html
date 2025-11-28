@@ -2,58 +2,69 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Success 💖</title>
+<title>Sent Successfully 💖🎀</title>
 <link rel="icon" type="image/png" href="favicon.png">
 
 <style>
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #ffe0f7, #ffd1ec);
+  background: linear-gradient(135deg, #ffe6f9, #ffd3ec, #ffeafc);
+  background-size: 300% 300%;
+  animation: floatBg 12s ease infinite;
   padding: 40px;
   text-align: center;
-  color: #b64aa8;
+  color: #c652b8;
+}
+
+@keyframes floatBg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .box {
   background: white;
-  padding: 30px;
+  padding: 35px;
   max-width: 600px;
   margin: auto;
-  border-radius: 30px;
-  border: 3px solid #ffbde9;
-  box-shadow: 0 10px 30px rgba(255,130,190,0.25);
-  animation: pop 0.6s ease;
+  border-radius: 35px;
+  border: 4px solid #ffbde9;
+  box-shadow: 0 12px 40px rgba(255,130,190,0.25);
+  animation: pop 0.7s ease;
 }
 
 @keyframes pop {
-  0% { transform: scale(0.85); opacity: 0; }
+  0% { transform: scale(0.8); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 
 .emoji {
-  font-size: 60px;
-  animation: float 2s infinite ease-in-out;
+  font-size: 70px;
+  animation: floatIcon 2s infinite ease-in-out;
 }
 
-@keyframes float {
+@keyframes floatIcon {
   0% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  50% { transform: translateY(-10px); }
   100% { transform: translateY(0); }
 }
 
 button {
   background: #ff94d6;
   border: none;
-  padding: 15px 22px;
+  padding: 16px 25px;
   color: white;
-  border-radius: 15px;
-  font-size: 16px;
+  border-radius: 20px;
+  font-size: 17px;
   cursor: pointer;
   margin-top: 20px;
+  transition: 0.2s;
+  box-shadow: 0 5px 15px rgba(255,120,200,0.3);
 }
 
 button:hover {
+  transform: scale(1.05);
   background: #ff7ac6;
 }
 </style>
@@ -62,11 +73,12 @@ button:hover {
 <body>
 
 <div class="box">
-  <div class="emoji">🌸💌</div>
-  <h1>Your secret has been sent! 💖</h1>
-  <p>Thank you for trusting me with your confession. It’s fully anonymous ✨</p>
+  <div class="emoji">💖💌✨</div>
+  <h1>Your secret has been delivered! 🎀</h1>
+  <p>Thank you for trusting me with your confession.  
+     It's safe, anonymous & sparkly ✨</p>
 
-  <button onclick="window.location.href='index.html'">Send Another 💌</button>
+  <button onclick="window.location.href='index.html'">Send Another Secret 💌</button>
 </div>
 
 </body>
