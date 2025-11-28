@@ -3,139 +3,126 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin — Confessions Inbox 💌</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
     body {
         margin: 0;
-        padding: 40px 20px;
         font-family: "Poppins", sans-serif;
         background: linear-gradient(135deg, #f3d9ff, #d9c9ff);
-        color: #6a34c9;
-        overflow-x: hidden;
+        padding: 30px;
+        color: #7a3cc9;
+        animation: fade 1s ease;
+    }
+
+    @keyframes fade {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .box {
         background: white;
+        padding: 30px;
         max-width: 650px;
         margin: auto;
-        padding: 35px 30px;
         border-radius: 22px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.12);
-        animation: pop 0.7s ease;
-        position: relative;
-        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        animation: pop 0.6s ease;
     }
 
     @keyframes pop {
-        0% { transform: scale(0.7); opacity: 0; }
+        0% { transform: scale(0.8); opacity: 0; }
         100% { transform: scale(1); opacity: 1; }
     }
 
-    /* Header Emoji */
+    h1 {
+        text-align: center;
+        font-size: 34px;
+        color: #8c4fd6;
+        margin-bottom: 12px;
+    }
+
     .emoji {
-        font-size: 55px;
+        text-align: center;
+        font-size: 60px;
         animation: float 2s infinite ease-in-out;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     @keyframes float {
         0% { transform: translateY(0); }
-        50% { transform: translateY(-7px); }
+        50% { transform: translateY(-8px); }
         100% { transform: translateY(0); }
     }
 
-    h1 {
-        font-size: 30px;
-        margin-bottom: 15px;
-        color: #8c4fd6;
-    }
-
     p {
-        font-size: 15px;
+        font-size: 16px;
         line-height: 1.6;
-        color: #7044b6;
+        color: #5c319e;
     }
 
-    h3 {
-        color: #8c4fd6;
-        margin-top: 25px;
-    }
-
-    /* Button */
     button {
         background: #b784f7;
         color: white;
-        border: none;
         padding: 14px 22px;
+        font-size: 16px;
+        border: none;
         border-radius: 14px;
         cursor: pointer;
-        font-size: 15px;
-        margin-top: 18px;
-        transition: 0.2s;
+        margin-top: 20px;
+        display: block;
+        width: 100%;
+        max-width: 250px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
     }
 
     button:hover {
-        background: #a277e8;
+        background: #a27ae8;
     }
 
-    /* Floating hearts */
-    .heart {
-        position: absolute;
-        font-size: 20px;
-        color: #c083ff;
-        animation: floatUp 6s linear infinite;
-        z-index: 1;
+    a.home {
+        display: block;
+        text-align: center;
+        margin-top: 25px;
+        color: #7a3cc9;
+        font-size: 15px;
+        text-decoration: none;
     }
 
-    @keyframes floatUp {
-        0% { transform: translateY(0); opacity: 1; }
-        100% { transform: translateY(-900px); opacity: 0; }
+    a.home:hover {
+        text-decoration: underline;
     }
+
 </style>
-
 </head>
 
 <body>
-
-<!-- Floating hearts -->
-<div id="heartContainer"></div>
 
 <div class="box">
     <div class="emoji">📥💜</div>
     <h1>Confessions Admin Panel</h1>
 
     <p>
-        All anonymous confessions submitted on your website are stored inside your
-        <b>FormSubmit Dashboard</b>.
-        <br><br>
-        Since FormSubmit does not offer a public inbox API,  
-        <u>your dashboard is the official admin panel</u>.
+        All anonymous confessions are collected using <b>FormSubmit</b>.<br>
+        Since FormSubmit does not provide a public API, your official inbox is inside their dashboard.
     </p>
 
-    <h3>🔑 How to Access Your Inbox</h3>
+    <h3 style="color:#8c4fd6; margin-top:20px;">🔑 How to Access Your Confessions</h3>
+
     <p>
         1️⃣ Go to <b>https://formsubmit.co/dashboard</b><br>
-        2️⃣ Log in using: <b>meriembenachit14@gmail.com</b><br>
-        3️⃣ Your confessions will appear instantly in the inbox list.
+        2️⃣ Log in using your email: <b>meriembenachit14@gmail.com</b><br>
+        3️⃣ All confessions appear instantly inside the dashboard inbox.
     </p>
 
-    <button onclick="window.open('https://formsubmit.co/dashboard', '_blank')">
+    <button onclick="window.open('https://formsubmit.co/dashboard','_blank')">
         Open Inbox Dashboard 💌
     </button>
-</div>
 
-<script>
-/* Floating Hearts Generator */
-setInterval(() => {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💜";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (18 + Math.random() * 18) + "px";
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 6000);
-}, 500);
-</script>
+    <a class="home" href="index.html">← Back to Home</a>
+</div>
 
 </body>
 </html>
