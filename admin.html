@@ -1,92 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Admin — Confessions Inbox 💌</title>
+<meta charset="UTF-8">
+<title>Confessions Admin 💌</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
 <style>
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #f3d9ff, #d9c9ff);
-  padding: 30px;
-  color: #5f3bad;
+  background: linear-gradient(135deg, #f4e8ff, #e1d2ff);
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  color: #6d42d9;
 }
 
 /* Container */
-.box {
+.panel {
   background: white;
-  padding: 20px;
-  border-radius: 18px;
-  max-width: 600px;
-  margin: auto;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  animation: pop 0.6s ease;
+  width: 100%;
+  max-width: 650px;
+  padding: 30px;
+  border-radius: 26px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+  animation: fadeUp 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes pop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+/* Subtle floating sparkles */
+.panel::before {
+  content: "✨";
+  position: absolute;
+  font-size: 28px;
+  left: 20px;
+  top: 20px;
+  opacity: 0.5;
+  animation: float1 4s infinite ease-in-out;
+}
+.panel::after {
+  content: "✨";
+  position: absolute;
+  font-size: 24px;
+  right: 25px;
+  bottom: 25px;
+  opacity: 0.4;
+  animation: float2 4s infinite ease-in-out;
 }
 
-/* Button */
-button {
-  background: #b784f7;
-  color: white;
-  padding: 12px 18px;
-  border: none;
-  border-radius: 12px;
-  font-size: 15px;
-  cursor: pointer;
-  margin-top: 15px;
+@keyframes fadeUp {
+  0% { opacity: 0; transform: translateY(25px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
-button:hover {
-  background: #a27ae8;
+
+@keyframes float1 {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+@keyframes float2 {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+  100% { transform: translateY(0); }
 }
 
 /* Heading */
 h1 {
   text-align: center;
-  font-size: 32px;
-  color: #8c4fd6;
+  font-size: 34px;
+  font-weight: 600;
   margin-bottom: 15px;
+  color: #8d54e2;
 }
 
-/* Cute icon */
+/* Icon */
 .emoji {
-  font-size: 48px;
   text-align: center;
-  animation: float 2s infinite ease-in-out;
+  font-size: 50px;
+  margin-bottom: 10px;
+  animation: float1 2.5s infinite ease-in-out;
 }
 
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-  100% { transform: translateY(0); }
+/* Text */
+p, h3 {
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+/* Button */
+button {
+  display: block;
+  width: 100%;
+  background: #b68afc;
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  margin-top: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 500;
+}
+button:hover {
+  background: #a47aee;
+  transform: translateY(-2px);
+}
+
+/* Back button */
+.back {
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+  font-size: 15px;
+  color: #7549d0;
+  text-decoration: none;
+}
+.back:hover {
+  text-decoration: underline;
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
+<div class="panel">
   <div class="emoji">📥💜</div>
-  <h1>Confessions Admin Panel</h1>
+  <h1>Confessions Admin</h1>
 
-  <p style="font-size:15px; line-height:1.6;">
-    All anonymous confessions sent through your website are collected through
+  <p>
+    All anonymous confessions submitted through your website are securely stored in
     <b>FormSubmit</b>.  
-    Since FormSubmit does not provide a public API, your official inbox is inside their dashboard.
+    This page is your shortcut to the dashboard where you can read everything.
   </p>
 
-  <h3>🔑 How to Access Your Confessions</h3>
+  <h3>🔑 How to View Your Confessions</h3>
   <p>
     1️⃣ Go to <b>https://formsubmit.co/dashboard</b><br>
-    2️⃣ Log in using your email: <b>meriembenachit14@gmail.com</b><br>
-    3️⃣ Your confessions will appear there instantly.
+    2️⃣ Log in with: <b>meriembenachit14@gmail.com</b><br>
+    3️⃣ Your confessions will appear instantly inside the inbox.
   </p>
 
   <button onclick="window.open('https://formsubmit.co/dashboard','_blank')">
-    Open Inbox Dashboard 💌
+    Open Confessions Inbox 💌
   </button>
+
+  <a href="index.html" class="back">← Back to Home</a>
 </div>
 
 </body>
