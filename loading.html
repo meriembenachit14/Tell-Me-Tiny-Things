@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Loading — Tiny Things</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* small override for loading page */
+    .container{max-width:420px;padding:36px;border-radius:20px}
+    .loaderMascot{font-size:64px}
+    .loaderText{margin-top:12px;color:#7f5a86}
+  </style>
+</head>
+<body>
+  <div class="cloud c1" aria-hidden="true"></div>
+  <div class="cloud c2" aria-hidden="true"></div>
+
+  <main>
+    <div class="container card" style="text-align:center;">
+      <div class="loaderMascot">🐰</div>
+      <div class="loaderText">Preparing your tiny space…</div>
+    </div>
+  </main>
+
+  <script>
+    // simple fake loader then redirect to index
+    setTimeout(()=> location.href='index.html', 900);
+  </script>
+</body>
+</html>
