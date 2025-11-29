@@ -1,12 +1,11 @@
 /* =========================
-   Tiny Whispers — script.js
+   Tiny Whispers — CLEAN script.js
    ========================= */
 
 /* CONFIG */
 const CONFIG = {
   assetsPath: 'assets',
-  bgmFile: 'bgm.mp3',
-  typingSoundDataURL: 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA='
+  bgmFile: 'bgm.mp3'
 };
 
 /* UTIL — DOM helpers */
@@ -51,7 +50,7 @@ function initCounters(){
   let visits = Number(localStorage.getItem(visitsKey) || 0);
   visits++;
   localStorage.setItem(visitsKey, visits);
-  const vEl = $('#visitCount') || $('#vCount');
+  const vEl = $('#visitCount');
   if(vEl) vEl.textContent = visits;
 
   const sendsKey = 'tw_sends_v1';
@@ -116,10 +115,12 @@ function throwConfetti(n){
 /* ——— Typing sound ——— */
 let typingAudio = null;
 function initTypingSound(){
-  typingAudio = new Audio(CONFIG.typingSoundDataURL);
+  const beep = $('#typeBeep');
+  if(!beep) return;
+  typingAudio = beep;
   typingAudio.volume = 0.18;
 
-  $$('.messageInput, input[type="text"], textarea').forEach(el => {
+  $$('#message, #codename').forEach(el => {
     el.addEventListener('input', ()=> {
       try{
         typingAudio.currentTime = 0;
@@ -217,7 +218,7 @@ function initAffirmations(){
   }
 })();
 
-/* ——— Add drop animation keyframe ——— */
+/* ——— Inject keyframe ——— */
 (function injectDropKeyframe(){
   const s = document.createElement('style');
   s.innerHTML = `
