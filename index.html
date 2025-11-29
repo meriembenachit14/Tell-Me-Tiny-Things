@@ -9,30 +9,30 @@
 </head>
 <body>
   <!-- Loading overlay -->
-  <div id="loading" class="loading" aria-hidden="false">
+  <div id="loading" class="loading">
     <div class="loaderContent">
       <div class="loaderMascot">🐰</div>
       <div class="loaderText">Preparing your tiny space…</div>
     </div>
   </div>
 
-  <!-- Floating clouds -->
+  <!-- Clouds -->
   <div id="clouds" class="clouds" aria-hidden="true"></div>
 
-  <!-- Floating toolbar -->
-  <div class="toolbar" role="toolbar" aria-label="site controls">
-    <button id="darkToggle" title="Toggle dark mode" aria-pressed="false">🌙</button>
-    <button id="musicToggle" title="Toggle music">🔈</button>
+  <!-- Toolbar -->
+  <div class="toolbar" role="toolbar">
+    <button id="darkToggle" title="Toggle Dark Mode">🌙</button>
+    <button id="musicToggle" title="Toggle Music">🔊</button>
     <button id="helpBtn" title="Help">❔</button>
   </div>
 
-  <!-- Main centered card -->
-  <main class="wrap" role="main">
-    <section class="card" aria-labelledby="title">
-      <div class="mascot" aria-hidden="true" id="mascot">🐰</div>
+  <!-- Main card -->
+  <main class="wrap">
+    <section class="card">
+      <div class="mascot" id="mascot">🐰</div>
 
-      <h1 id="title">Tiny Whispers</h1>
-      <p class="lead">Soft, anonymous space to share tiny thoughts — optional codename.</p>
+      <h1>Tiny Whispers</h1>
+      <p class="lead">Soft, anonymous place to share tiny thoughts — with optional codename.</p>
 
       <div id="affirmation" class="affirmation" aria-hidden="true"></div>
 
@@ -41,13 +41,13 @@
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_subject" value="💌 Tiny Whisper" />
         <input type="hidden" name="_next" value="success.html" />
-        <input type="text" name="_honey" style="display:none" aria-hidden="true" />
+        <input type="text" name="_honey" style="display:none" />
 
         <label class="labelVis" for="codename">Codename (optional)</label>
-        <input id="codename" name="codename" type="text" placeholder="Codename (optional)…" />
+        <input id="codename" name="codename" type="text" placeholder="Codename (optional)…">
 
         <label class="labelVis" for="message">Your tiny whisper</label>
-        <textarea id="message" name="message" placeholder="Write something tiny… (no real names, please)" required></textarea>
+        <textarea id="message" name="message" placeholder="Write something tiny…" required></textarea>
 
         <div class="row">
           <button class="btn primary" id="sendBtn" type="submit">Send Whisper 💌</button>
@@ -57,27 +57,26 @@
         <div class="meta">
           <div>Sent: <strong id="sentCount">0</strong></div>
           <div>Visitors: <strong id="visitCount">0</strong></div>
-          <div id="soundIndicator" style="display:none">🔔</div>
         </div>
       </form>
     </section>
   </main>
 
-  <!-- Help Modal (wording fixed to be accurate) -->
-  <div id="helpModal" class="modal" aria-hidden="true" role="dialog" aria-label="Help">
+  <!-- Help Modal -->
+  <div id="helpModal" class="modal">
     <div class="modalCard">
-      <button class="modalClose" id="helpClose" aria-label="Close">✕</button>
+      <button class="modalClose" id="helpClose">✕</button>
       <h3>How Tiny Whispers works</h3>
-      <p>Type a tiny message and send it anonymously. Your whisper is delivered privately to the page owner — not shown publicly.</p>
+      <p>Type a short anonymous message. Optionally add a codename.  
+      The message is sent privately to the receiver’s inbox — not yours.</p>
       <p>Use the toolbar to toggle Dark Mode and background music.</p>
     </div>
   </div>
 
-  <!-- Audio -->
-  <audio id="bgm" preload="auto"></audio>
+  <!-- Audios -->
+  <audio id="bgm" preload="auto" src="bgm.mp3"></audio>
   <audio id="typeBeep" preload="auto" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA="></audio>
 
-  <!-- main script -->
   <script src="main.js"></script>
 </body>
 </html>
