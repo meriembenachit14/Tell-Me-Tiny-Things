@@ -1,145 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tiny Things — Admin Inbox ✨</title>
-<link rel="icon" href="favicon.png">
-
-<style>
-:root{
-  --bg1:#fff0f7;
-  --bg2:#ffeafd;
-  --text:#7a4e91;
-  --card-bg:rgba(255,255,255,0.9);
-  --accent:#ff9ecf;
-}
-
-/* Dark mode */
-@media(prefers-color-scheme:dark){
-  :root{
-    --bg1:#2a1a32;
-    --bg2:#3a2347;
-    --text:#f7d8ff;
-    --card-bg:rgba(255,255,255,0.08);
-    --accent:#ff77c9;
-  }
-}
-
-html,body{
-  height:100%;
-  margin:0;
-  font-family:"Poppins",sans-serif;
-  background:linear-gradient(135deg,var(--bg1),var(--bg2));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--text);
-  overflow:hidden;
-}
-
-/* Clouds */
-.cloud{
-  position:fixed;
-  width:180px;
-  height:60px;
-  background:linear-gradient(180deg,#fff,#fff5fb);
-  border-radius:40px;
-  filter:drop-shadow(0 6px 18px rgba(255,150,200,0.15));
-  animation: floatCloud 42s linear infinite;
-  opacity:.85;
-}
-.cloud:before,.cloud:after{
-  content:"";
-  position:absolute;
-  background:inherit;
-  border-radius:50%;
-}
-.cloud:before{ width:70px;height:70px;left:-25px;top:-20px; }
-.cloud:after{ width:90px;height:90px;right:-40px;top:-30px; }
-
-.cloud.x2{ top:40%; left:70%; animation-duration:60s; transform:scale(.8); }
-.cloud.x3{ top:72%; left:6%; animation-duration:65s; transform:scale(.7); }
-
-@keyframes floatCloud{
-  0%{ transform:translateX(-20vw); }
-  100%{ transform:translateX(120vw); }
-}
-
-.card{
-  background:var(--card-bg);
-  padding:38px;
-  border-radius:26px;
-  border:2px solid rgba(255,200,240,0.45);
-  box-shadow:0 12px 32px rgba(0,0,0,0.12);
-  max-width:700px;
-  width:100%;
-  backdrop-filter:blur(8px);
-  animation:fadeIn .7s ease;
-}
-@keyframes fadeIn{
-  from{opacity:0; transform:scale(.85);}
-  to{opacity:1; transform:scale(1);}
-}
-
-.emoji{
-  font-size:60px;
-  text-align:center;
-  animation:floaty 2.2s ease-in-out infinite;
-}
-@keyframes floaty{
-  0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}
-}
-
-h1{
-  text-align:center;
-  margin-top:6px;
-  font-size:30px;
-}
-
-p,li{
-  color:var(--text);
-  line-height:1.6;
-}
-
-a.open-btn{
-  display:block;
-  margin:22px auto 0;
-  padding:14px 20px;
-  background:var(--accent);
-  color:white;
-  border-radius:16px;
-  text-decoration:none;
-  font-weight:600;
-  text-align:center;
-  width:240px;
-  box-shadow:0 10px 28px rgba(255,120,200,0.18);
-  transition:.15s;
-}
-a.open-btn:hover{
-  transform:translateY(-3px);
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tiny Whispers — Admin</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <div class="clouds" aria-hidden="true"></div>
 
-<div class="cloud" style="top:10%;left:-15%;"></div>
-<div class="cloud x2"></div>
-<div class="cloud x3"></div>
+  <main class="wrap" role="main">
+    <section class="card adminCard">
+      <div class="emoji">📥🫧</div>
+      <h1>Admin — Tiny Whispers</h1>
+      <p class="lead">Open your FormSubmit dashboard to read whispers.</p>
 
-<div class="card">
-  <div class="emoji">📥🌸</div>
-  <h1>Tiny Things — Admin Panel</h1>
-  <p>All anonymous submissions are sent securely to your FormSubmit inbox.</p>
-  <ol>
-    <li>Go to <strong>formsubmit.co/dashboard</strong></li>
-    <li>Login using your email: <strong>meriembenachit14@gmail.com</strong></li>
-    <li>Open “Submissions / Inbox” to read messages</li>
-  </ol>
+      <ol class="adminSteps">
+        <li>Go to <a href="https://formsubmit.co/dashboard" target="_blank" rel="noopener">formsubmit.co/dashboard</a></li>
+        <li>Log in with: <strong>meriembenachit14@gmail.com</strong></li>
+        <li>Open <strong>Submissions</strong> to read messages</li>
+      </ol>
 
-  <a class="open-btn" href="https://formsubmit.co/dashboard" target="_blank">Open Inbox 💌</a>
-</div>
+      <div class="rowInline">
+        <a class="btn primary" href="https://formsubmit.co/dashboard" target="_blank">Open Inbox</a>
+        <a class="btn secondary" href="index.html">Return</a>
+      </div>
 
+      <div class="adminNote">Tip: enable email notifications in FormSubmit for instant alerts.</div>
+
+    </section>
+  </main>
+
+  <script>
+    // small nicety: show total visitors & sends in console (pulled from localStorage)
+    console.log('Tiny Whispers — visits:', localStorage.getItem('tw_visits') || 0,
+                'sends:', localStorage.getItem('tw_sends') || 0);
+  </script>
 </body>
 </html>
