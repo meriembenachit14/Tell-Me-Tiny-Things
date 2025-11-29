@@ -110,6 +110,12 @@
     transform:translateY(-1px);
   }
 
+  /* ⭐ NEW: CENTER THE TEXTAREA BOX ⭐ */
+  #message {
+    display: block;
+    margin: 0 auto;
+  }
+
   .row{display:flex;gap:12px;margin-top:12px;align-items:center}
   .btn {
     flex:1;
@@ -133,10 +139,8 @@
     padding:10px 14px;
   }
 
-  /* counter + tiny text */
   .meta{ margin-top:12px; font-size:13px; color:#6f4f8a; }
 
-  /* sparkle trail mouse cursor (simulated) */
   .spark {
     position:fixed;
     pointer-events:none;
@@ -147,7 +151,6 @@
     transition: opacity .12s linear, transform .12s linear;
   }
 
-  /* floating hearts randomly */
   .heart {
     position:fixed;
     pointer-events:none;
@@ -160,7 +163,6 @@
     to{ transform: translateY(-100vh) scale(1.2); opacity:0; }
   }
 
-  /* small responsive tweaks */
   @media (max-width:520px){
     .card{ padding:20px;border-radius:22px;}
     .logo{font-size:46px}
@@ -175,7 +177,6 @@
 <div class="cloud x3" style="animation:floatCloud 44s linear infinite;"></div>
 
 <script>
-  // gentle cloud movement (CSS animation created via JS for varied delays)
   function addCloudKeyframes(){
     const s = document.createElement('style');
     s.innerHTML = `
@@ -187,20 +188,16 @@
   addCloudKeyframes();
 </script>
 
-<!-- main card -->
 <div class="card" role="main" aria-labelledby="title">
   <div class="logo" aria-hidden="true">🎀</div>
   <h1 id="title">TELL ME TINY THINGS</h1>
   <p class="lead">Tiny, true, anonymous. Share something sweet or silly ✨</p>
 
-  <!-- FormSubmit standard form (works without JS required) -->
   <form id="tinyForm" action="https://formsubmit.co/meriembenachit14@gmail.com" method="POST" autocomplete="off">
-    <!-- required hidden fields -->
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_subject" value="💌 New Tiny Thing">
     <input type="hidden" name="_next" value="https://meriembenachit14.github.io/Tell-Me-Tiny-Things/success.html">
-    <!-- honeypot -->
     <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
     <textarea id="message" name="message" placeholder="Write a tiny thing… (no names, please)"></textarea>
@@ -214,11 +211,9 @@
   </form>
 </div>
 
-<!-- sparkle element for mouse & typing -->
 <div id="spark" class="spark">✨</div>
 
 <script>
-/* AUTOSAVE DRAFT */
 const textarea = document.getElementById('message');
 const draftKey = 'tinyDraft_v1';
 const countKey = 'tinyCount_v1';
@@ -228,33 +223,26 @@ textarea.addEventListener('input', () => {
   showTinyTypingSparkle();
 });
 
-/* DRAFT CLEAR */
 document.getElementById('clearBtn').addEventListener('click', () => {
   textarea.value = '';
   localStorage.removeItem(draftKey);
   textarea.focus();
 });
 
-/* COUNTER (localStorage) */
 let count = Number(localStorage.getItem(countKey) || 0);
 document.getElementById('count').innerText = count;
 
-/* Form submit: allow default POST to FormSubmit (works reliably). On submit, update counter */
 document.getElementById('tinyForm').addEventListener('submit', (e) => {
-  // before submit: update counter and clear draft
   count++;
   localStorage.setItem(countKey, count);
   document.getElementById('count').innerText = count;
   localStorage.removeItem(draftKey);
-  // Let browser submit form normally (redirects to success page)
 });
 
-/* cute typing sparkle (briefly shows sparkle near textarea) */
 function showTinyTypingSparkle(){
   const sp = document.getElementById('spark');
   sp.style.opacity = '1';
   sp.style.transform = 'translate(-50%,-50%) scale(1.1)';
-  // position near textarea caret (approx bottom-right of textarea)
   const r = textarea.getBoundingClientRect();
   sp.style.left = (r.right - 24) + 'px';
   sp.style.top = (r.bottom - 18) + 'px';
@@ -262,7 +250,6 @@ function showTinyTypingSparkle(){
   window._sparkTimer = setTimeout(()=>{ sp.style.opacity='0'; sp.style.transform='translate(-50%,-50%) scale(0.9)'; }, 750);
 }
 
-/* sparkle trail following mouse (subtle) */
 const spark = document.getElementById('spark');
 let mouseTimer;
 window.addEventListener('mousemove', (ev) => {
@@ -273,7 +260,6 @@ window.addEventListener('mousemove', (ev) => {
   mouseTimer = setTimeout(()=>{ spark.style.opacity='0'; }, 220);
 });
 
-/* random floating hearts for decoration (non-blocking) */
 function floatHeart() {
   const h = document.createElement('div');
   h.className = 'heart';
@@ -283,14 +269,12 @@ function floatHeart() {
   h.style.left = (10 + Math.random()*80) + 'vw';
   h.style.bottom = '-10px';
   document.body.appendChild(h);
-  // duration variability
   const duration = 5500 + Math.random()*3000;
   h.style.animationDuration = duration + 'ms';
   setTimeout(()=> h.remove(), duration+300);
 }
 setInterval(floatHeart, 900);
 
-/* small accessibility: focus textarea on page load */
 window.addEventListener('load', ()=> textarea.focus());
 </script>
 
