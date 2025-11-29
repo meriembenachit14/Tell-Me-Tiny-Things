@@ -1,49 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tiny Whispers — Admin 💗</title>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Tiny Things</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- CLOUDS -->
-  <div class="cloud c1"></div>
-  <div class="cloud c2"></div>
-  <div class="cloud c3"></div>
-  <div class="cloud c4"></div>
-
-  <!-- TOOLBAR -->
-  <div class="toolbar">
-    <div id="darkToggle" class="tool-btn">🌙</div>
-    <div id="musicToggle" class="tool-btn">🔊</div>
-  </div>
-
-  <!-- BACKGROUND MUSIC -->
-  <audio id="bgm" loop>
-    <source src="birthday-bgmusic.mp3" type="audio/mpeg" />
+  <audio id="bgm" preload="auto" loop>
+    <source src="bgm.mp3" type="audio/mpeg" />
   </audio>
 
-  <main>
-    <div class="container">
-      <h1>Admin Dashboard 🐰</h1>
-      <p>All anonymous whispers sent to you will appear here.</p>
+  <!-- clouds -->
+  <div class="cloud c1" aria-hidden="true"></div>
+  <div class="cloud c2" aria-hidden="true"></div>
+  <div class="cloud c3" aria-hidden="true"></div>
+  <div class="cloud c4" aria-hidden="true"></div>
 
-      <!-- MESSAGE LIST DEMO -->
-      <div style="text-align:left; margin-top:20px;">
-        <div style="background:#fff0f8; padding:15px; border-radius:15px; margin-bottom:12px;">
-          <strong>Codename:</strong> StarBunny 🌟 <br>
-          “Hi, just testing the system!”
+  <!-- toolbar -->
+  <div class="toolbar" role="toolbar" aria-label="site controls">
+    <button id="musicToggle" class="tool-btn">🔊</button>
+    <button id="darkToggle" class="tool-btn">🌙</button>
+  </div>
+
+  <main>
+    <div class="container card">
+      <h1>Admin Dashboard 🐰</h1>
+      <p class="lead">Open your FormSubmit dashboard or check emails to read incoming whispers.</p>
+
+      <div class="admin-messages" style="text-align:left;margin-top:18px;">
+        <!-- Example static entries; you read messages in FormSubmit -->
+        <div style="background:#fff7fb;padding:12px;border-radius:12px;margin-bottom:12px;">
+          <strong>Codename:</strong> None<br>
+          <span>I miss my old cat today.</span>
         </div>
 
-        <div style="background:#fff0f8; padding:15px; border-radius:15px; margin-bottom:12px;">
-          <strong>Codename:</strong> Anonymous 💗 <br>
-          “Your page is so cute!”
+        <div style="background:#fff7fb;padding:12px;border-radius:12px;margin-bottom:12px;">
+          <strong>Codename:</strong> StarBunny<br>
+          <span>You are doing great even if you don't feel like it.</span>
         </div>
       </div>
-
     </div>
   </main>
 
