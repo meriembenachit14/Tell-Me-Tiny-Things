@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Whisper Sent</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Sent • Tiny Whispers</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="favicon.png">
 </head>
 
-<body>
+<body class="success-page">
 
-  <div class="wrap">
-    <div class="box">
+  <div class="success-container">
+    <img src="bunny.png" class="success-bunny" alt="">
+    <h1>Your tiny whisper is on its way 💌</h1>
+    <p>The receiver will get it soon.</p>
 
-      <div class="mascot" aria-hidden="true">🐰</div>
-
-      <h1>Your Whisper Was Sent ✨</h1>
-
-      <p class="lead">
-        Your whisper goes straight to the receiver’s inbox, safely and privately.
-      </p>
-
-      <div class="rowInline" style="margin-top:18px;">
-        <a href="index.html" class="btn primary">Send Another 💌</a>
-      </div>
-
-    </div>
+    <a href="index.html" class="btn">Send Another</a>
   </div>
 
+  <script>
+    // Soft floating hearts for success page
+    function spawnHeart() {
+      const heart = document.createElement("div");
+      heart.className = "floating-heart";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 3 + Math.random() * 3 + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(spawnHeart, 600);
+  </script>
 </body>
 </html>
