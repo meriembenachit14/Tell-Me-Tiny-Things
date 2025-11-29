@@ -1,38 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Message Sent ✨</title>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Thanks — Tiny Things</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- FLOATING CLOUDS -->
-  <div class="cloud c1"></div>
-  <div class="cloud c2"></div>
-  <div class="cloud c3"></div>
-  <div class="cloud c4"></div>
-
-  <!-- TOOLBAR -->
-  <div class="toolbar">
-    <div id="darkToggle" class="tool-btn">🌙</div>
-    <div id="musicToggle" class="tool-btn">🔊</div>
-  </div>
-
-  <!-- BACKGROUND MUSIC -->
-  <audio id="bgm" loop>
-    <source src="birthday-bgmusic.mp3" type="audio/mpeg" />
+  <!-- bg music -->
+  <audio id="bgm" preload="auto" loop>
+    <source src="bgm.mp3" type="audio/mpeg" />
   </audio>
 
+  <!-- clouds -->
+  <div class="cloud c1" aria-hidden="true"></div>
+  <div class="cloud c2" aria-hidden="true"></div>
+  <div class="cloud c3" aria-hidden="true"></div>
+  <div class="cloud c4" aria-hidden="true"></div>
+
+  <!-- toolbar -->
+  <div class="toolbar" role="toolbar" aria-label="site controls">
+    <button id="musicToggle" class="tool-btn">🔊</button>
+    <button id="darkToggle" class="tool-btn">🌙</button>
+  </div>
+
   <main>
-    <div class="container">
-      <h1>Message Sent! 💌</h1>
-
+    <div class="container success-container card">
+      <img src="bunny.png" alt="bunny" class="bunny-hero" onerror="this.style.display='none'">
+      <h1>Message sent 💌</h1>
       <p>Your whisper goes straight to the receiver’s inbox, safely and privately.</p>
-
-      <a href="index.html" class="btn">Send Another</a>
+      <a href="index.html" class="btn primary">Send another whisper</a>
     </div>
   </main>
 
