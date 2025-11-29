@@ -1,389 +1,181 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TELL ME TINY THINGS 💌</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tiny Things — Send Something Cute 💌</title>
 <link rel="icon" type="image/png" href="favicon.png">
-
 <style>
-/* -----------------------------------------------------------
-   🌸 GLOBAL PASTEL KAWAII THEME
------------------------------------------------------------ */
+/* === GLOBAL === */
+*{box-sizing:border-box;}
+body{
+  margin:0;font-family:"Poppins",sans-serif;
+  background:var(--bg);color:var(--text);
+  display:flex;justify-content:center;align-items:center;min-height:100vh;
+  overflow:hidden;
+  transition:background .4s ease,color .4s ease;
+}
 :root{
-  --bg1: #ffe9f6;
-  --bg2: #fef6ff;
-  --accent: #ff9edb;
-  --accent2: #e7c4ff;
-  --text: #7b4a9e;
-  --card: rgba(255,255,255,0.88);
-  --glow: rgba(255,150,220,0.35);
+  --bg:#fff6fc;
+  --text:#a464b5;
+  --card:#ffffffee;
+  --border:#ffd9f4;
+}
+.dark{
+  --bg:#1b1020;
+  --text:#f8d7ff;
+  --card:#2b1933ee;
+  --border:#55355f;
 }
 
-html,body{
-  margin:0;
-  padding:0;
-  height:100%;
-  font-family: "Poppins", system-ui, sans-serif;
-  color:var(--text);
-  background: linear-gradient(135deg,var(--bg1),var(--bg2));
-  overflow-x:hidden;
-}
-
-/* fade-in page */
-body { opacity:0; animation:fadeIn 1.2s ease forwards; }
-@keyframes fadeIn { to{opacity:1;} }
-
-/* -----------------------------------------------------------
-   🌸 FLOATING AUTO-GENERATED CLOUDS
------------------------------------------------------------ */
+/* === FLOATING CLOUDS === */
 .cloud{
-  position:fixed;
-  background: #fff;
-  border-radius:50px;
-  filter: blur(12px) brightness(1.1);
-  opacity:.55;
-  animation: drift linear infinite;
-  pointer-events:none;
+position:absolute;width:140px;height:70px;
+background:#fff;border-radius:50px;
+filter:blur(1px) brightness(1.1);
+opacity:.7;animation:floatCloud 18s linear infinite;
 }
-@keyframes drift{
-  from{ transform: translateX(-20vw); }
-  to{ transform: translateX(120vw); }
+.cloud:before,.cloud:after{
+content:"";position:absolute;background:#fff;
+width:80px;height:80px;border-radius:50%;top:-30px;
 }
-
-/* -----------------------------------------------------------
-   🌸 MAIN CARD
------------------------------------------------------------ */
-.wrapper{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:36px 18px;
+.cloud:before{left:10px;} .cloud:after{right:10px;}
+@keyframes floatCloud{
+0%{transform:translateX(-200px);}100%{transform:translateX(110vw);}
 }
 
+/* === CARD === */
 .card{
-  width:100%;
-  max-width:520px;
-  background:var(--card);
-  border-radius:28px;
-  padding:32px;
-  text-align:center;
-  box-shadow:0 18px 50px rgba(210,120,200,0.22);
-  border:1px solid rgba(255,180,240,0.55);
-  backdrop-filter: blur(10px);
-  animation:softGlow 3s ease-in-out infinite;
+position:relative;z-index:3;
+background:var(--card);
+padding:34px;border-radius:26px;
+border:2px solid var(--border);
+box-shadow:0 12px 36px rgba(0,0,0,0.08);
+width:92%;max-width:420px;
+text-align:center;
+animation:fadeUp .8s ease;
 }
+@keyframes fadeUp{0%{opacity:0;transform:translateY(20px);}100%{opacity:1;transform:translateY(0);}}
 
-@keyframes softGlow{
-  0%,100%{ box-shadow:0 18px 55px rgba(255,160,240,0.20); }
-  50%{ box-shadow:0 18px 65px rgba(255,160,240,0.35); }
-}
-
-/* -----------------------------------------------------------
-   🌸 TITLE, MASCOT, TEXT
------------------------------------------------------------ */
+/* === MASCOT === */
 .mascot{
-  font-size:58px;
-  animation:bounce 2.2s infinite ease-in-out;
+font-size:70px;margin-bottom:10px;
+animation:mascotMove 3s infinite ease-in-out;
 }
-@keyframes bounce{
-  0%,100%{ transform: translateY(0); }
-  50%{ transform: translateY(-10px); }
+@keyframes mascotMove{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-10px) rotate(3deg);} }
+
+h1{font-size:28px;margin:4px 0 10px 0;}
+p{color:var(--text);opacity:.85;}
+
+input,textarea{
+width:100%;padding:12px;border-radius:14px;
+border:2px solid var(--border);
+margin-top:10px;font-family:inherit;
+background:transparent;color:var(--text);
+}
+textarea{height:120px;resize:none;}
+button{
+width:100%;padding:12px;margin-top:16px;
+background:#ff9ed9;color:#fff;border:none;
+border-radius:16px;font-size:16px;font-weight:600;
+cursor:pointer;transition:.2s;
+box-shadow:0 8px 20px rgba(255,130,190,.25);
+}
+button:hover{transform:translateY(-3px);}
+
+/* TOOLBAR */
+.toolbar{
+position:fixed;bottom:20px;right:20px;
+background:var(--card);
+padding:14px 18px;border-radius:20px;
+border:2px solid var(--border);
+display:flex;gap:12px;z-index:20;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+.toolbar button{
+width:auto;padding:8px 14px;font-size:14px;
 }
 
-h1{
-  margin:8px 0 6px;
-  font-size:28px;
-  background:linear-gradient(90deg,#ff8ed3,#c79aff);
-  -webkit-background-clip:text;
-  color:transparent;
-  text-shadow:0 2px 8px rgba(255,150,220,0.25);
+/* LOADING SCREEN */
+#loading{
+position:fixed;inset:0;background:var(--bg);
+display:flex;justify-content:center;align-items:center;
+font-size:32px;color:var(--text);z-index:200;
+animation:fadeOut 1.2s ease forwards;
+animation-delay:1.2s;
 }
+@keyframes fadeOut{to{opacity:0;visibility:hidden;}} </style>
 
-p.lead{
-  font-size:14px;
-  color:#775588;
-  margin-top:0;
-  margin-bottom:14px;
-}
-
-/* -----------------------------------------------------------
-   🌸 FORMS
------------------------------------------------------------ */
-input[type="text"], textarea{
-  width:100%;
-  border:2px solid #ffdff4;
-  background:#fff7fc;
-  border-radius:16px;
-  padding:12px 14px;
-  margin-bottom:12px;
-  font-size:15px;
-  outline:none;
-  transition:0.2s;
-  box-shadow: inset 0 5px 12px rgba(255,180,220,0.15);
-}
-textarea{
-  min-height:150px;
-  resize:vertical;
-}
-input:focus, textarea:focus{
-  border-color:var(--accent);
-  box-shadow:0 8px 25px rgba(255,150,220,0.25);
-}
-
-/* -----------------------------------------------------------
-   🌸 BUTTONS
------------------------------------------------------------ */
-.row{ display:flex; gap:12px; }
-
-.btn{
-  flex:1;
-  padding:12px 16px;
-  border-radius:14px;
-  border:none;
-  font-weight:600;
-  cursor:pointer;
-  background:linear-gradient(180deg,var(--accent),#ff7abf);
-  color:white;
-  box-shadow:0 12px 24px rgba(255,120,200,0.18);
-  transition:0.18s;
-}
-.btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 16px 34px rgba(255,120,200,0.26);
-}
-.btn.secondary{
-  background:transparent;
-  color:var(--text);
-  border:2px dashed rgba(210,150,230,0.5);
-  box-shadow:none;
-}
-
-/* -----------------------------------------------------------
-   🌸 META / COUNTERS
------------------------------------------------------------ */
-.meta{
-  margin-top:10px;
-  font-size:13px;
-}
-
-/* -----------------------------------------------------------
-   🌸 SPARKLE EFFECT
------------------------------------------------------------ */
-.spark{
-  position:fixed;
-  font-size:16px;
-  pointer-events:none;
-  opacity:0;
-  transition:0.1s;
-  z-index:999;
-}
-
-/* -----------------------------------------------------------
-   🌸 CONFETTI
------------------------------------------------------------ */
-.confetti{
-  position:fixed;
-  width:10px;
-  height:10px;
-  border-radius:3px;
-  top:-10px;
-  animation: drop linear forwards;
-}
-@keyframes drop{
-  to{
-    transform: translateY(105vh) rotate(300deg);
-    opacity:0;
-  }
-}
-
-/* -----------------------------------------------------------
-   🌸 MUSIC TOGGLE
------------------------------------------------------------ */
-.musicToggle{
-  margin-top:14px;
-  font-size:13px;
-  cursor:pointer;
-  color:#9a53b0;
-  opacity:0.8;
-}
-.musicToggle:hover{
-  opacity:1;
-}
-
-/* -----------------------------------------------------------
-   🌸 RESPONSIVE
------------------------------------------------------------ */
-@media (max-width:520px){
-  .card{ padding:26px; }
-}
-</style>
 </head>
-
 <body>
 
-<div id="cloudContainer"></div>
+<div id="loading">🌸 Loading your tiny space…</div>
 
-<div class="wrapper">
-  <div class="card">
-    <div class="mascot">🌸🐰</div>
+<!-- CLOUDS -->
 
-    <h1>TELL ME TINY THINGS</h1>
-    <p class="lead">Tiny thoughts. Tiny feelings. All anonymous, all sweet. 💌</p>
+<div class="cloud" style="top:10%;animation-delay:0s"></div>
+<div class="cloud" style="top:40%;animation-delay:4s"></div>
+<div class="cloud" style="top:70%;animation-delay:8s"></div>
 
-    <!-- FORM -->
-    <form id="tinyForm" action="https://formsubmit.co/meriembenachit14@gmail.com" method="POST" autocomplete="off">
-      
-      <!-- FormSubmit requirements -->
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_subject" value="💌 New Tiny Thing">
-      <input type="hidden" name="_next" value="https://meriembenachit14.github.io/Tell-Me-Tiny-Things/success.html">
-      <input type="text" name="_honey" style="display:none">
+<!-- CARD -->
 
-      <!-- OPTIONAL CODENAME -->
-      <input type="text" name="codename" placeholder="Codename (optional)…">
+<div class="card">
+  <div class="mascot">🐰✨</div>
+  <h1>Tiny Things Inbox</h1>
+  <p>Whisper your tiny thoughts, confessions, or feelings 💗</p>
 
-      <!-- MESSAGE -->
-      <textarea id="message" name="message" placeholder="Write a tiny thing… (no names, please)"></textarea>
+  <form action="https://formsubmit.co/meriembenachit14@gmail.com" method="POST">
+    <input type="hidden" name="_next" value="success.html">
+    <input type="hidden" name="_captcha" value="false">
 
-      <div class="row">
-        <button class="btn" id="sendBtn" type="submit">Send 💌</button>
-        <button class="btn secondary" id="clearBtn" type="button">Clear</button>
-      </div>
+```
+<input type="text" name="codename" placeholder="Optional: Your codename 🐾">
 
-      <div class="meta">
-        Messages sent: <span id="count">0</span> · Visitors: <span id="visits">0</span>
-      </div>
+<textarea name="message" required placeholder="Tell me tiny things…"></textarea>
 
-      <div class="musicToggle" id="musicToggle">🔈 Turn on music</div>
+<button type="submit">Send 💌</button>
+```
 
-    </form>
-  </div>
+  </form>
+
+  <p style="margin-top:14px;font-size:14px;opacity:.6">Visitors: <span id="vCount">0</span></p>
 </div>
 
-<div id="spark" class="spark">✨</div>
+<!-- FLOATING TOOLBAR -->
 
-<audio id="bgm" src="bgm.mp3" loop></audio>
+<div class="toolbar">
+  <button onclick="toggleDark()">🌙 Dark Mode</button>
+  <button onclick="toggleSound()">🔊 Sound</button>
+</div>
+
+<!-- AUDIO -->
+
+<audio id="typingSound" src="https://assets.mixkit.co/active_storage/sfx/2002/2002.wav"></audio> <audio id="bgm" loop src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7c2cc9e946.mp3?filename=cute-bgm.mp3"></audio>
 
 <script>
-/* -----------------------------------------------------------
-   🌸 CLOUD GENERATOR
------------------------------------------------------------ */
-for(let i=0;i<12;i++){
-  const c = document.createElement("div");
-  c.className="cloud";
-  const w = 120 + Math.random()*180;
-  const h = 40 + Math.random()*70;
-  c.style.width = w+"px";
-  c.style.height = h+"px";
-  c.style.top = (Math.random()*90)+"vh";
-  c.style.animationDuration = (30+Math.random()*40)+"s";
-  c.style.animationDelay = (-Math.random()*50)+"s";
-  document.getElementById("cloudContainer").appendChild(c);
-}
+/* === DARK MODE TOGGLE === */
+function toggleDark(){ document.body.classList.toggle('dark'); }
 
-/* -----------------------------------------------------------
-   🌸 LOCAL VISITOR COUNTER
------------------------------------------------------------ */
-let visits = Number(localStorage.getItem("tiny_visits") || 0);
-visits++;
-localStorage.setItem("tiny_visits", visits);
-document.getElementById("visits").textContent = visits;
-
-/* -----------------------------------------------------------
-   🌸 MESSAGE COUNTER
------------------------------------------------------------ */
-let countKey="tinyCount_v2";
-let count = Number(localStorage.getItem(countKey) || 0);
-document.getElementById("count").textContent = count;
-
-/* -----------------------------------------------------------
-   🌸 DRAFT SAVE
------------------------------------------------------------ */
-let draftKey="tinyDraft_v2";
-const textarea=document.getElementById("message");
-if(localStorage.getItem(draftKey)) textarea.value=localStorage.getItem(draftKey);
-
-textarea.addEventListener("input",()=>{
-  localStorage.setItem(draftKey, textarea.value);
-  showSpark();
+/* === TYPING SOUND === */
+let ts=document.getElementById("typingSound");
+[...document.querySelectorAll("input,textarea")].forEach(el=>{
+  el.addEventListener("input",()=>{
+    ts.currentTime=0; ts.play();
+  });
 });
 
-/* -----------------------------------------------------------
-   🌸 CLEAR BUTTON
------------------------------------------------------------ */
-document.getElementById("clearBtn").onclick = ()=>{
-  textarea.value="";
-  localStorage.removeItem(draftKey);
-};
+/* === BGM === */
+let bgm=document.getElementById("bgm");
+let bgOn=false;
+function toggleSound(){ if(!bgOn){ bgm.play(); bgOn=true;} else{ bgm.pause(); bgOn=false;} }
 
-/* -----------------------------------------------------------
-   🌸 SPARKLE EFFECT
------------------------------------------------------------ */
-const spark=document.getElementById("spark");
-function showSpark(){
-  const r=textarea.getBoundingClientRect();
-  spark.style.left=(r.right-25)+"px";
-  spark.style.top=(r.bottom-25)+"px";
-  spark.style.opacity="1";
-  setTimeout(()=> spark.style.opacity="0",300);
-}
-
-/* -----------------------------------------------------------
-   🌸 CONFETTI
------------------------------------------------------------ */
-function throwConfetti(){
-  for(let i=0;i<25;i++){
-    const conf=document.createElement("div");
-    conf.className="confetti";
-    conf.style.left=Math.random()*100+"vw";
-    conf.style.background=["#ff8ed3","#c79aff","#ffd4f4","#fff"][(Math.random()*4)|0];
-    conf.style.animationDuration=(3+Math.random()*2)+"s";
-    document.body.appendChild(conf);
-    setTimeout(()=>conf.remove(),5000);
-  }
-}
-
-/* -----------------------------------------------------------
-   🌸 FORM SUBMIT
------------------------------------------------------------ */
-document.getElementById("tinyForm").addEventListener("submit",(e)=>{
-  count++;
-  localStorage.setItem(countKey,count);
-  throwConfetti();
-});
-
-/* -----------------------------------------------------------
-   🌸 MUSIC TOGGLE
------------------------------------------------------------ */
-const bgm=document.getElementById("bgm");
-const musicToggle=document.getElementById("musicToggle");
-let musicOn=false;
-
-musicToggle.onclick=()=>{
-  musicOn=!musicOn;
-  if(musicOn){
-    bgm.play();
-    musicToggle.textContent="🔊 Music on";
-  } else {
-    bgm.pause();
-    musicToggle.textContent="🔈 Turn on music";
-  }
-};
-
-/* -----------------------------------------------------------
-   🌸 MOUSE SPARK TRAIL
------------------------------------------------------------ */
-let t;
-window.onmousemove=e=>{
-  clearTimeout(t);
-  spark.style.left=e.clientX+"px";
-  spark.style.top=e.clientY+"px";
-  spark.style.opacity="1";
-  t=setTimeout(()=> spark.style.opacity="0",150);
-};
+/* === VISITOR COUNTER (LOCAL) === */
+let v=localStorage.getItem("tinyVisitors")||0;
+v++;localStorage.setItem("tinyVisitors",v);
+document.getElementById("vCount").textContent=v;
 </script>
 
 </body>
