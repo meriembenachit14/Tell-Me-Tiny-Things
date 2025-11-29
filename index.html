@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tiny Whispers — Tiny Things 💌</title>
   <link rel="icon" href="favicon.png" />
-  <link rel="stylesheet" href="style.css?v=3" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <!-- Loading overlay -->
@@ -19,14 +19,14 @@
   <!-- Clouds -->
   <div id="clouds" class="clouds" aria-hidden="true"></div>
 
-  <!-- Toolbar -->
+  <!-- Floating toolbar -->
   <div class="toolbar" role="toolbar" aria-label="site controls">
     <button id="darkToggle" title="Toggle dark mode">🌙</button>
     <button id="musicToggle" title="Toggle music">🔊</button>
     <button id="helpBtn" title="Help">❔</button>
   </div>
 
-  <!-- Main -->
+  <!-- Main card -->
   <main class="wrap" role="main">
     <section class="card" aria-labelledby="title">
       <div class="mascot" aria-hidden="true" id="mascot">🐰</div>
@@ -73,11 +73,10 @@
     </div>
   </div>
 
-  <!-- Audio -->
   <audio id="bgm" preload="auto"></audio>
+
   <audio id="typeBeep" preload="auto" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA="></audio>
 
-  <!-- JS -->
-  <script src="main.js?v=3"></script>
+  <script src="main.js"></script>
 </body>
 </html>
