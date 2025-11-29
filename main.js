@@ -1,22 +1,21 @@
 /* =========================
-   Tiny Whispers — main.js
+   Tiny Whispers — main.js (FINAL)
    ========================= */
 
 /* CONFIG */
 const CONFIG = { bgmFile: 'bgm.mp3' };
 
-/* helpers */
+/* simple helpers */
 const qs = s => document.querySelector(s);
 const qsa = s => Array.from(document.querySelectorAll(s));
 
-/* loading + init */
+/* start */
 window.addEventListener('load', () => {
-  // hide loading overlay
   const loading = qs('#loading');
   if (loading) loading.style.opacity = '0';
-  setTimeout(() => { if (loading) loading.style.display = 'none'; }, 420);
+  setTimeout(()=> { if (loading) loading.style.display = 'none'; }, 420);
 
-  initClouds();
+  generateClouds();
   initCounters();
   initMascot();
   initAffirmations();
@@ -24,11 +23,10 @@ window.addEventListener('load', () => {
   initToolbar();
 });
 
-/* cloud generator: scattered soft clouds */
-function initClouds(){
-  const container = qs('#clouds');
-  if (!container) return;
-  // positions for varied coverage
+/* CLOUDS: create positioned clouds and set per-cloud float animations */
+function generateClouds(){
+  const container = qs('#clouds'); if(!container) return;
+
   const presets = [
     {left:'6%', top:'8vh', cls:'large'},
     {left:'72%', top:'6vh', cls:'med'},
@@ -37,59 +35,53 @@ function initClouds(){
     {left:'4%', top:'76vh', cls:'small'},
     {left:'52%', top:'48vh', cls:'large'}
   ];
-  presets.forEach(p=>{
+
+  presets.forEach((p, i) => {
     const c = document.createElement('div');
     c.className = `cloud ${p.cls}`;
     c.style.left = p.left;
     c.style.top = p.top;
     c.style.opacity = (0.75 + Math.random()*0.25).toString();
-    // subtle float animation
-    const dur = 25 + Math.random()*30;
-    c.style.transition = `transform ${dur}s linear`;
+
+    const dur = 20 + Math.random()*30; // seconds
+    const delay = Math.random()*5;
+    // apply CSS keyframe with custom duration + delay
+    c.style.animation = `floatCloud ${dur}s ease-in-out ${delay}s infinite`;
     container.appendChild(c);
-    // gently animate sideways
-    setTimeout(()=> { c.style.transform = `translateX(${(10 - Math.random()*20)}px)`; }, 120);
-    setInterval(()=> { c.style.transform = `translateX(${(10 - Math.random()*20)}px)`; }, dur*1000);
   });
 }
 
-/* counters (localStorage) */
+/* COUNTERS */
 function initCounters(){
-  const visitsKey = 'tw_visits';
-  const sendsKey = 'tw_sends';
-  let visits = Number(localStorage.getItem(visitsKey) || 0);
-  visits++;
-  localStorage.setItem(visitsKey, visits);
-  const vEl = qs('#visitCount'); if (vEl) vEl.textContent = visits;
-
+  const visitsKey='tw_visits'; const sendsKey='tw_sends';
+  let visits = Number(localStorage.getItem(visitsKey) || 0); visits++; localStorage.setItem(visitsKey, visits);
   let sends = Number(localStorage.getItem(sendsKey) || 0);
-  const sEl = qs('#sentCount'); if (sEl) sEl.textContent = sends;
+
+  const vEl = qs('#visitCount'); if(vEl) vEl.textContent = visits;
+  const sEl = qs('#sentCount'); if(sEl) sEl.textContent = sends;
 
   const form = qs('#tinyForm');
   if(form){
     form.addEventListener('submit', (e)=>{
-      // bump sends locally, show animations then submit
       e.preventDefault();
-      sends++;
-      localStorage.setItem(sendsKey, sends);
-      if (sEl) sEl.textContent = sends;
-      playConfirmSequence(form);
+      // update local sends, show celebration, then submit
+      sends++; localStorage.setItem(sendsKey, sends);
+      if(sEl) sEl.textContent = sends;
+      celebrationThenSubmit(form);
     });
   }
 
   const clearBtn = qs('#clearBtn');
-  if (clearBtn){
-    clearBtn.addEventListener('click', ()=>{
-      const cod = qs('#codename'); const msg = qs('#message');
-      if (cod) cod.value=''; if (msg) msg.value='';
-    });
-  }
+  if(clearBtn) clearBtn.addEventListener('click', ()=>{
+    const cod = qs('#codename'); const msg = qs('#message');
+    if(cod) cod.value=''; if(msg) msg.value='';
+  });
 }
 
-/* celebration visuals then submit */
-function playConfirmSequence(form){
-  spawnHearts(12);
-  throwConfetti(28);
+/* celebration visuals */
+function celebrationThenSubmit(form){
+  spawnHearts(10);
+  spawnConfetti(24);
   setTimeout(()=> form.submit(), 900);
 }
 
@@ -99,23 +91,24 @@ function spawnHearts(n){
       const h = document.createElement('div');
       h.className = 'heart';
       h.innerText = '💗';
-      h.style.left = (8 + Math.random()*84) + 'vw';
+      h.style.left = (6 + Math.random()*88) + 'vw';
       h.style.fontSize = (12 + Math.random()*20) + 'px';
       h.style.zIndex = 1400;
-      h.style.animationDuration = (4200 + Math.random()*2800) + 'ms';
+      const dur = 6 + Math.random()*4;
+      h.style.animation = `rise ${dur}s linear forwards`;
       document.body.appendChild(h);
-      setTimeout(()=> h.remove(), 9000);
+      setTimeout(()=> h.remove(), (dur*1000)+200);
     }, i*60);
   }
 }
 
-function throwConfetti(n){
+function spawnConfetti(n){
   const colors = ['#ff9edb','#c79aff','#ffd4f4','#fff6ea'];
   for(let i=0;i<n;i++){
     const el = document.createElement('div');
     el.className = 'confetti';
     el.style.left = (8 + Math.random()*84) + 'vw';
-    el.style.top = (-10 - Math.random()*12) + 'vh';
+    el.style.top = (-10 - Math.random()*20) + 'vh';
     el.style.width = (6 + Math.random()*12) + 'px';
     el.style.height = el.style.width;
     el.style.background = colors[Math.floor(Math.random()*colors.length)];
@@ -131,26 +124,20 @@ function throwConfetti(n){
 /* typing sound */
 let typingAudio = null;
 function initTypingSound(){
-  const beep = qs('#typeBeep');
-  if(!beep) return;
-  typingAudio = beep;
-  typingAudio.volume = 0.18;
+  const beep = qs('#typeBeep'); if(!beep) return;
+  typingAudio = beep; typingAudio.volume = 0.18;
   qsa('#message, #codename').forEach(el=>{
-    el.addEventListener('input', ()=> {
+    el.addEventListener('input', ()=>{
       try{ typingAudio.currentTime = 0; typingAudio.play(); }catch(e){}
     });
   });
 }
 
-/* mascot micro-interactions */
+/* mascot micro interactions */
 function initMascot(){
   const m = qs('#mascot'); if(!m) return;
-  setInterval(()=> {
-    m.style.transform = 'translateY(-8px) rotate(4deg)';
-    setTimeout(()=> m.style.transform = '', 520);
-  }, 3600);
-  const txt = qs('#message');
-  if(txt) txt.addEventListener('focus', ()=> { m.style.transform = 'translateY(-12px) rotate(-3deg) scale(1.02)'; setTimeout(()=> m.style.transform = '',700); });
+  setInterval(()=> { m.style.transform = 'translateY(-8px) rotate(4deg)'; setTimeout(()=> m.style.transform = '', 520); }, 3600);
+  const txt = qs('#message'); if(txt) txt.addEventListener('focus', ()=> { m.style.transform = 'translateY(-12px) rotate(-3deg) scale(1.02)'; setTimeout(()=> m.style.transform = '',700); });
 }
 
 /* affirmation rotation */
@@ -163,15 +150,12 @@ function initAffirmations(){
     "Thank you for being brave."
   ];
   const el = qs('#affirmation'); if(!el) return;
-  let i = 0;
-  function rot(){
-    el.style.opacity = 0;
-    setTimeout(()=> { el.textContent = list[i]; i = (i+1)%list.length; el.style.opacity = 1; }, 260);
-  }
-  rot(); setInterval(rot, 4200);
+  let i=0;
+  function rot(){ el.style.opacity=0; setTimeout(()=>{ el.textContent=list[i]; i=(i+1)%list.length; el.style.opacity=1; },260); }
+  rot(); setInterval(rot,4200);
 }
 
-/* toolbar + bgm + help modal */
+/* toolbar, bgm, help modal */
 function initToolbar(){
   const bgmEl = qs('#bgm');
   const darkBtn = qs('#darkToggle');
@@ -180,35 +164,28 @@ function initToolbar(){
   const helpModal = qs('#helpModal');
   const helpClose = qs('#helpClose');
 
-  if (bgmEl) {
-    bgmEl.src = CONFIG.bgmFile;
-    bgmEl.volume = 0.22;
-  }
+  if(bgmEl){ bgmEl.src = CONFIG.bgmFile; bgmEl.volume = 0.22; }
 
-  if (darkBtn) darkBtn.addEventListener('click', ()=>{
+  if(darkBtn) darkBtn.addEventListener('click', ()=> {
     document.body.classList.toggle('dark');
     const pressed = document.body.classList.contains('dark');
     darkBtn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
   });
 
-  if (musicBtn){
-    musicBtn.addEventListener('click', ()=>{
-      if (!bgmEl) return;
-      if (bgmEl.paused){ bgmEl.play().catch(()=>{}); musicBtn.textContent='🔊'; }
+  if(musicBtn){
+    musicBtn.addEventListener('click', ()=> {
+      if(!bgmEl) return;
+      if(bgmEl.paused){ bgmEl.play().catch(()=>{}); musicBtn.textContent='🔊'; }
       else { bgmEl.pause(); musicBtn.textContent='🔈'; }
     });
   }
 
-  if (helpBtn && helpModal){
+  if(helpBtn && helpModal){
     helpBtn.addEventListener('click', ()=> helpModal.classList.add('show'));
-    if (helpClose) helpClose.addEventListener('click', ()=> helpModal.classList.remove('show'));
-    helpModal.addEventListener('click', e => { if (e.target === helpModal) helpModal.classList.remove('show'); });
+    if(helpClose) helpClose.addEventListener('click', ()=> helpModal.classList.remove('show'));
+    helpModal.addEventListener('click', e => { if(e.target === helpModal) helpModal.classList.remove('show'); });
   }
 }
 
-/* ensure keyframe for confetti */
-(function injectDropKF(){
-  const s = document.createElement('style');
-  s.innerHTML = '@keyframes drop{0%{transform:translateY(0);opacity:1}100%{transform:translateY(110vh);opacity:0}}';
-  document.head.appendChild(s);
-})();
+/* ensure drop keyframe exists (for confetti) */
+(function injectKF(){ const s=document.createElement('style'); s.innerHTML='@keyframes drop{0%{transform:translateY(0);opacity:1}100%{transform:translateY(110vh);opacity:0}}'; document.head.appendChild(s); })();
