@@ -2,34 +2,130 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Admin — Tiny Things Inbox</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tiny Things — Admin Inbox 💌</title>
 <link rel="icon" type="image/png" href="favicon.png">
+
 <style>
-  body{ margin:0; font-family:"Poppins",sans-serif; background: linear-gradient(135deg,#fff3fb,#ffeef8); color:#7a3f95; padding:36px; display:flex; align-items:center; justify-content:center; min-height:100vh;}
-  .card{ background:rgba(255,255,255,0.95); padding:28px; border-radius:26px; box-shadow:0 12px 36px rgba(220,160,200,0.12); border:1px solid #ffdff4; max-width:720px; width:100%;}
-  .emoji{ font-size:56px; text-align:center; margin-bottom:8px; animation:floaty 2s infinite;}
-  h1{ text-align:center; margin:6px 0 8px 0; font-size:28px; color:#8a3f9a;}
-  p{ color:#6f4f8a; line-height:1.6; }
-  .open-btn{ display:block; margin:18px auto 0; background:#ff9ecf; color:white; border:none; padding:12px 18px; border-radius:14px; text-decoration:none; text-align:center; font-weight:600; box-shadow:0 8px 20px rgba(255,130,190,0.14) }
-  .open-btn:hover{ transform:translateY(-3px); }
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #ffeef8, #fff4ff, #fceaff);
+    color: #7a3f95;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 32px;
+    animation: fadeIn 0.8s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 40px 34px;
+    border-radius: 32px;
+    box-shadow: 0 12px 40px rgba(230, 160, 210, 0.16);
+    border: 2px solid #ffd9f2;
+    max-width: 720px;
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    animation: floatUp 0.9s ease;
+  }
+
+  @keyframes floatUp {
+    from { transform: translateY(16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  .emoji {
+    font-size: 72px;
+    animation: bounce 2s infinite;
+    margin-bottom: 10px;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  h1 {
+    font-size: 30px;
+    margin: 10px 0 14px 0;
+    color: #8a3fb0;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+
+  p, li {
+    color: #6f4f8a;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  ol {
+    text-align: left;
+    margin: 14px auto;
+    max-width: 360px;
+  }
+
+  a {
+    color: #b45bd6;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .open-btn {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 14px 22px;
+    background: #ff9edc;
+    color: white;
+    font-weight: 600;
+    border-radius: 16px;
+    text-decoration: none;
+    box-shadow: 0 8px 22px rgba(255, 140, 210, 0.18);
+    transition: 0.2s ease;
+  }
+
+  .open-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+  }
 </style>
 </head>
+
 <body>
   <div class="card">
     <div class="emoji">📥🌸</div>
-    <h1>Tiny Things — Admin</h1>
+
+    <h1>Tiny Things — Admin Inbox</h1>
     <p>
-      All anonymous tiny messages are delivered to your <strong>FormSubmit</strong> inbox.
-      To view them:
+      All anonymous tiny messages are delivered to your<br>
+      <strong>FormSubmit</strong> inbox. To read them, just follow the steps:
     </p>
+
     <ol>
-      <li>Go to <a href="https://formsubmit.co/dashboard" target="_blank" rel="noopener">formsubmit.co/dashboard</a></li>
-      <li>Log in with: <strong>meriembenachit14@gmail.com</strong></li>
-      <li>Open the Submissions / Inbox to read messages</li>
+      <li>Go to:  
+        <a href="https://formsubmit.co/dashboard" target="_blank" rel="noopener">
+          formsubmit.co/dashboard
+        </a>
+      </li>
+      <li>Log in using:<br><strong>meriembenachit14@gmail.com</strong></li>
+      <li>Open <strong>Submissions / Inbox</strong> to read the messages 💌</li>
     </ol>
 
-    <a class="open-btn" href="https://formsubmit.co/dashboard" target="_blank" rel="noopener">Open FormSubmit Inbox 💌</a>
+    <a class="open-btn" href="https://formsubmit.co/dashboard" target="_blank" rel="noopener">
+      Open Inbox 💖
+    </a>
   </div>
 </body>
 </html>
