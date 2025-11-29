@@ -1,105 +1,58 @@
-/* ============================
-   Loading Screen
-============================ */
-window.addEventListener("load", () => {
-  setTimeout(() => {
-    document.getElementById("loading").style.opacity = "0";
-    setTimeout(() => {
-      document.getElementById("loading").style.display = "none";
-    }, 400);
-  }, 600);
-});
+/* ------------------------------------------------------------ */
+/* FLOATING HEARTS                                              */
+/* ------------------------------------------------------------ */
 
-/* ============================
-   Clouds Generator
-============================ */
-const cloudContainer = document.getElementById("clouds");
-function makeCloud(size) {
-  const c = document.createElement("div");
-  c.className = `cloud ${size}`;
-  c.style.top = Math.random() * 90 + "vh";
-  c.style.left = Math.random() * 90 + "vw";
-  c.style.animation = `floatCloud ${12 + Math.random()*10}s ease-in-out infinite`;
-  cloudContainer.appendChild(c);
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("floating-heart");
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+
+  document.body.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 7000);
 }
 
-["small","med","large"].forEach(size => {
-  for (let i = 0; i < 4; i++) makeCloud(size);
-});
+setInterval(createHeart, 900);
 
-/* ============================
-   Floating Hearts
-============================ */
-function spawnHeart() {
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.textContent = "💖";
-  h.style.left = Math.random()*100 + "vw";
-  h.style.bottom = "-20px";
-  h.style.animationDuration = (4 + Math.random()*3) + "s";
-  document.body.appendChild(h);
-  setTimeout(() => h.remove(), 5000);
-}
-setInterval(spawnHeart, 1400);
+/* ------------------------------------------------------------ */
+/* DARK MODE TOGGLE                                             */
+/* ------------------------------------------------------------ */
 
-/* ============================
-   Dark Mode
-============================ */
-const darkBtn = document.getElementById("darkToggle");
-darkBtn.addEventListener("click", () => {
+const darkToggle = document.getElementById("darkToggle");
+darkToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
 });
 
-/* ============================
-   Music Toggle
-============================ */
-const bgm = document.getElementById("bgm");
-const musicBtn = document.getElementById("musicToggle");
-let musicOn = false;
+/* ------------------------------------------------------------ */
+/* MUSIC TOGGLE                                                 */
+/* ------------------------------------------------------------ */
 
-musicBtn.addEventListener("click", () => {
-  if (!musicOn) {
-    bgm.volume = 0.6;
-    bgm.play().catch(() => {});
-    musicBtn.textContent = "🔈";
+const music = document.getElementById("bgm");
+const musicToggle = document.getElementById("musicToggle");
+
+musicToggle.addEventListener("click", () => {
+  if (music.paused) {
+    music.play();
+    musicToggle.textContent = "🔈";
   } else {
-    bgm.pause();
-    musicBtn.textContent = "🔊";
+    music.pause();
+    musicToggle.textContent = "🔊";
   }
-  musicOn = !musicOn;
 });
 
-/* ============================
-   Form – Send + Local Stats
-============================ */
-const form = document.getElementById("tinyForm");
-const sentCount = document.getElementById("sentCount");
-const visitCount = document.getElementById("visitCount");
+/* ------------------------------------------------------------ */
+/* HELP MODAL                                                   */
+/* ------------------------------------------------------------ */
 
-// count visits
-let visits = localStorage.getItem("tw_visits") || 0;
-visits++;
-localStorage.setItem("tw_visits", visits);
-visitCount.textContent = visits;
-
-// count sends
-let sends = localStorage.getItem("tw_sends") || 0;
-sentCount.textContent = sends;
-
-// clear button
-document.getElementById("clearBtn").addEventListener("click", () => {
-  form.reset();
-});
-
-// on submit, increment sends
-form.addEventListener("submit", () => {
-  sends++;
-  localStorage.setItem("tw_sends", sends);
-});
-
-/* ============================
-   Help Modal
-============================ */
+const helpBtn = document.getElementById("helpBtn");
 const helpModal = document.getElementById("helpModal");
-document.getElementById("helpBtn").onclick = () => helpModal.classList.add("show");
-document.getElementById("helpClose").onclick = () => helpModal.classList.remove("show");
+const helpClose = document.getElementById("helpClose");
+
+helpBtn.onclick = () => helpModal.classList.remove("hidden");
+helpClose.onclick = () => helpModal.classList.add("hidden");
+
+helpModal.onclick = (e) => {
+  if (e.target === helpModal) helpModal.classList.add("hidden");
+};
