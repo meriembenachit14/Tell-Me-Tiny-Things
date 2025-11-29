@@ -3,308 +3,299 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>TELL ME TINY THINGS 💌</title>
+<title>Tiny Whispers 🫧</title>
 
 <link rel="icon" type="image/png" href="favicon.png">
 
 <style>
-  /* Soft Kawaii Pastel Theme */
-  :root{
-    --bg1:#fff0f7;
-    --bg2:#fff6fb;
-    --accent:#ff9ed9;
-    --accent-2:#e6b9ff;
-    --text:#7b4a9e;
-    --card:rgba(255,255,255,0.92);
-  }
+/* ---------- ROOT COLORS ---------- */
+:root{
+  --pink: #ffb8e5;
+  --lav: #ceb8ff;
+  --text: #6b3e85;
+  --bg1: #fff4fb;
+  --bg2: #fdf7ff;
+  --card: rgba(255,255,255,0.75);
+}
 
-  html,body{height:100%;margin:0;padding:0;}
-  body{
-    font-family:"Poppins",system-ui;
-    background:linear-gradient(135deg,var(--bg1),var(--bg2));
-    background-size:300% 300%;
-    animation:gentle 18s ease infinite;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow-x:hidden;
-    padding:32px 16px;
-    color:var(--text);
-  }
+/* ---------- PAGE ---------- */
+html,body{
+  height:100%;
+  margin:0;
+  font-family:"Poppins",system-ui;
+  color:var(--text);
+}
+body{
+  background: linear-gradient(135deg,var(--bg1),var(--bg2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+  animation:bgFlow 14s ease-in-out infinite;
+}
+@keyframes bgFlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 
-  @keyframes gentle{
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
+/* ---------- FLOATING CLOUDS (pure CSS) ---------- */
+.cloud{
+  position:fixed;
+  background:rgba(255,255,255,0.85);
+  box-shadow:0 8px 26px rgba(200,150,255,0.15);
+  border-radius:50px;
+  filter:blur(2px);
+  animation:floatCloud linear infinite;
+}
+.cloud:before,.cloud:after{
+  content:"";
+  position:absolute;
+  background:inherit;
+  border-radius:50%;
+}
+.cloud.x1{
+  width:180px;height:60px;
+  top:10%;left:-20%;
+  animation-duration:45s;
+}
+.cloud.x1:before{width:70px;height:70px;left:-25px;top:-20px;}
+.cloud.x1:after{width:90px;height:90px;right:-30px;top:-30px;}
 
-  /* Floating decorative clouds */
-  .cloud{
-    position:absolute;
-    width:180px;
-    height:60px;
-    background:linear-gradient(180deg,#fff,#fff6fa);
-    border-radius:40px;
-    filter:drop-shadow(0 8px 18px rgba(255,170,210,0.15));
-    opacity:.85;
-    pointer-events:none;
-  }
-  .cloud:before, .cloud:after{
-    content:"";
-    position:absolute;
-    background:linear-gradient(180deg,#fff,#fffbff);
-    border-radius:50%;
-  }
-  .cloud:before{width:70px;height:70px;left:-28px;top:-22px;}
-  .cloud:after{width:90px;height:90px;right:-36px;top:-30px;}
-  .cloud.x2{transform:scale(.9);opacity:.8;}
-  .cloud.x3{transform:scale(.75);opacity:.75;}
+.cloud.x2{
+  width:140px;height:50px;
+  top:60%;left:-25%;
+  animation-duration:52s;
+  animation-direction:reverse;
+}
+.cloud.x2:before{width:60px;height:60px;left:-20px;top:-15px;}
+.cloud.x2:after{width:80px;height:80px;right:-25px;top:-25px;}
 
-  /* Main card */
-  .card{
-    width:100%;
-    max-width:520px;
-    background:var(--card);
-    border-radius:28px;
-    padding:28px;
-    text-align:center;
-    border:1px solid rgba(250,180,220,0.55);
-    box-shadow:0 14px 36px rgba(200,140,190,0.12);
-    backdrop-filter:blur(8px);
-    position:relative;
-    z-index:10;
-  }
+@keyframes floatCloud{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(140vw)}
+}
 
-  .logo{
-    font-size:58px;
-    margin-bottom:6px;
-    animation:floaty 2.6s infinite ease-in-out;
-  }
+/* ---------- CARD ---------- */
+.card{
+  width:100%;
+  max-width:520px;
+  background:var(--card);
+  padding:30px;
+  border-radius:28px;
+  text-align:center;
+  border:1px solid rgba(255,200,255,0.6);
+  box-shadow:0 20px 40px rgba(210,150,255,0.18);
+  backdrop-filter:blur(10px);
+}
+.mascot{
+  font-size:58px;
+  animation:floaty 2.5s ease-in-out infinite;
+}
+@keyframes floaty{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
+}
 
-  @keyframes floaty{
-    0%{transform:translateY(0)}
-    50%{transform:translateY(-8px)}
-    100%{transform:translateY(0)}
-  }
+h1{
+  margin:10px 0 4px 0;
+  font-size:28px;
+  letter-spacing:1px;
+}
+.lead{
+  margin:0 0 16px 0;
+  font-size:14px;
+  color:#8a5da5;
+}
 
-  h1{
-    margin:0;
-    margin-bottom:6px;
-    font-size:26px;
-    letter-spacing:1px;
-  }
-  .lead{
-    margin-top:0;
-    margin-bottom:12px;
-    font-size:14px;
-    color:#6f5692;
-  }
+/* tiny rotating prompt text */
+#whisperLine{
+  font-size:13px;
+  color:#9b74b8;
+  margin-bottom:12px;
+  min-height:16px;
+  opacity:0;
+  transition:opacity .4s;
+}
 
-  textarea{
-    width:100%;
-    min-height:150px;
-    padding:14px;
-    font-size:15px;
-    border-radius:16px;
-    border:2px solid #ffdff2;
-    background:#fff7fc;
-    resize:vertical;
-    outline:none;
-    box-shadow:inset 0 6px 14px rgba(240,180,220,0.12);
-    transition:border-color .2s, box-shadow .2s, transform .15s;
-  }
+/* ---------- TEXTAREA ---------- */
+textarea{
+  width:100%;
+  min-height:150px;
+  padding:15px;
+  border-radius:18px;
+  border:2px solid #ffd4f7;
+  background:rgba(255,255,255,0.85);
+  resize:vertical;
+  font-size:15px;
+  outline:none;
+  transition:border-color .18s, box-shadow .18s;
+}
+textarea:focus{
+  border-color:var(--pink);
+  box-shadow:0 10px 24px rgba(255,150,230,0.22);
+}
 
-  textarea:focus{
-    border-color:var(--accent);
-    box-shadow:0 10px 26px rgba(255,140,200,0.2);
-    transform:translateY(-2px);
-  }
+/* ---------- BUTTONS ---------- */
+.row{display:flex;gap:12px;margin-top:12px;}
+.btn{
+  flex:1;
+  background:linear-gradient(135deg,var(--pink),var(--lav));
+  border:none;
+  padding:12px;
+  color:white;
+  font-weight:600;
+  border-radius:16px;
+  cursor:pointer;
+  box-shadow:0 12px 26px rgba(210,150,255,0.25);
+  transition:transform .14s;
+}
+.btn:hover{
+  transform:translateY(-3px);
+}
+.btn.secondary{
+  background:transparent;
+  border:2px dashed rgba(200,150,255,0.4);
+  color:var(--text);
+  box-shadow:none;
+}
 
-  .row{
-    display:flex;
-    gap:12px;
-    margin-top:12px;
-  }
+/* ---------- SPARKLES ---------- */
+.spark{
+  position:fixed;
+  font-size:16px;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .15s, transform .15s;
+  z-index:1200;
+}
+.heart{
+  position:fixed;
+  bottom:-10px;
+  font-size:20px;
+  pointer-events:none;
+  animation:rise linear forwards;
+  z-index:1000;
+}
+@keyframes rise{
+  from{opacity:1;transform:translateY(0) scale(1)}
+  to{opacity:0;transform:translateY(-100vh) scale(1.3)}
+}
 
-  .btn{
-    flex:1;
-    background:linear-gradient(180deg,var(--accent),#ff7fbe);
-    border:none;
-    padding:12px 16px;
-    border-radius:14px;
-    color:white;
-    font-weight:600;
-    cursor:pointer;
-    font-size:15px;
-    box-shadow:0 10px 26px rgba(255,120,200,0.2);
-    transition:transform .15s, box-shadow .15s;
-  }
+/* ---------- META ---------- */
+.meta{
+  font-size:13px;
+  margin-top:10px;
+  color:#8b66a8;
+}
 
-  .btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 14px 36px rgba(255,120,200,0.28);
-  }
-
-  .btn.secondary{
-    background:transparent;
-    border:2px dashed rgba(210,160,230,0.55);
-    color:var(--text);
-    box-shadow:none;
-  }
-
-  .meta{
-    margin-top:12px;
-    font-size:13px;
-    color:#776190;
-  }
-
-  /* Sparkle element */
-  .spark{
-    position:fixed;
-    font-size:16px;
-    pointer-events:none;
-    z-index:1200;
-    opacity:0;
-    transition:opacity .15s, transform .15s;
-  }
-
-  /* Floating hearts */
-  .heart{
-    position:fixed;
-    pointer-events:none;
-    z-index:500;
-    animation:driftUp linear forwards;
-  }
-
-  @keyframes driftUp{
-    0%{transform:translateY(0) scale(1); opacity:1;}
-    100%{transform:translateY(-100vh) scale(1.25); opacity:0;}
-  }
 </style>
 </head>
 
 <body>
 
-<!-- Clouds -->
-<div class="cloud" style="top:12%; left:6%; animation:floatCloud 32s linear infinite;"></div>
-<div class="cloud x2" style="top:28%; right:4%; animation:floatCloudReverse 38s linear infinite;"></div>
-<div class="cloud x3" style="top:62%; left:14%; animation:floatCloud 44s linear infinite;"></div>
+<!-- CSS-generated clouds -->
+<div class="cloud x1"></div>
+<div class="cloud x2"></div>
 
-<!-- Main Card -->
 <div class="card">
-  <div class="logo">🎀</div>
-  <h1>TELL ME TINY THINGS</h1>
-  <p class="lead">Tiny, true, anonymous. Say something sweet or silly ✨</p>
+  <div class="mascot">🫧</div>
+  <h1>Tiny Whispers</h1>
+  <p class="lead">Soft, sweet, anonymous. Whisper something tiny ✨</p>
 
-  <form id="tinyForm" action="https://formsubmit.co/meriembenachit14@gmail.com" method="POST" autocomplete="off">
+  <div id="whisperLine"></div>
+
+  <form id="tinyForm" action="https://formsubmit.co/meriembenachit14@gmail.com" method="POST">
+
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_subject" value="💌 New Tiny Thing">
+    <input type="hidden" name="_subject" value="💌 New Tiny Whisper">
     <input type="hidden" name="_next" value="https://meriembenachit14.github.io/Tell-Me-Tiny-Things/success.html">
     <input type="text" name="_honey" style="display:none">
 
-    <textarea id="message" name="message" placeholder="Write a tiny thing… (no names, please)"></textarea>
+    <textarea id="message" name="message" placeholder="Write your tiny whisper…"></textarea>
 
     <div class="row">
-      <button type="submit" class="btn">Send Tiny Thing 💌</button>
-      <button type="button" class="btn secondary" id="clearBtn">Clear</button>
+      <button class="btn" type="submit">Send Whisper 💌</button>
+      <button id="clearBtn" type="button" class="btn secondary">Clear</button>
     </div>
 
-    <div class="meta">Confessions sent: <span id="count">0</span> · 100% anonymous</div>
+    <div class="meta">Sent: <span id="count">0</span> whispers · 100% anonymous</div>
   </form>
 </div>
 
 <div id="spark" class="spark">✨</div>
 
 <script>
-/* Inject Keyframes for Cloud Movement */
-function addCloudKeyframes(){
-  const s=document.createElement('style');
-  s.innerHTML=`
-    @keyframes floatCloud{
-      0%{transform:translateX(-8vw)}
-      100%{transform:translateX(108vw)}
-    }
-    @keyframes floatCloudReverse{
-      0%{transform:translateX(108vw)}
-      100%{transform:translateX(-8vw)}
-    }
-  `;
-  document.head.appendChild(s);
+/* ---------- WHISPER ROTATION ---------- */
+const whispers=[
+  "Tell me a tiny secret…",
+  "Whisper something sweet…",
+  "Say something soft…",
+  "What’s a tiny thing on your mind?",
+  "Something small but real…"
+];
+let wIndex=0;
+function rotateWhisper(){
+  const w=document.getElementById('whisperLine');
+  w.style.opacity=0;
+  setTimeout(()=>{
+    w.innerText=whispers[wIndex];
+    wIndex=(wIndex+1)%whispers.length;
+    w.style.opacity=1;
+  },400);
 }
-addCloudKeyframes();
+setInterval(rotateWhisper,2500);
+rotateWhisper();
 
-/* Auto-save draft */
-const textarea=document.getElementById('message');
-const draftKey='tinyDraft_v1';
-if(localStorage.getItem(draftKey)) textarea.value = localStorage.getItem(draftKey);
+/* ---------- AUTOSAVE ---------- */
+const txt=document.getElementById('message');
+const draftKey='whisperDraft';
+const countKey='whisperCount';
+if(localStorage.getItem(draftKey)) txt.value=localStorage.getItem(draftKey);
+txt.addEventListener('input',()=>localStorage.setItem(draftKey,txt.value));
 
-textarea.addEventListener('input', ()=>{
-  localStorage.setItem(draftKey, textarea.value);
-  showTinyTypingSparkle();
-});
-
-/* Clear button */
-document.getElementById('clearBtn').onclick=()=>{
-  textarea.value='';
-  localStorage.removeItem(draftKey);
-  textarea.focus();
-};
-
-/* Message counter */
-const countKey='tinyCount_v1';
+/* ---------- COUNTER ---------- */
 let count=Number(localStorage.getItem(countKey)||0);
 document.getElementById('count').innerText=count;
 
-document.getElementById('tinyForm').addEventListener('submit', ()=>{
+/* ---------- CLEAR ---------- */
+document.getElementById('clearBtn').onclick=function(){
+  txt.value="";
+  localStorage.removeItem(draftKey);
+  txt.focus();
+};
+
+/* ---------- SUBMIT ---------- */
+document.getElementById('tinyForm').onsubmit=function(){
   count++;
   localStorage.setItem(countKey,count);
   localStorage.removeItem(draftKey);
-});
+};
 
-/* Typing sparkle */
-function showTinyTypingSparkle(){
-  const sp=document.getElementById('spark');
-  const r=textarea.getBoundingClientRect();
-  sp.style.left=(r.right-22)+'px';
-  sp.style.top=(r.bottom-20)+'px';
-  sp.style.opacity='1';
-  sp.style.transform='scale(1.2)';
-  clearTimeout(window._sparkTimer);
-  window._sparkTimer=setTimeout(()=>{
-    sp.style.opacity='0';
-    sp.style.transform='scale(.8)';
-  },700);
-}
+/* ---------- SPARKLE TRAIL ---------- */
+const spark=document.getElementById('spark'); let mTimer;
+window.onmousemove=e=>{
+  spark.style.left=e.clientX+"px";
+  spark.style.top=e.clientY+"px";
+  spark.style.opacity=1;
+  clearTimeout(mTimer);
+  mTimer=setTimeout(()=>spark.style.opacity=0,200);
+};
 
-/* Mouse sparkle */
-let mouseTimer;
-window.addEventListener('mousemove',(e)=>{
-  const sp=document.getElementById('spark');
-  sp.style.left=e.clientX+'px';
-  sp.style.top=e.clientY+'px';
-  sp.style.opacity='1';
-  clearTimeout(mouseTimer);
-  mouseTimer=setTimeout(()=>sp.style.opacity='0',220);
-});
-
-/* Floating hearts */
-function floatHeart(){
+/* ---------- RISING HEARTS ---------- */
+function heart(){
   const h=document.createElement('div');
   h.className='heart';
-  h.innerText='💗';
-  h.style.left=(10+Math.random()*80)+'vw';
-  h.style.bottom='-10px';
-  h.style.fontSize=(18+Math.random()*20)+'px';
-  const d=6000+Math.random()*3000;
-  h.style.animationDuration=d+'ms';
+  h.innerText="💗";
+  h.style.left=(10+Math.random()*80)+"vw";
+  h.style.fontSize=(16+Math.random()*14)+"px";
+  h.style.animationDuration=(5600+Math.random()*3200)+"ms";
   document.body.appendChild(h);
-  setTimeout(()=>h.remove(),d+300);
+  setTimeout(()=>h.remove(),9000);
 }
-setInterval(floatHeart,900);
-
-/* Auto-focus textarea */
-window.addEventListener('load', ()=>textarea.focus());
+setInterval(heart,1200);
 </script>
 
 </body>
