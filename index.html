@@ -1,281 +1,206 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TELL ME TINY THINGS 💌</title>
 
-<!-- Favicon (place favicon.png in repo root) -->
-<link rel="icon" type="image/png" href="favicon.png">
-
 <style>
-  /* Soft Kawaii Pastel theme */
-  :root{
-    --bg1: #fff0f6;
-    --bg2: #fff7fb;
-    --accent: #ff9ecf;
-    --accent-2: #f2c7ff;
-    --text: #74408f;
-    --card: rgba(255,255,255,0.85);
-  }
+/* ===== BASE AESTHETIC ===== */
+:root{
+  --bg1: #ffeaf5;
+  --bg2: #ffeefd;
+  --card-bg: #ffffffdd;
+  --accent: #ff8ec4;
+  --accent-light: #ffd2ec;
+  --text: #6d478a;
+  --soft-shadow: 0 14px 40px rgba(214,138,199,0.12);
+}
 
-  html,body{height:100%;margin:0;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-  body{
-    background: linear-gradient(135deg,var(--bg1),var(--bg2));
-    overflow-x:hidden;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:36px 18px;
-    color:var(--text);
-  }
+html,body{
+  margin:0;
+  padding:0;
+  font-family:"Poppins", system-ui, sans-serif;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  background-size:300% 300%;
+  animation:bgMove 18s ease infinite;
+  height:100%;
+}
 
-  /* soft moving background */
-  @keyframes gentle {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-  }
-  body { background-size:300% 300%; animation: gentle 18s ease infinite; }
+/* 💗 PERFECT CENTER FIX */
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  padding:20px;
+}
 
-  /* floating cloud shapes (decor) */
-  .cloud {
-    position: absolute;
-    top: 8%;
-    left: 6%;
-    width: 180px;
-    height: 60px;
-    background: linear-gradient(180deg,#ffffff,#fff4fb);
-    border-radius: 40px;
-    filter: drop-shadow(0 6px 18px rgba(255,150,200,0.08));
-    opacity:0.9;
-    transform: translate3d(0,0,0);
-    pointer-events:none;
-  }
-  .cloud:before, .cloud:after{
-    content:""; position:absolute; background: linear-gradient(180deg,#fff,#fff7ff);
-    border-radius:50%;
-  }
-  .cloud:before{ width:70px; height:70px; left:-30px; top:-20px; }
-  .cloud:after{ width:90px; height:90px; right:-40px; top:-30px; }
-  .cloud.x2{ left:auto; right:4%; top:22%; transform:scale(0.9); opacity:0.85; }
-  .cloud.x3{ left:12%; top:64%; width:140px; height:48px; transform:scale(0.8); opacity:0.8; }
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 
-  /* main card */
-  .card{
-    position:relative;
-    width:100%;
-    max-width:520px;
-    background:var(--card);
-    border-radius:26px;
-    padding:28px;
-    box-shadow: 0 14px 40px rgba(214,138,199,0.12);
-    border: 1px solid rgba(255,200,230,0.6);
-    backdrop-filter: blur(6px);
-    text-align:center;
-  }
+/* ===== CARD ===== */
+.card{
+  width:100%;
+  max-width:580px;
+  background:var(--card-bg);
+  border-radius:28px;
+  padding:36px;
+  box-shadow:var(--soft-shadow);
+  border:1px solid rgba(255,200,230,0.65);
+  backdrop-filter:blur(8px);
+  text-align:center;
+}
 
-  .logo {
-    font-size:56px;
-    line-height:1;
-    margin-bottom:8px;
-    animation: floaty 2.5s ease-in-out infinite;
-  }
-  @keyframes floaty { 0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)} }
+/* ===== HEADER ===== */
+.logo{
+  font-size:64px;
+  animation:floaty 3s ease-in-out infinite;
+}
 
-  h1{
-    margin:0 0 6px 0;
-    font-size:26px;
-    letter-spacing:1px;
-    color:var(--text);
-  }
-  p.lead{ margin-top:0; margin-bottom:10px; color:#6f4f8a; font-size:14px; }
+@keyframes floaty{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+  100%{transform:translateY(0)}
+}
 
-  textarea{
-    width:100%;
-    min-height:140px;
-    border-radius:16px;
-    border:2px solid #ffdff2;
-    padding:14px;
-    resize:vertical;
-    font-size:15px;
-    background:#fff7fb;
-    box-shadow: inset 0 6px 18px rgba(245,200,230,0.12);
-    transition: box-shadow 180ms, border-color 180ms, transform 120ms;
-    outline:none;
-  }
-  textarea:focus{
-    border-color:var(--accent);
-    box-shadow:0 8px 24px rgba(255,160,200,0.18);
-    transform:translateY(-1px);
-  }
+h1{
+  margin:6px 0 2px;
+  font-size:30px;
+  letter-spacing:.5px;
+  color:var(--text);
+}
 
-  /* ⭐ NEW: CENTER THE TEXTAREA BOX ⭐ */
-  #message {
-    display: block;
-    margin: 0 auto;
-  }
+.lead{
+  font-size:15px;
+  color:#8a6aa5;
+  margin-bottom:24px;
+}
 
-  .row{display:flex;gap:12px;margin-top:12px;align-items:center}
-  .btn {
-    flex:1;
-    background: linear-gradient(180deg,var(--accent),#ff7fb0);
-    color:white;
-    border:none;
-    padding:12px 16px;
-    border-radius:14px;
-    font-weight:600;
-    font-size:15px;
-    cursor:pointer;
-    box-shadow:0 10px 26px rgba(255,120,200,0.18);
-    transition: transform .14s ease, box-shadow .14s ease;
-  }
-  .btn:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(255,120,200,0.24); }
-  .btn.secondary{
-    background:transparent;
-    border: 2px dashed rgba(220,170,230,0.45);
-    color:var(--text);
-    box-shadow:none;
-    padding:10px 14px;
-  }
+/* ===== TEXTAREA ===== */
+textarea{
+  width:100%;
+  min-height:150px;
+  border-radius:18px;
+  border:2px solid var(--accent-light);
+  padding:16px;
+  resize:vertical;
+  font-size:16px;
+  color:var(--text);
+  background:#fff7fc;
+  box-shadow:inset 0 8px 22px rgba(245,200,230,0.14);
+  transition: all .2s ease;
+}
 
-  .meta{ margin-top:12px; font-size:13px; color:#6f4f8a; }
+textarea:focus{
+  border-color:var(--accent);
+  box-shadow:0 10px 26px rgba(255,120,200,0.28);
+  outline:none;
+}
 
-  .spark {
-    position:fixed;
-    pointer-events:none;
-    z-index:1200;
-    font-size:16px;
-    transform:translate(-50%,-50%);
-    opacity:0;
-    transition: opacity .12s linear, transform .12s linear;
-  }
+/* ===== BUTTONS ===== */
+.row{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
 
-  .heart {
-    position:fixed;
-    pointer-events:none;
-    z-index:1000;
-    font-size:20px;
-    animation: driftUp linear forwards;
-  }
-  @keyframes driftUp{
-    from{ transform: translateY(0) scale(1); opacity:1; }
-    to{ transform: translateY(-100vh) scale(1.2); opacity:0; }
-  }
+.btn{
+  flex:1;
+  padding:14px 18px;
+  border-radius:16px;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.15s ease;
+}
 
-  @media (max-width:520px){
-    .card{ padding:20px;border-radius:22px;}
-    .logo{font-size:46px}
-  }
+.btn.send{
+  background:linear-gradient(180deg,#ff8ec4,#ff6dab);
+  border:none;
+  color:white;
+  box-shadow:0 12px 28px rgba(255,120,200,0.28);
+}
+
+.btn.send:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 36px rgba(255,120,200,0.36);
+}
+
+.btn.clear{
+  background:transparent;
+  border:2px dashed rgba(210,150,220,0.45);
+  color:var(--text);
+}
+
+/* ===== FOOTER ===== */
+.meta{
+  margin-top:16px;
+  font-size:14px;
+  color:#8a6aa5;
+}
+
+/* ===== FLOATING HEARTS ===== */
+.heart{
+  position:fixed;
+  font-size:20px;
+  pointer-events:none;
+  animation: driftUp linear forwards;
+  z-index:1000;
+}
+
+@keyframes driftUp{
+  from{ transform:translateY(0) scale(1); opacity:1; }
+  to{ transform:translateY(-100vh) scale(1.2); opacity:0; }
+}
+
 </style>
 </head>
+
 <body>
 
-<!-- decorative clouds -->
-<div class="cloud" style="animation:floatCloud 32s linear infinite;"></div>
-<div class="cloud x2" style="animation:floatCloudReverse 38s linear infinite;"></div>
-<div class="cloud x3" style="animation:floatCloud 44s linear infinite;"></div>
-
-<script>
-  function addCloudKeyframes(){
-    const s = document.createElement('style');
-    s.innerHTML = `
-      @keyframes floatCloud { 0%{transform:translateX(-6vw)} 100%{transform:translateX(106vw)} }
-      @keyframes floatCloudReverse { 0%{transform:translateX(106vw)} 100%{transform:translateX(-6vw)} }
-    `;
-    document.head.appendChild(s);
-  }
-  addCloudKeyframes();
-</script>
-
-<div class="card" role="main" aria-labelledby="title">
-  <div class="logo" aria-hidden="true">🎀</div>
-  <h1 id="title">TELL ME TINY THINGS</h1>
+<div class="card">
+  <div class="logo">🎀</div>
+  <h1>TELL ME TINY THINGS</h1>
   <p class="lead">Tiny, true, anonymous. Share something sweet or silly ✨</p>
 
-  <form id="tinyForm" action="https://formsubmit.co/meriembenachit14@gmail.com" method="POST" autocomplete="off">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
-    <input type="hidden" name="_subject" value="💌 New Tiny Thing">
-    <input type="hidden" name="_next" value="https://meriembenachit14.github.io/Tell-Me-Tiny-Things/success.html">
-    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+  <textarea id="msg" placeholder="Write a tiny thing… (no names please)"></textarea>
 
-    <textarea id="message" name="message" placeholder="Write a tiny thing… (no names, please)"></textarea>
+  <div class="row">
+    <button class="btn send" id="sendBtn">Send Tiny Thing 💌</button>
+    <button class="btn clear" id="clearBtn">Clear</button>
+  </div>
 
-    <div class="row">
-      <button type="submit" class="btn" id="sendBtn">Send Tiny Thing 💌</button>
-      <button type="button" class="btn secondary" id="clearBtn" title="Clear draft">Clear</button>
-    </div>
-
-    <div class="meta" id="meta">Confessions sent: <span id="count">0</span> · 100% anonymous</div>
-  </form>
+  <div class="meta">Confessions sent: <span id="count">0</span> · 100% anonymous</div>
 </div>
 
-<div id="spark" class="spark">✨</div>
-
 <script>
-const textarea = document.getElementById('message');
-const draftKey = 'tinyDraft_v1';
-const countKey = 'tinyCount_v1';
-if(localStorage.getItem(draftKey)) textarea.value = localStorage.getItem(draftKey);
-textarea.addEventListener('input', () => {
-  localStorage.setItem(draftKey, textarea.value);
-  showTinyTypingSparkle();
-});
+/* LOCAL COUNTER */
+let count = Number(localStorage.getItem("tinyCount_v1") || 0);
+document.getElementById("count").innerText = count;
 
-document.getElementById('clearBtn').addEventListener('click', () => {
-  textarea.value = '';
-  localStorage.removeItem(draftKey);
-  textarea.focus();
-});
+/* CLEAR BUTTON */
+document.getElementById("clearBtn").onclick = () => {
+  document.getElementById("msg").value = "";
+};
 
-let count = Number(localStorage.getItem(countKey) || 0);
-document.getElementById('count').innerText = count;
-
-document.getElementById('tinyForm').addEventListener('submit', (e) => {
-  count++;
-  localStorage.setItem(countKey, count);
-  document.getElementById('count').innerText = count;
-  localStorage.removeItem(draftKey);
-});
-
-function showTinyTypingSparkle(){
-  const sp = document.getElementById('spark');
-  sp.style.opacity = '1';
-  sp.style.transform = 'translate(-50%,-50%) scale(1.1)';
-  const r = textarea.getBoundingClientRect();
-  sp.style.left = (r.right - 24) + 'px';
-  sp.style.top = (r.bottom - 18) + 'px';
-  clearTimeout(window._sparkTimer);
-  window._sparkTimer = setTimeout(()=>{ sp.style.opacity='0'; sp.style.transform='translate(-50%,-50%) scale(0.9)'; }, 750);
-}
-
-const spark = document.getElementById('spark');
-let mouseTimer;
-window.addEventListener('mousemove', (ev) => {
-  clearTimeout(mouseTimer);
-  spark.style.left = ev.clientX + 'px';
-  spark.style.top = ev.clientY + 'px';
-  spark.style.opacity = '0.9';
-  mouseTimer = setTimeout(()=>{ spark.style.opacity='0'; }, 220);
-});
-
-function floatHeart() {
-  const h = document.createElement('div');
-  h.className = 'heart';
-  h.innerText = '💗';
-  const size = 14 + Math.random()*20;
-  h.style.fontSize = size + 'px';
-  h.style.left = (10 + Math.random()*80) + 'vw';
-  h.style.bottom = '-10px';
-  document.body.appendChild(h);
+/* ♡ Floating hearts every 1s */
+function floatHeart(){
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerText = "💗";
+  h.style.left = (10 + Math.random()*80) + "vw";
+  h.style.bottom = "-10px";
+  h.style.fontSize = (18 + Math.random()*20) + "px";
   const duration = 5500 + Math.random()*3000;
-  h.style.animationDuration = duration + 'ms';
-  setTimeout(()=> h.remove(), duration+300);
+  h.style.animationDuration = duration + "ms";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(), duration+300);
 }
-setInterval(floatHeart, 900);
-
-window.addEventListener('load', ()=> textarea.focus());
+setInterval(floatHeart, 1200);
 </script>
 
 </body>
