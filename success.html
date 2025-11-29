@@ -1,85 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Sent Successfully 💖🎀</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Thanks — Tiny Thing Sent 💌</title>
 <link rel="icon" type="image/png" href="favicon.png">
-
 <style>
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #ffe6f9, #ffd3ec, #ffeafc);
-  background-size: 300% 300%;
-  animation: floatBg 12s ease infinite;
-  padding: 40px;
-  text-align: center;
-  color: #c652b8;
-}
-
-@keyframes floatBg {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-.box {
-  background: white;
-  padding: 35px;
-  max-width: 600px;
-  margin: auto;
-  border-radius: 35px;
-  border: 4px solid #ffbde9;
-  box-shadow: 0 12px 40px rgba(255,130,190,0.25);
-  animation: pop 0.7s ease;
-}
-
-@keyframes pop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.emoji {
-  font-size: 70px;
-  animation: floatIcon 2s infinite ease-in-out;
-}
-
-@keyframes floatIcon {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
-}
-
-button {
-  background: #ff94d6;
-  border: none;
-  padding: 16px 25px;
-  color: white;
-  border-radius: 20px;
-  font-size: 17px;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: 0.2s;
-  box-shadow: 0 5px 15px rgba(255,120,200,0.3);
-}
-
-button:hover {
-  transform: scale(1.05);
-  background: #ff7ac6;
-}
+  body{ margin:0; font-family:"Poppins",sans-serif; background: linear-gradient(135deg,#fff3fb,#ffeef8); display:flex; align-items:center; justify-content:center; height:100vh; color:#8a3f9a; }
+  .box{ background:rgba(255,255,255,0.95); padding:34px; border-radius:28px; text-align:center; border:2px solid #ffdff4; box-shadow:0 12px 36px rgba(230,160,210,0.12); max-width:520px;}
+  .emoji{ font-size:60px; margin-bottom:8px; animation:floaty 2s infinite;}
+  @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+  h1{ margin:6px 0 6px 0; font-size:26px;}
+  p{ margin:0 0 10px 0; color:#6f4f8a;}
+  a.btn{ display:inline-block; margin-top:18px; padding:12px 18px; background:#ff9ecf; color:white; border-radius:14px; text-decoration:none; font-weight:600; box-shadow:0 8px 20px rgba(255,130,190,0.16)}
+  a.btn:hover{ transform:translateY(-3px); }
 </style>
 </head>
-
 <body>
-
-<div class="box">
-  <div class="emoji">💖💌✨</div>
-  <h1>Your secret has been delivered! 🎀</h1>
-  <p>Thank you for trusting me with your confession.  
-     It's safe, anonymous & sparkly ✨</p>
-
-  <button onclick="window.location.href='index.html'">Send Another Secret 💌</button>
-</div>
-
+  <div class="box">
+    <div class="emoji">💌✨</div>
+    <h1>Your tiny thing was sent!</h1>
+    <p>Thanks for sharing — it's anonymous and received safely.</p>
+    <a class="btn" href="index.html">Send Another</a>
+  </div>
 </body>
 </html>
