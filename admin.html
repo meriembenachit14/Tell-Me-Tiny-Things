@@ -1,89 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Admin — Confessions Inbox 💌✨</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Admin — Tiny Things Inbox</title>
 <link rel="icon" type="image/png" href="favicon.png">
-
 <style>
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #ffe6f9, #ffd3ec, #ffeafc);
-  padding: 40px;
-  color: #c652b8;
-  text-align: center;
-}
-
-.box {
-  background: white;
-  padding: 35px;
-  max-width: 650px;
-  margin: auto;
-  border-radius: 35px;
-  border: 4px solid #ffbde9;
-  box-shadow: 0 12px 40px rgba(255,130,190,0.25);
-  animation: pop 0.7s ease;
-}
-
-@keyframes pop {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-.emoji {
-  font-size: 75px;
-  animation: float 2s infinite ease-in-out;
-}
-
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
-}
-
-button {
-  width: 100%;
-  background: #ff9cda;
-  border: none;
-  padding: 18px;
-  border-radius: 20px;
-  color: white;
-  font-size: 18px;
-  cursor: pointer;
-  margin-top: 25px;
-  transition: 0.2s;
-  box-shadow: 0 5px 15px rgba(255,120,200,0.3);
-}
-
-button:hover {
-  background: #ff85cf;
-  transform: scale(1.05);
-}
+  body{ margin:0; font-family:"Poppins",sans-serif; background: linear-gradient(135deg,#fff3fb,#ffeef8); color:#7a3f95; padding:36px; display:flex; align-items:center; justify-content:center; min-height:100vh;}
+  .card{ background:rgba(255,255,255,0.95); padding:28px; border-radius:26px; box-shadow:0 12px 36px rgba(220,160,200,0.12); border:1px solid #ffdff4; max-width:720px; width:100%;}
+  .emoji{ font-size:56px; text-align:center; margin-bottom:8px; animation:floaty 2s infinite;}
+  h1{ text-align:center; margin:6px 0 8px 0; font-size:28px; color:#8a3f9a;}
+  p{ color:#6f4f8a; line-height:1.6; }
+  .open-btn{ display:block; margin:18px auto 0; background:#ff9ecf; color:white; border:none; padding:12px 18px; border-radius:14px; text-decoration:none; text-align:center; font-weight:600; box-shadow:0 8px 20px rgba(255,130,190,0.14) }
+  .open-btn:hover{ transform:translateY(-3px); }
 </style>
 </head>
-
 <body>
+  <div class="card">
+    <div class="emoji">📥🌸</div>
+    <h1>Tiny Things — Admin</h1>
+    <p>
+      All anonymous tiny messages are delivered to your <strong>FormSubmit</strong> inbox.
+      To view them:
+    </p>
+    <ol>
+      <li>Go to <a href="https://formsubmit.co/dashboard" target="_blank" rel="noopener">formsubmit.co/dashboard</a></li>
+      <li>Log in with: <strong>meriembenachit14@gmail.com</strong></li>
+      <li>Open the Submissions / Inbox to read messages</li>
+    </ol>
 
-<div class="box sparkle">
-  <div class="emoji">📥🎀✨</div>
-  <h1>Confessions Admin Panel 💌</h1>
-
-  <p style="font-size:17px;">
-    All secrets are stored securely in your FormSubmit inbox. 💖  
-  </p>
-
-  <h3>🔐 How to check messages</h3>
-  <p>
-    ➤ Go to <b>formsubmit.co/dashboard</b><br>
-    ➤ Log in with your email: <b>meriembenachit14@gmail.com</b><br>
-    ➤ Open your adorable secret inbox 💌🎀
-  </p>
-
-  <button onclick="window.open('https://formsubmit.co/dashboard','_blank')">
-    Open inbox ✨
-  </button>
-</div>
-
+    <a class="open-btn" href="https://formsubmit.co/dashboard" target="_blank" rel="noopener">Open FormSubmit Inbox 💌</a>
+  </div>
 </body>
 </html>
