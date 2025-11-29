@@ -1,287 +1,390 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Tiny Whispers 🫧</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TELL ME TINY THINGS 💌</title>
 <link rel="icon" type="image/png" href="favicon.png">
+
 <style>
-  /* ===== ROOT / THEME ===== */
-  :root{
-    --pink:#ffb6e6;
-    --lav:#d9c8ff;
-    --bg1:#fff7fb;
-    --bg2:#f8f3ff;
-    --text:#6b3e85;
-    --card:rgba(255,255,255,0.82);
+/* -----------------------------------------------------------
+   🌸 GLOBAL PASTEL KAWAII THEME
+----------------------------------------------------------- */
+:root{
+  --bg1: #ffe9f6;
+  --bg2: #fef6ff;
+  --accent: #ff9edb;
+  --accent2: #e7c4ff;
+  --text: #7b4a9e;
+  --card: rgba(255,255,255,0.88);
+  --glow: rgba(255,150,220,0.35);
+}
+
+html,body{
+  margin:0;
+  padding:0;
+  height:100%;
+  font-family: "Poppins", system-ui, sans-serif;
+  color:var(--text);
+  background: linear-gradient(135deg,var(--bg1),var(--bg2));
+  overflow-x:hidden;
+}
+
+/* fade-in page */
+body { opacity:0; animation:fadeIn 1.2s ease forwards; }
+@keyframes fadeIn { to{opacity:1;} }
+
+/* -----------------------------------------------------------
+   🌸 FLOATING AUTO-GENERATED CLOUDS
+----------------------------------------------------------- */
+.cloud{
+  position:fixed;
+  background: #fff;
+  border-radius:50px;
+  filter: blur(12px) brightness(1.1);
+  opacity:.55;
+  animation: drift linear infinite;
+  pointer-events:none;
+}
+@keyframes drift{
+  from{ transform: translateX(-20vw); }
+  to{ transform: translateX(120vw); }
+}
+
+/* -----------------------------------------------------------
+   🌸 MAIN CARD
+----------------------------------------------------------- */
+.wrapper{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:36px 18px;
+}
+
+.card{
+  width:100%;
+  max-width:520px;
+  background:var(--card);
+  border-radius:28px;
+  padding:32px;
+  text-align:center;
+  box-shadow:0 18px 50px rgba(210,120,200,0.22);
+  border:1px solid rgba(255,180,240,0.55);
+  backdrop-filter: blur(10px);
+  animation:softGlow 3s ease-in-out infinite;
+}
+
+@keyframes softGlow{
+  0%,100%{ box-shadow:0 18px 55px rgba(255,160,240,0.20); }
+  50%{ box-shadow:0 18px 65px rgba(255,160,240,0.35); }
+}
+
+/* -----------------------------------------------------------
+   🌸 TITLE, MASCOT, TEXT
+----------------------------------------------------------- */
+.mascot{
+  font-size:58px;
+  animation:bounce 2.2s infinite ease-in-out;
+}
+@keyframes bounce{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-10px); }
+}
+
+h1{
+  margin:8px 0 6px;
+  font-size:28px;
+  background:linear-gradient(90deg,#ff8ed3,#c79aff);
+  -webkit-background-clip:text;
+  color:transparent;
+  text-shadow:0 2px 8px rgba(255,150,220,0.25);
+}
+
+p.lead{
+  font-size:14px;
+  color:#775588;
+  margin-top:0;
+  margin-bottom:14px;
+}
+
+/* -----------------------------------------------------------
+   🌸 FORMS
+----------------------------------------------------------- */
+input[type="text"], textarea{
+  width:100%;
+  border:2px solid #ffdff4;
+  background:#fff7fc;
+  border-radius:16px;
+  padding:12px 14px;
+  margin-bottom:12px;
+  font-size:15px;
+  outline:none;
+  transition:0.2s;
+  box-shadow: inset 0 5px 12px rgba(255,180,220,0.15);
+}
+textarea{
+  min-height:150px;
+  resize:vertical;
+}
+input:focus, textarea:focus{
+  border-color:var(--accent);
+  box-shadow:0 8px 25px rgba(255,150,220,0.25);
+}
+
+/* -----------------------------------------------------------
+   🌸 BUTTONS
+----------------------------------------------------------- */
+.row{ display:flex; gap:12px; }
+
+.btn{
+  flex:1;
+  padding:12px 16px;
+  border-radius:14px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(180deg,var(--accent),#ff7abf);
+  color:white;
+  box-shadow:0 12px 24px rgba(255,120,200,0.18);
+  transition:0.18s;
+}
+.btn:hover{
+  transform:translateY(-3px);
+  box-shadow:0 16px 34px rgba(255,120,200,0.26);
+}
+.btn.secondary{
+  background:transparent;
+  color:var(--text);
+  border:2px dashed rgba(210,150,230,0.5);
+  box-shadow:none;
+}
+
+/* -----------------------------------------------------------
+   🌸 META / COUNTERS
+----------------------------------------------------------- */
+.meta{
+  margin-top:10px;
+  font-size:13px;
+}
+
+/* -----------------------------------------------------------
+   🌸 SPARKLE EFFECT
+----------------------------------------------------------- */
+.spark{
+  position:fixed;
+  font-size:16px;
+  pointer-events:none;
+  opacity:0;
+  transition:0.1s;
+  z-index:999;
+}
+
+/* -----------------------------------------------------------
+   🌸 CONFETTI
+----------------------------------------------------------- */
+.confetti{
+  position:fixed;
+  width:10px;
+  height:10px;
+  border-radius:3px;
+  top:-10px;
+  animation: drop linear forwards;
+}
+@keyframes drop{
+  to{
+    transform: translateY(105vh) rotate(300deg);
+    opacity:0;
   }
-  html,body{height:100%;margin:0;font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
-  body{
-    background: linear-gradient(135deg,var(--bg1),var(--bg2));
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:28px;
-    overflow:hidden;
-    color:var(--text);
-    -webkit-font-smoothing:antialiased;
-  }
+}
 
-  /* ===== dreamy blurred blob lights ===== */
-  .blob{
-    position:fixed; border-radius:50%; filter:blur(36px); opacity:.18; z-index:1;
-  }
-  .blob.b1{width:360px;height:360px; left:-8%; top:6%; background:linear-gradient(135deg,var(--pink),var(--lav));}
-  .blob.b2{width:280px;height:280px; right:-6%; bottom:8%; background:linear-gradient(135deg,#ffd2f8,#e7dbff); opacity:.14;}
+/* -----------------------------------------------------------
+   🌸 MUSIC TOGGLE
+----------------------------------------------------------- */
+.musicToggle{
+  margin-top:14px;
+  font-size:13px;
+  cursor:pointer;
+  color:#9a53b0;
+  opacity:0.8;
+}
+.musicToggle:hover{
+  opacity:1;
+}
 
-  /* ===== fluff clouds (CSS-only) ===== */
-  .cloud{
-    position:fixed; z-index:2; pointer-events:none;
-    background:linear-gradient(180deg,#ffffff,#fff8fb);
-    border-radius:60px; box-shadow:0 10px 30px rgba(230,190,240,0.16); filter:blur(1px);
-  }
-  .cloud:before,.cloud:after{content:"";position:absolute;background:inherit;border-radius:50%;}
-  .cloud.c1{width:220px;height:80px; left:-25%; top:8%; animation:cloudMove 46s linear infinite;}
-  .cloud.c1:before{width:84px;height:84px; left:-30px; top:-26px;}
-  .cloud.c1:after{width:110px;height:110px; right:-36px; top:-40px;}
-  .cloud.c2{width:180px;height:60px; left:-30%; top:60%; animation:cloudMove 52s linear infinite reverse;}
-  .cloud.c2:before{width:70px;height:70px; left:-26px; top:-20px;}
-  .cloud.c2:after{width:90px;height:90px; right:-30px; top:-30px;}
-  @keyframes cloudMove{0%{transform:translateX(0)}100%{transform:translateX(160vw)}}
-
-  /* ===== card ===== */
-  .card{
-    z-index:10; position:relative;
-    width:100%; max-width:560px;
-    background:var(--card);
-    border-radius:28px;
-    padding:30px 28px;
-    box-shadow:0 26px 60px rgba(200,140,220,0.12);
-    border:1px solid rgba(255,210,240,0.6);
-    text-align:center;
-    backdrop-filter:blur(8px);
-  }
-
-  .mascot{font-size:64px; animation:floaty 3s ease-in-out infinite; margin-bottom:6px;}
-  @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
-
-  h1{margin:6px 0 4px;font-size:30px;letter-spacing:.6px;background:linear-gradient(90deg,#b25bff,#ff8ec4);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .lead{margin:0 0 14px;color:#8b66a8}
-
-  /* whisper rotating line */
-  #whisperLine{height:18px;font-size:13px;color:#9b79c2;margin-bottom:8px;opacity:0;transition:opacity .35s}
-
-  /* textarea (auto-expand + soft) */
-  textarea{
-    width:100%;
-    min-height:110px;
-    max-height:46vh;
-    padding:14px 16px;
-    border-radius:16px;
-    border:2px solid rgba(255,210,235,0.8);
-    background:rgba(255,255,255,0.9);
-    font-size:15px;
-    color:var(--text);
-    resize:vertical;
-    box-shadow:inset 0 10px 24px rgba(245,200,235,0.08);
-    transition:box-shadow .12s, border-color .12s, transform .08s;
-  }
-  textarea:focus{outline:none;border-color:var(--pink);box-shadow:0 12px 30px rgba(255,140,200,0.18);transform:translateY(-2px);}
-
-  /* typing wiggle on first input */
-  .wiggle{animation:wig 220ms ease}
-  @keyframes wig{0%{transform:translateY(0)}50%{transform:translateY(-4px)}100%{transform:translateY(0)}}
-
-  /* buttons */
-  .row{display:flex;gap:12px;margin-top:12px}
-  .btn{
-    flex:1;padding:12px 14px;border-radius:14px;border:none;background:linear-gradient(135deg,var(--pink),var(--lav));color:white;font-weight:700;
-    cursor:pointer;box-shadow:0 12px 28px rgba(200,120,255,0.2);transition:transform .12s;
-  }
-  .btn:hover{transform:translateY(-3px)}
-  .btn.secondary{background:transparent;color:var(--text);border:2px dashed rgba(200,150,255,0.38);box-shadow:none}
-
-  /* meta + controls */
-  .meta{font-size:13px;color:#8b66a8;margin-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
-  .controls{display:flex;gap:8px;align-items:center}
-
-  .toggle{
-    display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.6);padding:6px 10px;border-radius:999px;border:1px solid rgba(240,220,250,0.6);
-    font-size:13px;color:#6d4b8f;
-  }
-
-  /* spark trail */
-  #spark{position:fixed;font-size:16px;pointer-events:none;z-index:1200;opacity:0;transition:opacity .14s, transform .14s}
-
-  /* rising hearts on submit */
-  .heart{position:fixed;pointer-events:none;font-size:18px;z-index:1500;animation:rise linear forwards}
-  @keyframes rise{0%{transform:translateY(0) scale(1);opacity:1}100%{transform:translateY(-80vh) scale(1.25);opacity:0}}
-
-  /* responsive tweaks */
-  @media (max-width:520px){
-    .card{padding:20px;border-radius:20px}
-    h1{font-size:22px}
-    .mascot{font-size:48px}
-  }
+/* -----------------------------------------------------------
+   🌸 RESPONSIVE
+----------------------------------------------------------- */
+@media (max-width:520px){
+  .card{ padding:26px; }
+}
 </style>
 </head>
+
 <body>
 
-  <!-- blobs & clouds -->
-  <div class="blob b1"></div>
-  <div class="blob b2"></div>
+<div id="cloudContainer"></div>
 
-  <div class="cloud c1"></div>
-  <div class="cloud c2"></div>
+<div class="wrapper">
+  <div class="card">
+    <div class="mascot">🌸🐰</div>
 
-  <!-- main card -->
-  <div class="card" role="main" aria-labelledby="title">
-    <div class="mascot" id="mascot">🫧</div>
-    <h1 id="title">Tiny Whispers</h1>
-    <p class="lead">Soft, sweet & anonymous — whisper something tiny ✨</p>
+    <h1>TELL ME TINY THINGS</h1>
+    <p class="lead">Tiny thoughts. Tiny feelings. All anonymous, all sweet. 💌</p>
 
-    <div id="whisperLine" aria-hidden="true"></div>
-
+    <!-- FORM -->
     <form id="tinyForm" action="https://formsubmit.co/meriembenachit14@gmail.com" method="POST" autocomplete="off">
+      
+      <!-- FormSubmit requirements -->
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_subject" value="💌 New Tiny Whisper">
+      <input type="hidden" name="_subject" value="💌 New Tiny Thing">
       <input type="hidden" name="_next" value="https://meriembenachit14.github.io/Tell-Me-Tiny-Things/success.html">
-      <input type="text" name="_honey" style="display:none" autocomplete="off">
+      <input type="text" name="_honey" style="display:none">
 
-      <textarea id="message" name="message" placeholder="Write your tiny whisper… (no names)"></textarea>
+      <!-- OPTIONAL CODENAME -->
+      <input type="text" name="codename" placeholder="Codename (optional)…">
+
+      <!-- MESSAGE -->
+      <textarea id="message" name="message" placeholder="Write a tiny thing… (no names, please)"></textarea>
 
       <div class="row">
-        <button class="btn" id="sendBtn" type="submit">Send Whisper 💌</button>
+        <button class="btn" id="sendBtn" type="submit">Send 💌</button>
         <button class="btn secondary" id="clearBtn" type="button">Clear</button>
       </div>
 
       <div class="meta">
-        <div>Sent: <strong id="count">0</strong> whispers · 100% anonymous</div>
-        <div class="controls">
-          <label class="toggle">
-            <input id="soundToggle" type="checkbox" style="display:none">
-            🔔 Sound
-          </label>
-        </div>
+        Messages sent: <span id="count">0</span> · Visitors: <span id="visits">0</span>
       </div>
+
+      <div class="musicToggle" id="musicToggle">🔈 Turn on music</div>
+
     </form>
   </div>
+</div>
 
-  <div id="spark">✨</div>
+<div id="spark" class="spark">✨</div>
+
+<audio id="bgm" src="bgm.mp3" loop></audio>
 
 <script>
-/* ========== Random mascot (emoji) ========== */
-const mascots=["🫧","🎀","🧸","💗","🌙","🌸","🍓","✨"];
-const mascotEl=document.getElementById('mascot');
-mascotEl.innerText = mascots[Math.floor(Math.random()*mascots.length)];
-
-/* ========== rotating whisper prompts ========== */
-const whispers=[
-  "Tell me a tiny secret…",
-  "Whisper something soft…",
-  "Say a small sweet thing…",
-  "A tiny thought you’re holding…",
-  "Share a little truth…"
-];
-let wi=0;
-const wEl=document.getElementById('whisperLine');
-function rotateWhisper(){
-  wEl.style.opacity=0;
-  setTimeout(()=>{
-    wEl.innerText=whispers[wi];
-    wi=(wi+1)%whispers.length;
-    wEl.style.opacity=1;
-  },320);
+/* -----------------------------------------------------------
+   🌸 CLOUD GENERATOR
+----------------------------------------------------------- */
+for(let i=0;i<12;i++){
+  const c = document.createElement("div");
+  c.className="cloud";
+  const w = 120 + Math.random()*180;
+  const h = 40 + Math.random()*70;
+  c.style.width = w+"px";
+  c.style.height = h+"px";
+  c.style.top = (Math.random()*90)+"vh";
+  c.style.animationDuration = (30+Math.random()*40)+"s";
+  c.style.animationDelay = (-Math.random()*50)+"s";
+  document.getElementById("cloudContainer").appendChild(c);
 }
-rotateWhisper();
-setInterval(rotateWhisper,3500);
 
-/* ========== autosave + counter ========== */
-const txt=document.getElementById('message');
-const draftKey='tinyWhisperDraft_v2';
-const countKey='tinyWhisperCount_v2';
-if(localStorage.getItem(draftKey)) txt.value = localStorage.getItem(draftKey);
-txt.addEventListener('input',()=>{
-  localStorage.setItem(draftKey, txt.value);
-  // typing wiggle on first input
-  txt.classList.add('wiggle');
-  setTimeout(()=>txt.classList.remove('wiggle'),240);
-});
+/* -----------------------------------------------------------
+   🌸 LOCAL VISITOR COUNTER
+----------------------------------------------------------- */
+let visits = Number(localStorage.getItem("tiny_visits") || 0);
+visits++;
+localStorage.setItem("tiny_visits", visits);
+document.getElementById("visits").textContent = visits;
+
+/* -----------------------------------------------------------
+   🌸 MESSAGE COUNTER
+----------------------------------------------------------- */
+let countKey="tinyCount_v2";
 let count = Number(localStorage.getItem(countKey) || 0);
-document.getElementById('count').innerText = count;
+document.getElementById("count").textContent = count;
 
-/* ========== clear button ========== */
-document.getElementById('clearBtn').addEventListener('click',()=>{
-  txt.value='';
+/* -----------------------------------------------------------
+   🌸 DRAFT SAVE
+----------------------------------------------------------- */
+let draftKey="tinyDraft_v2";
+const textarea=document.getElementById("message");
+if(localStorage.getItem(draftKey)) textarea.value=localStorage.getItem(draftKey);
+
+textarea.addEventListener("input",()=>{
+  localStorage.setItem(draftKey, textarea.value);
+  showSpark();
+});
+
+/* -----------------------------------------------------------
+   🌸 CLEAR BUTTON
+----------------------------------------------------------- */
+document.getElementById("clearBtn").onclick = ()=>{
+  textarea.value="";
   localStorage.removeItem(draftKey);
-  txt.focus();
-});
+};
 
-/* ========== spark trail ========== */
-const spark=document.getElementById('spark');
-let mtimer;
-window.addEventListener('mousemove', (ev) => {
-  spark.style.left = ev.clientX + 'px';
-  spark.style.top = ev.clientY + 'px';
-  spark.style.opacity = '0.95';
-  clearTimeout(mtimer);
-  mtimer = setTimeout(()=> spark.style.opacity = '0', 200);
-});
-
-/* ========== rising hearts on submit (sequence) ========== */
-function spawnHeart(){
-  const h = document.createElement('div');
-  h.className='heart';
-  h.innerText='💗';
-  h.style.left = (8 + Math.random()*84) + 'vw';
-  h.style.fontSize = (14 + Math.random()*18) + 'px';
-  h.style.animationDuration = (4200 + Math.random()*3000) + 'ms';
-  document.body.appendChild(h);
-  setTimeout(()=> h.remove(), 9000);
+/* -----------------------------------------------------------
+   🌸 SPARKLE EFFECT
+----------------------------------------------------------- */
+const spark=document.getElementById("spark");
+function showSpark(){
+  const r=textarea.getBoundingClientRect();
+  spark.style.left=(r.right-25)+"px";
+  spark.style.top=(r.bottom-25)+"px";
+  spark.style.opacity="1";
+  setTimeout(()=> spark.style.opacity="0",300);
 }
 
-/* ========== soft bell sound (optional) ========== */
-let soundEnabled = (localStorage.getItem('tinyWhisperSound') === '1');
-const soundToggle = document.getElementById('soundToggle');
-soundToggle.checked = soundEnabled;
-document.querySelector('.toggle').addEventListener('click', ()=>{
-  soundEnabled = !soundEnabled;
-  soundToggle.checked = soundEnabled;
-  localStorage.setItem('tinyWhisperSound', soundEnabled ? '1' : '0');
-});
-
-/* build a tiny soft bell (data URL) */
-const bellDataUrl = "data:audio/wav;base64,UklGRmQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA="; // tiny silent placeholder (safe short beep can be injected if desired)
-
-/* ========== submit interception to show hearts & sound then redirect ====== */
-const form = document.getElementById('tinyForm');
-form.addEventListener('submit', (e) => {
-  // if message empty, allow normal submission (FormSubmit will handle), but we still show small feedback
-  e.preventDefault();
-  // play sound if enabled
-  if(soundEnabled){
-    const a = new Audio(bellDataUrl);
-    try{ a.play(); }catch(err){}
+/* -----------------------------------------------------------
+   🌸 CONFETTI
+----------------------------------------------------------- */
+function throwConfetti(){
+  for(let i=0;i<25;i++){
+    const conf=document.createElement("div");
+    conf.className="confetti";
+    conf.style.left=Math.random()*100+"vw";
+    conf.style.background=["#ff8ed3","#c79aff","#ffd4f4","#fff"][(Math.random()*4)|0];
+    conf.style.animationDuration=(3+Math.random()*2)+"s";
+    document.body.appendChild(conf);
+    setTimeout(()=>conf.remove(),5000);
   }
-  // show quick hearts (0.9s)
-  for(let i=0;i<8;i++){ setTimeout(spawnHeart, i*90 + Math.random()*80); }
-  // small UX: disable button to prevent double clicks
-  document.getElementById('sendBtn')?.setAttribute('disabled','true');
-  // after 900ms, actually submit the form (redirects to _next)
-  setTimeout(()=> form.submit(), 900);
+}
+
+/* -----------------------------------------------------------
+   🌸 FORM SUBMIT
+----------------------------------------------------------- */
+document.getElementById("tinyForm").addEventListener("submit",(e)=>{
+  count++;
+  localStorage.setItem(countKey,count);
+  throwConfetti();
 });
 
-/* ========== auto-expand textarea (soft) ========= */
-function autoGrow(el){
-  el.style.height = 'auto';
-  el.style.height = (el.scrollHeight) + 'px';
-}
-txt.addEventListener('input', ()=> autoGrow(txt));
-window.addEventListener('load', ()=> autoGrow(txt));
+/* -----------------------------------------------------------
+   🌸 MUSIC TOGGLE
+----------------------------------------------------------- */
+const bgm=document.getElementById("bgm");
+const musicToggle=document.getElementById("musicToggle");
+let musicOn=false;
 
-/* ========== ensure accessibility: focus textarea on load ===== */
-window.addEventListener('load', ()=> txt.focus());
+musicToggle.onclick=()=>{
+  musicOn=!musicOn;
+  if(musicOn){
+    bgm.play();
+    musicToggle.textContent="🔊 Music on";
+  } else {
+    bgm.pause();
+    musicToggle.textContent="🔈 Turn on music";
+  }
+};
+
+/* -----------------------------------------------------------
+   🌸 MOUSE SPARK TRAIL
+----------------------------------------------------------- */
+let t;
+window.onmousemove=e=>{
+  clearTimeout(t);
+  spark.style.left=e.clientX+"px";
+  spark.style.top=e.clientY+"px";
+  spark.style.opacity="1";
+  t=setTimeout(()=> spark.style.opacity="0",150);
+};
 </script>
+
 </body>
 </html>
