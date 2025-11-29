@@ -1,46 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Whisper Sent 💌</title>
-  <link rel="icon" href="favicon.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Message Sent ✨</title>
+
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-  <!-- Clouds (same as index) -->
-  <div id="clouds" class="clouds" aria-hidden="true"></div>
+  <!-- FLOATING CLOUDS -->
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
+  <div class="cloud c4"></div>
 
-  <!-- Floating hearts container -->
-  <div id="floatingHearts"></div>
-
-  <!-- Toolbar (same as index) -->
-  <div class="toolbar" role="toolbar">
-    <button id="darkToggle" class="tool-btn" title="Toggle Dark Mode">🌙</button>
-    <button id="musicToggle" class="tool-btn" title="Toggle Music">🔊</button>
-    <button class="tool-btn" onclick="location.href='index.html'">🏠</button>
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div id="darkToggle" class="tool-btn">🌙</div>
+    <div id="musicToggle" class="tool-btn">🔊</div>
   </div>
 
-  <!-- Success Page -->
-  <main class="success-page">
-    <div class="success-container">
+  <!-- BACKGROUND MUSIC -->
+  <audio id="bgm" loop>
+    <source src="birthday-bgmusic.mp3" type="audio/mpeg" />
+  </audio>
 
-      <img src="https://em-content.zobj.net/thumbs/240/softbank/145/rabbit-face_1f430.png"
-           class="success-bunny" alt="bunny" />
-
-      <h2>Whisper Sent! 💌</h2>
+  <main>
+    <div class="container">
+      <h1>Message Sent! 💌</h1>
 
       <p>Your whisper goes straight to the receiver’s inbox, safely and privately.</p>
 
-      <a href="index.html" class="btn">Send another whisper</a>
-
+      <a href="index.html" class="btn">Send Another</a>
     </div>
   </main>
-
-  <!-- BGM -->
-  <audio id="bgm" preload="auto" src="bgm.mp3"></audio>
 
   <script src="main.js"></script>
 </body>
