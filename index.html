@@ -9,24 +9,24 @@
 </head>
 <body>
   <!-- Loading overlay -->
-  <div id="loading" class="loading">
+  <div id="loading" class="loading" aria-hidden="false">
     <div class="loaderContent">
       <div class="loaderMascot">🐰</div>
       <div class="loaderText">Preparing your tiny space…</div>
     </div>
   </div>
 
-  <!-- Clouds -->
+  <!-- Floating clouds container -->
   <div id="clouds" class="clouds" aria-hidden="true"></div>
 
   <!-- Floating toolbar -->
   <div class="toolbar" role="toolbar" aria-label="site controls">
-    <button id="darkToggle" title="Toggle dark mode">🌙</button>
-    <button id="musicToggle" title="Toggle music">🔊</button>
+    <button id="darkToggle" title="Toggle dark mode" aria-pressed="false">🌙</button>
+    <button id="musicToggle" title="Toggle music">🔈</button>
     <button id="helpBtn" title="Help">❔</button>
   </div>
 
-  <!-- Main card -->
+  <!-- Main centered card -->
   <main class="wrap" role="main">
     <section class="card" aria-labelledby="title">
       <div class="mascot" aria-hidden="true" id="mascot">🐰</div>
@@ -41,7 +41,7 @@
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_subject" value="💌 Tiny Whisper" />
         <input type="hidden" name="_next" value="success.html" />
-        <input type="text" name="_honey" style="display:none" />
+        <input type="text" name="_honey" style="display:none" aria-hidden="true" />
 
         <label class="labelVis" for="codename">Codename (optional)</label>
         <input id="codename" name="codename" type="text" placeholder="Codename (optional)…" />
@@ -73,10 +73,11 @@
     </div>
   </div>
 
+  <!-- Audio -->
   <audio id="bgm" preload="auto"></audio>
-
   <audio id="typeBeep" preload="auto" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA="></audio>
 
+  <!-- Main JS -->
   <script src="main.js"></script>
 </body>
 </html>
