@@ -1,5 +1,5 @@
 /* ------------------------------------------------------------ */
-/* GENERAL THEME — pink pastel kawaii clouds + hearts + bunny   */
+/* BASE — Soft Kawaii Pastel Pink                               */
 /* ------------------------------------------------------------ */
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
@@ -12,31 +12,33 @@
 }
 
 body {
-  background: linear-gradient(#ffd8ec, #ffeaf6);
+  background: linear-gradient(#ffeef7, #fff6fb);
   overflow-x: hidden;
+  color: #444;
 }
 
 /* ------------------------------------------------------------ */
 /* FLOATING CLOUDS                                              */
 /* ------------------------------------------------------------ */
 
-.cloud {
-  position: absolute;
-  width: 200px;
-  opacity: 0.75;
-  animation: floatClouds 40s linear infinite;
+#clouds {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("https://raw.githubusercontent.com/mallowcloud/kawaii-assets/main/cloud-soft.png"),
+                    url("https://raw.githubusercontent.com/mallowcloud/kawaii-assets/main/cloud-soft.png"),
+                    url("https://raw.githubusercontent.com/mallowcloud/kawaii-assets/main/cloud-soft.png");
+  background-repeat: no-repeat;
+  background-size: 380px, 320px, 420px;
+  background-position: -200px 10%, 80% 40%, -150px 70%;
+  animation: moveClouds 45s linear infinite;
 }
 
-@keyframes floatClouds {
-  0% { transform: translateX(-20vw); }
-  100% { transform: translateX(120vw); }
+@keyframes moveClouds {
+  0% { background-position: -300px 10%, 80% 40%, -200px 70%; }
+  100% { background-position: 120vw 10%, -40vw 40%, 110vw 70%; }
 }
-
-/* Place them gently at different heights */
-.cloud.c1 { top: 10%; animation-duration: 42s; }
-.cloud.c2 { top: 30%; animation-duration: 38s; }
-.cloud.c3 { top: 55%; animation-duration: 48s; }
-.cloud.c4 { top: 75%; animation-duration: 35s; }
 
 /* ------------------------------------------------------------ */
 /* FLOATING HEARTS                                              */
@@ -44,190 +46,210 @@ body {
 
 .floating-heart {
   position: fixed;
-  width: 20px;
-  height: 20px;
-  background: pink;
+  bottom: -20px;
+  width: 24px;
+  height: 24px;
+  background: #ff87c7;
   clip-path: path("M12.015 3.58c-.84-1.142-2.52-1.142-3.36 0L8 4.5l-.655-.92c-.84-1.142-2.52-1.142-3.36 0-.9 1.223-.72 2.97.36 4.02L8 11l3.655-3.4c1.08-1.05 1.26-2.797.36-4.02z");
-  animation: floatUp 5s ease-in infinite;
-  opacity: 0.8;
+  opacity: 0.75;
+  animation: riseHeart 6s ease-in infinite;
+  z-index: 2;
 }
 
-@keyframes floatUp {
-  0% { transform: translateY(20px) scale(0.7); opacity: 0; }
-  30% { opacity: 1; }
-  100% { transform: translateY(-120vh) scale(1.2); opacity: 0; }
+@keyframes riseHeart {
+  0% { transform: translateY(0) scale(.7); opacity: 0; }
+  25% { opacity: .95; }
+  100% { transform: translateY(-120vh) scale(1.3); opacity: 0; }
 }
 
 /* ------------------------------------------------------------ */
-/* MAIN CONTAINER                                               */
+/* MAIN CARD                                                    */
 /* ------------------------------------------------------------ */
 
-.container {
-  max-width: 420px;
+.wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+  padding: 20px;
+}
+
+.card {
   background: white;
-  margin: 80px auto;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 28px;
   padding: 30px;
-  border-radius: 25px;
-  box-shadow: 0 0 30px rgba(255, 150, 200, 0.35);
   text-align: center;
   position: relative;
+  box-shadow: 0 12px 40px rgba(255, 150, 200, 0.28);
+  z-index: 5;
+}
+
+.mascot {
+  font-size: 48px;
+  margin-bottom: 10px;
 }
 
 h1 {
+  color: #b34fa8;
   font-size: 28px;
-  margin-bottom: 10px;
-  color: #ff7fbf;
+  margin-bottom: 6px;
 }
 
-p {
-  font-size: 15px;
-  color: #444;
-  opacity: 0.8;
-  margin-bottom: 18px;
+.lead {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 15px;
 }
 
 /* ------------------------------------------------------------ */
-/* INPUT + TEXTAREA                                             */
+/* INPUTS                                                       */
 /* ------------------------------------------------------------ */
 
-textarea, input {
+.labelVis {
+  display: block;
+  text-align: left;
+  font-size: 13px;
+  margin-top: 10px;
+  color: #a55589;
+}
+
+input, textarea {
   width: 100%;
+  border: 2px solid #ffd0ea;
+  background: #fff9fc;
+  border-radius: 16px;
   padding: 14px;
-  border: 2px solid #ffc1dd;
-  background: #fff8fc;
-  border-radius: 15px;
-  margin-top: 12px;
-  outline: none;
-  resize: none;
+  margin-top: 5px;
   font-size: 15px;
-  color: #333;
   transition: 0.2s;
 }
 
-textarea:focus, input:focus {
-  border-color: #ff8ac6;
-  background: #fff0f8;
+input:focus, textarea:focus {
+  border-color: #ff94d0;
+  background: #fff3fa;
 }
 
 /* ------------------------------------------------------------ */
-/* BUTTON                                                       */
+/* BUTTONS                                                      */
 /* ------------------------------------------------------------ */
+
+.row {
+  display: flex;
+  gap: 14px;
+  margin-top: 20px;
+}
 
 .btn {
-  display: inline-block;
-  width: 100%;
-  margin-top: 20px;
-  padding: 14px;
-  background: #ff9ad5;
-  color: white;
-  border-radius: 15px;
+  padding: 13px;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
   font-weight: 600;
-  text-decoration: none;
+  font-size: 15px;
   transition: 0.2s;
 }
 
-.btn:hover {
-  background: #ff7cc8;
+.primary {
+  background: linear-gradient(135deg, #ffa4dd, #ff7bc7);
+  color: white;
+}
+
+.primary:hover {
+  opacity: 0.9;
   transform: translateY(-2px);
 }
 
+.secondary {
+  background: #ffe9f5;
+  border: 2px dashed #ffb5df;
+  color: #c05f9a;
+}
+
+.secondary:hover {
+  background: #ffe1f1;
+}
+
 /* ------------------------------------------------------------ */
-/* TOP RIGHT TOOLS (music + dark toggle)                        */
+/* META INFO                                                    */
+/* ------------------------------------------------------------ */
+
+.meta {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #777;
+}
+
+/* ------------------------------------------------------------ */
+/* TOOLBAR                                                      */
 /* ------------------------------------------------------------ */
 
 .toolbar {
   position: fixed;
-  top: 20px;
+  bottom: 20px;
   right: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(5px);
+  padding: 10px 16px;
+  border-radius: 20px;
   display: flex;
-  gap: 12px;
-  z-index: 999;
+  gap: 10px;
+  box-shadow: 0 0 20px rgba(255,150,200,0.3);
+  z-index: 10;
 }
 
-.tool-btn {
-  background: white;
-  padding: 10px 12px;
-  border-radius: 13px;
-  box-shadow: 0 0 15px rgba(255, 180, 220, 0.4);
+.toolbar button {
+  background: none;
+  border: none;
+  font-size: 20px;
   cursor: pointer;
-  font-size: 14px;
-  transition: 0.2s;
 }
 
-.tool-btn:hover {
-  background: #ffe6f2;
+/* ------------------------------------------------------------ */
+/* MODAL                                                        */
+/* ------------------------------------------------------------ */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+  z-index: 100;
+}
+
+.modalCard {
+  background: white;
+  padding: 25px;
+  border-radius: 25px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+.modalClose {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 /* ------------------------------------------------------------ */
 /* SUCCESS PAGE                                                 */
 /* ------------------------------------------------------------ */
 
-.success-page {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background: linear-gradient(#ffd8ec, #ffeaf6);
-}
-
 .success-container {
-  text-align: center;
+  max-width: 340px;
+  margin: 120px auto;
   background: white;
-  padding: 40px;
-  border-radius: 30px;
-  width: 330px;
-  box-shadow: 0 0 40px rgba(255, 150, 200, 0.4);
-}
-
-.success-bunny {
-  width: 110px;
-  margin-bottom: 20px;
-}
-
-/* ------------------------------------------------------------ */
-/* ADMIN PAGE                                                   */
-/* ------------------------------------------------------------ */
-
-.admin-page {
-  padding: 40px;
-}
-
-.admin-title {
+  padding: 35px;
   text-align: center;
-  color: #ff6ebb;
-  margin-bottom: 25px;
-}
-
-.admin-messages {
-  max-width: 600px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.admin-card {
-  background: #ffffff;
-  border: 2px solid #ffc7e6;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(255, 150, 200, 0.25);
-}
-
-.msg-text {
-  font-size: 17px;
-  margin-bottom: 10px;
-}
-
-.msg-code {
-  font-size: 14px;
-  opacity: 0.7;
-}
-
-.msg-time {
-  font-size: 12px;
-  opacity: 0.6;
-  margin-top: 6px;
+  border-radius: 28px;
+  box-shadow: 0 12px 40px rgba(255, 150, 200, 0.35);
 }
 
 /* ------------------------------------------------------------ */
@@ -239,34 +261,23 @@ textarea:focus, input:focus {
   background: #2b2b2b !important;
 }
 
-.dark .container,
-.dark .success-container,
-.dark .admin-card {
+.dark .card,
+.dark .success-container {
   background: #3b3b3b;
   color: #eee;
-  border-color: #555;
 }
 
-.dark textarea,
-.dark input {
+.dark input,
+.dark textarea {
   background: #4a4a4a;
   border-color: #666;
-  color: #fff;
+  color: white;
 }
 
-.dark .btn {
+.dark .primary { background: #555; }
+
+.dark .secondary {
   background: #444;
-}
-
-.dark .btn:hover {
-  background: #555;
-}
-
-.dark .tool-btn {
-  background: #444;
-  color: #eee;
-}
-
-.dark .tool-btn:hover {
-  background: #555;
+  color: #ddd;
+  border-color: #777;
 }
