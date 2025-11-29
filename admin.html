@@ -1,137 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Admin Panel</title>
-
-<style>
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif;
-    background: linear-gradient(180deg, #fdf7ff, #f4e8ff);
-    overflow-x: hidden;
-    color: #6a4e7c;
-  }
-
-  h1 {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 2.5rem;
-    color: #b48bd9;
-    text-shadow: 0 0 15px #f2e6ff;
-  }
-
-  .dashboard {
-    margin: 40px auto;
-    width: 90%;
-    max-width: 900px;
-    display: grid;
-    gap: 20px;
-  }
-
-  .card {
-    background: #ffffffcc;
-    border-radius: 22px;
-    padding: 20px;
-    box-shadow: 0 8px 25px rgba(195, 163, 240, 0.25);
-    backdrop-filter: blur(6px);
-    transition: 0.2s;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-  }
-
-  .confession {
-    background: #f8f1ff;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: inset 0 0 10px #e8d7ff;
-    color: #6c4d83;
-    margin-bottom: 10px;
-  }
-
-  /* CLOUDS */
-  .cloud {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50px;
-    filter: blur(2px);
-    animation: floatClouds 35s linear infinite;
-  }
-  .cloud:before, .cloud:after {
-    content: "";
-    position: absolute;
-    background: rgba(255, 255, 255, 0.95);
-    width: 70%;
-    height: 70%;
-    border-radius: 50%;
-  }
-  .cloud:before { top: -20px; left: 10px; }
-  .cloud:after { bottom: -15px; right: 15px; }
-  @keyframes floatClouds {
-    0% { transform: translateX(-200px); }
-    100% { transform: translateX(110vw); }
-  }
-
-  /* HEARTS */
-  .heart {
-    position: absolute;
-    font-size: 22px;
-    color: #ffb3d9;
-    opacity: 0.7;
-    animation: floatHearts 8s ease-in-out infinite;
-  }
-
-  @keyframes floatHearts {
-    0% { transform: translateY(0) scale(1); opacity: 0.7; }
-    100% { transform: translateY(-120px) scale(1.4); opacity: 0; }
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin — Tiny Whispers</title>
+  <link rel="icon" href="favicon.png" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-<h1>Admin Dashboard 💜</h1>
+  <!-- Clouds -->
+  <div id="clouds" class="clouds" aria-hidden="true"></div>
 
-<div class="dashboard">
+  <!-- Floating hearts -->
+  <div id="floatingHearts"></div>
 
-  <div class="card">
-    <h3>Latest Confessions</h3>
-
-    <div class="confession">I hope someone understands me someday…</div>
-    <div class="confession">I miss someone I shouldn’t miss.</div>
-    <div class="confession">I’m scared to be honest about how tired I am.</div>
-
+  <!-- Toolbar -->
+  <div class="toolbar" role="toolbar">
+    <button id="darkToggle" class="tool-btn" title="Toggle Dark Mode">🌙</button>
+    <button id="musicToggle" class="tool-btn" title="Toggle Music">🔊</button>
+    <button class="tool-btn" onclick="location.href='index.html'">🏠</button>
   </div>
 
-  <div class="card">
-    <h3>Stats</h3>
-    <p>Total confessions: <b>128</b></p>
-    <p>Today: <b>7</b></p>
-  </div>
+  <main class="admin-page">
+    <h1 class="admin-title">📬 Whisper Inbox</h1>
 
-</div>
+    <div id="adminList" class="admin-messages">
+      <!-- Messages will load here via main.js -->
+    </div>
+  </main>
 
-<!-- CLOUDS -->
-<div class="cloud" style="top: 80px; left: -150px; width: 200px; height: 90px; animation-duration: 42s;"></div>
-<div class="cloud" style="top: 260px; left: -180px; width: 240px; height: 110px; animation-duration: 50s;"></div>
+  <!-- Music -->
+  <audio id="bgm" preload="auto" src="bgm.mp3"></audio>
 
-<!-- HEARTS -->
-<script>
-function spawnHeart() {
-  const heart = document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML = "❤";
-  heart.style.left = Math.random() * 90 + "vw";
-  heart.style.bottom = "0px";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 8000);
-}
-setInterval(spawnHeart, 1200);
-</script>
+  <script src="main.js"></script>
 
 </body>
 </html>
