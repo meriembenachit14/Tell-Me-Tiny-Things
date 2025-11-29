@@ -56,3 +56,18 @@ helpClose.onclick = () => helpModal.classList.add("hidden");
 helpModal.onclick = (e) => {
   if (e.target === helpModal) helpModal.classList.add("hidden");
 };
+
+/* ------------------------------------------------------------ */
+/* FLOATING CLOUDS — CREATED IN JS                              */
+/* ------------------------------------------------------------ */
+
+function spawnCloud(className) {
+  const cloud = document.createElement("div");
+  cloud.classList.add("cloud", className);
+  document.body.appendChild(cloud);
+}
+
+spawnCloud("c1");
+spawnCloud("c2");
+spawnCloud("c3");
+spawnCloud("c4");
