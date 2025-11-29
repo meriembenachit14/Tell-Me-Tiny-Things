@@ -6,64 +6,30 @@
 <title>Tiny Whispers — Admin</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <style>
-body{
-  margin:0;
-  font-family:"Poppins";
-  background:linear-gradient(135deg,#fff3fb,#f7efff);
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:36px;
-  color:#7c4f9a;
-}
-.card{
-  background:rgba(255,255,255,0.92);
-  padding:30px;
-  border-radius:26px;
-  max-width:720px;
-  border:1px solid #f4d8ff;
-  box-shadow:0 14px 38px rgba(200,150,255,0.18);
-}
-.emoji{
-  font-size:56px;
-  animation:floaty 2s infinite;
-  text-align:center;
-  margin-bottom:6px;
-}
-@keyframes floaty{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
-}
-.open-btn{
-  display:block;
-  margin:20px auto 0;
-  background:linear-gradient(135deg,#ffb8e5,#ceb8ff);
-  color:white;
-  padding:12px 18px;
-  border-radius:16px;
-  text-align:center;
-  text-decoration:none;
-  font-weight:600;
-  box-shadow:0 10px 24px rgba(200,150,255,0.22);
-}
+  :root{--pink:#ffb6e6;--lav:#d9c8ff;--text:#6b3e85}
+  html,body{height:100%;margin:0;font-family:"Poppins",system-ui; background:linear-gradient(135deg,#fff6fb,#f9f4ff); color:var(--text); display:flex;align-items:center;justify-content:center;padding:28px}
+  .card{background:rgba(255,255,255,0.94);padding:32px;border-radius:26px;max-width:760px;width:100%;box-shadow:0 20px 48px rgba(200,140,220,0.12);border:1px solid rgba(255,210,240,0.6);text-align:center;backdrop-filter:blur(6px)}
+  .emoji{font-size:56px;animation:floaty 2s infinite;margin-bottom:8px}
+  @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+  h1{margin:6px 0 8px;font-size:26px}
+  p,li{color:#8760a3}
+  ol{text-align:left;margin:14px auto;max-width:520px}
+  .open-btn{display:inline-block;margin-top:18px;padding:12px 18px;border-radius:16px;background:linear-gradient(135deg,var(--pink),var(--lav));color:#fff;text-decoration:none;font-weight:700;box-shadow:0 12px 28px rgba(210,150,255,0.18)}
+  .note{margin-top:12px;font-size:13px;color:#9a79bb}
 </style>
 </head>
-
 <body>
   <div class="card">
     <div class="emoji">📥🫧</div>
     <h1>Tiny Whispers — Admin</h1>
-    <p>You can view all anonymous whispers in your FormSubmit inbox.</p>
-
+    <p>All anonymous whispers are delivered to your FormSubmit inbox.</p>
     <ol>
-      <li>Go to: <a href="https://formsubmit.co/dashboard" target="_blank">formsubmit.co/dashboard</a></li>
-      <li>Log in with your email</li>
-      <li>Open “Submissions” to read the whispers</li>
+      <li>Go to: <a href="https://formsubmit.co/dashboard" target="_blank" rel="noopener">formsubmit.co/dashboard</a></li>
+      <li>Log in with your account email</li>
+      <li>Open <strong>Submissions / Inbox</strong> to read messages</li>
     </ol>
-
-    <a class="open-btn" href="https://formsubmit.co/dashboard" target="_blank">Open Inbox 💌</a>
+    <a class="open-btn" href="https://formsubmit.co/dashboard" target="_blank" rel="noopener">Open Inbox 💌</a>
+    <div class="note">Tip: set email notifications in FormSubmit for instant alerts.</div>
   </div>
 </body>
 </html>
