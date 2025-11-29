@@ -224,6 +224,4 @@ function initAffirmations(){
   document.head.appendChild(s);
 })();
 
-/* helper to get DOM safely */
-function $(sel){ return document.querySelector(sel); }
-function $$(sel){ return Array.from(document.querySelectorAll(sel)); }
+::contentReference[oaicite:0]{index=0}
