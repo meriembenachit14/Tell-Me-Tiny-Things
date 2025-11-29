@@ -1,41 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tiny Whispers — Admin</title>
-  <link rel="icon" href="favicon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="favicon.png">
 </head>
-<body>
-  <div id="clouds" class="clouds" aria-hidden="true"></div>
 
-  <main class="wrap" role="main">
-    <section class="card adminCard">
-      <div class="emoji">📥🫧</div>
-      <h1>Admin — Tiny Whispers</h1>
-      <p class="lead">Open your FormSubmit dashboard to read whispers.</p>
+<body class="admin-page">
 
-      <ol class="adminSteps">
-        <li>Go to <a href="https://formsubmit.co/dashboard" target="_blank" rel="noopener">formsubmit.co/dashboard</a></li>
-        <li>Log in with: <strong>meriembenachit14@gmail.com</strong></li>
-        <li>Open <strong>Submissions</strong> to read messages</li>
-      </ol>
+  <h1 class="admin-title">Tiny Whispers — Admin Inbox 🐰💌</h1>
 
-      <div class="rowInline">
-        <a class="btn primary" href="https://formsubmit.co/dashboard" target="_blank">Open Inbox</a>
-        <a class="btn secondary" href="index.html">Return</a>
-      </div>
+  <div id="messages" class="admin-messages"></div>
 
-      <div class="adminNote">Tip: enable email notifications in FormSubmit for instant alerts.</div>
-    </section>
-  </main>
+  <script type="module">
+    // Firebase (same config as in main.js)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-  <script>
-    console.log('Tiny Whispers — visits:', localStorage.getItem('tw_visits') || 0,
-                'sends:', localStorage.getItem('tw_sends') || 0);
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getDatabase(app);
+
+    const messagesDiv = document.getElementById("messages");
+
+    onValue(ref(db, "messages"), (snapshot) => {
+      messagesDiv.innerHTML = "";
+      const data = snapshot.val();
+
+      if (!data) {
+        messagesDiv.innerHTML = "<p class='no-msg'>No messages yet.</p>";
+        return;
+      }
+
+      Object.values(data)
+        .reverse()
+        .forEach(msg => {
+          const card = document.createElement("div");
+          card.className = "admin-card";
+
+          card.innerHTML = `
+            <p class="msg-text">${msg.text}</p>
+            <p class="msg-code">Codename: ${msg.codename || "—"}</p>
+            <p class="msg-time">${new Date(msg.time).toLocaleString()}</p>
+          `;
+
+          messagesDiv.appendChild(card);
+        });
+    });
   </script>
 
-  <script src="main.js"></script>
 </body>
 </html>
