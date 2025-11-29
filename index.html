@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tiny Whispers — Tiny Things 💌</title>
   <link rel="icon" href="favicon.png" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=3" />
 </head>
 <body>
-  <!-- Loading overlay (shows while page assets initialize) -->
+  <!-- Loading overlay -->
   <div id="loading" class="loading">
     <div class="loaderContent">
       <div class="loaderMascot">🐰</div>
@@ -16,17 +16,17 @@
     </div>
   </div>
 
-  <!-- Cloud container (CSS+JS will populate positioning/animation) -->
+  <!-- Clouds -->
   <div id="clouds" class="clouds" aria-hidden="true"></div>
 
-  <!-- Floating toolbar -->
+  <!-- Toolbar -->
   <div class="toolbar" role="toolbar" aria-label="site controls">
     <button id="darkToggle" title="Toggle dark mode">🌙</button>
     <button id="musicToggle" title="Toggle music">🔊</button>
     <button id="helpBtn" title="Help">❔</button>
   </div>
 
-  <!-- Main card -->
+  <!-- Main -->
   <main class="wrap" role="main">
     <section class="card" aria-labelledby="title">
       <div class="mascot" aria-hidden="true" id="mascot">🐰</div>
@@ -37,7 +37,6 @@
       <div id="affirmation" class="affirmation" aria-hidden="true"></div>
 
       <form id="tinyForm" action="https://formsubmit.co/meriembenachit14@gmail.com" method="POST" autocomplete="off">
-        <!-- FormSubmit required -->
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_template" value="table" />
         <input type="hidden" name="_subject" value="💌 Tiny Whisper" />
@@ -64,7 +63,7 @@
     </section>
   </main>
 
-  <!-- small helpful modal -->
+  <!-- Help Modal -->
   <div id="helpModal" class="modal" aria-hidden="true" role="dialog" aria-label="Help">
     <div class="modalCard">
       <button class="modalClose" id="helpClose" aria-label="Close">✕</button>
@@ -74,11 +73,11 @@
     </div>
   </div>
 
+  <!-- Audio -->
   <audio id="bgm" preload="auto"></audio>
-  <!-- small typing sound embedded as data URL -->
   <audio id="typeBeep" preload="auto" src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA="></audio>
 
-  <!-- FIXED: RENAMED JS FILE -->
-  <script src="main.js"></script>
+  <!-- JS -->
+  <script src="main.js?v=3"></script>
 </body>
 </html>
