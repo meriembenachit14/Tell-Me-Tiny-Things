@@ -23,10 +23,10 @@
   </main>
 
   <script>
-    // small confetti animation on the success page
+    // confetti on success (keeps lightweight)
     (function confetti(){
       const colors=['#ff9edb','#c79aff','#ffd4f4','#fff6ea'];
-      for(let i=0;i<24;i++){
+      for(let i=0;i<18;i++){
         const el = document.createElement('div');
         el.className = 'confetti';
         el.style.left = (10 + Math.random()*80) + 'vw';
@@ -35,13 +35,12 @@
         el.style.width = (8 + Math.random()*10) + 'px';
         el.style.height = el.style.width;
         el.style.borderRadius = '2px';
-        el.style.opacity = 0.9;
+        el.style.opacity = 0.95;
         el.style.position='fixed';
-        el.style.transform = 'translateY(0)';
         el.style.zIndex = 999;
-        el.style.animation = 'fall 1400ms forwards ease';
+        el.style.animation = 'fall 1200ms forwards ease';
         document.body.appendChild(el);
-        setTimeout(()=> el.remove(), 1500);
+        setTimeout(()=> el.remove(), 1400);
       }
     })();
   </script>
@@ -49,5 +48,7 @@
   <style>
     @keyframes fall { to { transform: translateY(110vh) rotate(200deg); opacity:0; } }
   </style>
+
+  <script src="main.js"></script>
 </body>
 </html>
