@@ -4,10 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Tiny Whispers — Admin</title>
+  <link rel="icon" href="favicon.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="clouds" aria-hidden="true"></div>
+  <div id="clouds" class="clouds" aria-hidden="true"></div>
 
   <main class="wrap" role="main">
     <section class="card adminCard">
@@ -27,12 +28,11 @@
       </div>
 
       <div class="adminNote">Tip: enable email notifications in FormSubmit for instant alerts.</div>
-
     </section>
   </main>
 
   <script>
-    // small nicety: show total visitors & sends in console (pulled from localStorage)
+    // show visits & sends in console
     console.log('Tiny Whispers — visits:', localStorage.getItem('tw_visits') || 0,
                 'sends:', localStorage.getItem('tw_sends') || 0);
   </script>
