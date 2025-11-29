@@ -3,32 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Message Sent • Tiny Whispers</title>
+  <title>Message Sent ✨</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" href="favicon.png">
 </head>
+<body>
 
-<body class="success-page">
+<!-- floating clouds -->
+<div class="clouds">
+  <div class="cloud small" style="top:12%; left:10%; animation: floatCloud 9s infinite ease-in-out;"></div>
+  <div class="cloud med" style="top:32%; left:70%; animation: floatCloud 13s infinite ease-in-out;"></div>
+  <div class="cloud large" style="top:68%; left:20%; animation: floatCloud 16s infinite ease-in-out;"></div>
+</div>
 
-  <div class="success-container">
-    <img src="bunny.png" class="success-bunny" alt="">
-    <h1>Your tiny whisper is on its way 💌</h1>
-    <p>The receiver will get it soon.</p>
+<div class="wrap">
+  <div class="box">
+    <div class="mascot">🐰💌</div>
 
-    <a href="index.html" class="btn">Send Another</a>
+    <h1>Your tiny whisper has been sent! ✨</h1>
+    <p class="lead">
+      Your whisper goes straight to the receiver’s inbox, safely and privately. 💗  
+    </p>
+
+    <a class="btn primary" href="index.html">Send another message</a>
   </div>
+</div>
 
-  <script>
-    // Soft floating hearts for success page
-    function spawnHeart() {
-      const heart = document.createElement("div");
-      heart.className = "floating-heart";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 3 + Math.random() * 3 + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }
-    setInterval(spawnHeart, 600);
-  </script>
+<!-- toolbar (dark mode + music) -->
+<div class="toolbar">
+  <button id="darkToggle">🌙</button>
+  <button id="musicToggle">🎵</button>
+</div>
+
+<audio id="bgm" src="bgm.mp3" loop></audio>
+<script src="main.js"></script>
+
 </body>
 </html>
