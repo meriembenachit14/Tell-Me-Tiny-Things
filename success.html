@@ -1,131 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Thanks — Tiny Thing Sent 💌</title>
-<link rel="icon" type="image/png" href="favicon.png">
-
-<style>
-:root{
-  --bg1:#fff0f7;
-  --bg2:#ffeafd;
-  --text:#7a4e91;
-  --card-bg:rgba(255,255,255,0.9);
-  --accent:#ff9ecf;
-}
-
-/* Dark mode */
-@media(prefers-color-scheme:dark){
-  :root{
-    --bg1:#2a1a32;
-    --bg2:#3a2347;
-    --text:#f7d8ff;
-    --card-bg:rgba(255,255,255,0.08);
-    --accent:#ff77c9;
-  }
-}
-
-html,body{
-  margin:0;
-  height:100%;
-  font-family:"Poppins",sans-serif;
-  background:linear-gradient(135deg,var(--bg1),var(--bg2));
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  color:var(--text);
-  overflow:hidden;
-}
-
-/* Clouds */
-.cloud{
-  position:fixed;
-  width:180px;
-  height:60px;
-  background:linear-gradient(180deg,#fff,#fff5fb);
-  border-radius:40px;
-  filter:drop-shadow(0 6px 18px rgba(255,150,200,0.15));
-  animation: floatCloud 40s linear infinite;
-  opacity:0.85;
-}
-.cloud:before,.cloud:after{
-  content:"";
-  position:absolute;
-  background:inherit;
-  border-radius:50%;
-}
-.cloud:before{ width:70px;height:70px;left:-25px;top:-20px; }
-.cloud:after{ width:90px;height:90px;right:-40px;top:-30px; }
-
-.cloud.x2{ top:30%; left:65%; transform:scale(.8); animation-duration:55s; opacity:.75; }
-.cloud.x3{ top:70%; left:10%; transform:scale(.7); animation-duration:60s; opacity:.7; }
-
-@keyframes floatCloud{
-  0%{ transform:translateX(-20vw); }
-  100%{ transform:translateX(120vw); }
-}
-
-/* Box */
-.box{
-  background:var(--card-bg);
-  padding:38px;
-  border-radius:28px;
-  text-align:center;
-  border:2px solid rgba(255,200,240,0.5);
-  box-shadow:0 14px 38px rgba(0,0,0,0.12);
-  max-width:500px;
-  backdrop-filter:blur(8px);
-  animation: pop 0.6s ease;
-}
-@keyframes pop{
-  0%{ transform:scale(.7); opacity:0; }
-  100%{ transform:scale(1); opacity:1; }
-}
-
-.emoji{
-  font-size:62px;
-  margin-bottom:8px;
-  animation:floaty 2s ease-in-out infinite;
-}
-@keyframes floaty{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-8px)}
-  100%{transform:translateY(0)}
-}
-
-h1{ margin:8px 0 6px 0; font-size:26px; }
-p{ margin:0 0 12px 0; color:var(--text); }
-
-a.btn{
-  display:inline-block;
-  margin-top:18px;
-  padding:12px 20px;
-  background:var(--accent);
-  color:white;
-  border-radius:16px;
-  text-decoration:none;
-  font-weight:600;
-  box-shadow:0 8px 20px rgba(255,120,200,0.18);
-  transition:.15s;
-}
-a.btn:hover{ transform:translateY(-3px); }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Whisper Sent — Tiny Whispers</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <div class="clouds" aria-hidden="true"></div>
 
-<!-- clouds -->
-<div class="cloud" style="top:10%;left:-15%;"></div>
-<div class="cloud x2"></div>
-<div class="cloud x3"></div>
+  <main class="wrap" role="main">
+    <section class="box centerCard">
+      <div class="emoji">💌🫧</div>
+      <h1>Your whisper was sent</h1>
+      <p class="lead">Thanks for sharing — your message arrived and is anonymous.</p>
+      <div class="rowInline">
+        <a class="btn primary" href="index.html">Send Another</a>
+        <a class="btn secondary" href="admin.html">Open Admin</a>
+      </div>
+    </section>
+  </main>
 
-<div class="box">
-  <div class="emoji">💌✨</div>
-  <h1>Your tiny thing was sent!</h1>
-  <p>Thank you for sharing. Your message is safely delivered and 100% anonymous.</p>
-  <a class="btn" href="index.html">Send Another</a>
-</div>
+  <script>
+    // small confetti animation on the success page
+    (function confetti(){
+      const colors=['#ff9edb','#c79aff','#ffd4f4','#fff6ea'];
+      for(let i=0;i<24;i++){
+        const el = document.createElement('div');
+        el.className = 'confetti';
+        el.style.left = (10 + Math.random()*80) + 'vw';
+        el.style.top = (-10 - Math.random()*10) + 'vh';
+        el.style.background = colors[Math.floor(Math.random()*colors.length)];
+        el.style.width = (8 + Math.random()*10) + 'px';
+        el.style.height = el.style.width;
+        el.style.borderRadius = '2px';
+        el.style.opacity = 0.9;
+        el.style.position='fixed';
+        el.style.transform = 'translateY(0)';
+        el.style.zIndex = 999;
+        el.style.animation = 'fall 1400ms forwards ease';
+        document.body.appendChild(el);
+        setTimeout(()=> el.remove(), 1500);
+      }
+    })();
+  </script>
 
+  <style>
+    @keyframes fall { to { transform: translateY(110vh) rotate(200deg); opacity:0; } }
+  </style>
 </body>
 </html>
