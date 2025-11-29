@@ -2,96 +2,59 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tiny Thing Sent 💌✨</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Whisper Sent 💌</title>
 <link rel="icon" type="image/png" href="favicon.png">
-
 <style>
-  body {
-    margin: 0;
-    font-family: "Poppins", sans-serif;
-    background: linear-gradient(135deg, #ffeef8, #fff4ff, #fceaff);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    color: #8a3f9a;
-    animation: fadeIn 0.8s ease;
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.96); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  .box {
-    background: rgba(255, 255, 255, 0.92);
-    padding: 40px 32px;
-    border-radius: 32px;
-    text-align: center;
-    border: 2px solid #ffd9f2;
-    box-shadow: 0 12px 40px rgba(230, 160, 210, 0.16);
-    max-width: 520px;
-    backdrop-filter: blur(6px);
-    animation: floatUp 0.9s ease;
-  }
-
-  @keyframes floatUp {
-    from { transform: translateY(16px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-  }
-
-  .emoji {
-    font-size: 72px;
-    animation: bounce 2s infinite;
-    margin-bottom: 6px;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  h1 {
-    font-size: 28px;
-    margin: 8px 0 12px 0;
-    color: #9a4fb5;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-  }
-
-  p {
-    color: #6f4f8a;
-    margin: 0;
-    font-size: 15px;
-    line-height: 1.5;
-  }
-
-  .btn {
-    display: inline-block;
-    margin-top: 22px;
-    background: #ff9edc;
-    color: white;
-    font-weight: 600;
-    padding: 13px 20px;
-    border-radius: 16px;
-    text-decoration: none;
-    box-shadow: 0 8px 22px rgba(255, 140, 210, 0.18);
-    transition: 0.2s ease;
-  }
-
-  .btn:hover {
-    transform: translateY(-3px) scale(1.03);
-  }
+body{
+  margin:0;
+  font-family:"Poppins";
+  background:linear-gradient(135deg,#fff3fb,#f6edff);
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#7a4d9b;
+}
+.box{
+  background:rgba(255,255,255,0.9);
+  padding:34px;
+  border-radius:28px;
+  max-width:480px;
+  text-align:center;
+  border:1px solid #f8d8ff;
+  box-shadow:0 12px 34px rgba(200,150,255,0.18);
+}
+.emoji{
+  font-size:58px;
+  margin-bottom:8px;
+  animation:floaty 2.2s infinite;
+}
+@keyframes floaty{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+  100%{transform:translateY(0)}
+}
+.btn{
+  display:inline-block;
+  margin-top:16px;
+  padding:12px 18px;
+  background:linear-gradient(135deg,#ffb8e5,#ceb8ff);
+  color:white;
+  border-radius:16px;
+  text-decoration:none;
+  font-weight:600;
+  box-shadow:0 10px 24px rgba(210,150,255,0.22);
+}
 </style>
 </head>
 
 <body>
   <div class="box">
-    <div class="emoji">💌🌸</div>
-    <h1>Your tiny thing was sent!</h1>
-    <p>It’s now safely delivered… thank you for sharing something soft today.</p>
-    <a class="btn" href="index.html">Send Another 🌈</a>
+    <div class="emoji">💌🫧</div>
+    <h1>Your Whisper Was Sent</h1>
+    <p>Thank you for sharing something tiny and true.</p>
+    <a class="btn" href="index.html">Send Another Whisper</a>
   </div>
 </body>
 </html>
