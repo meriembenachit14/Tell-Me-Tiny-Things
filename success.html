@@ -1,34 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Message Sent • Tiny Whispers</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="favicon.png">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Success</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(180deg, #fdf7ff, #f4e8ff);
+    overflow: hidden;
+    color: #6a4e7c;
+    text-align: center;
+  }
+
+  h1 {
+    margin-top: 120px;
+    font-size: 2.8rem;
+    color: #b48bd9;
+    text-shadow: 0 0 15px #f2e6ff;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #8f78a8;
+    margin-top: -10px;
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 35px;
+    padding: 14px 35px;
+    background: #d7b3ff;
+    color: white;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 6px 15px rgba(183, 141, 232, 0.4);
+    transition: 0.2s;
+  }
+
+  a:hover {
+    background: #c99dff;
+  }
+
+  /* CLOUD ELEMENTS */
+  .cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    filter: blur(2px);
+    animation: floatClouds 35s linear infinite;
+  }
+  .cloud:before, .cloud:after {
+    content: "";
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    width: 70%;
+    height: 70%;
+    border-radius: 50%;
+  }
+  .cloud:before { top: -20px; left: 10px; }
+  .cloud:after { bottom: -15px; right: 15px; }
+  @keyframes floatClouds {
+    0% { transform: translateX(-200px); }
+    100% { transform: translateX(110vw); }
+  }
+
+  /* HEARTS */
+  .heart {
+    position: absolute;
+    font-size: 22px;
+    color: #ffb3d9;
+    opacity: 0.7;
+    animation: floatHearts 8s ease-in-out infinite;
+  }
+
+  @keyframes floatHearts {
+    0% { transform: translateY(0) scale(1); opacity: 0.7; }
+    100% { transform: translateY(-120px) scale(1.4); opacity: 0; }
+  }
+</style>
 </head>
 
-<body class="success-page">
+<body>
 
-  <div class="success-container">
-    <img src="bunny.png" class="success-bunny" alt="">
-    <h1>Your tiny whisper is on its way 💌</h1>
-    <p>The receiver will get it soon.</p>
+<h1>Thank You 💗</h1>
+<p>Your tiny thought has been sent softly.</p>
 
-    <a href="index.html" class="btn">Send Another</a>
-  </div>
+<a href="index.html">Send another</a>
 
-  <script>
-    // Soft floating hearts for success page
-    function spawnHeart() {
-      const heart = document.createElement("div");
-      heart.className = "floating-heart";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = 3 + Math.random() * 3 + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 5000);
-    }
-    setInterval(spawnHeart, 600);
-  </script>
+<!-- CLOUDS -->
+<div class="cloud" style="top: 60px; left: -150px; width: 180px; height: 80px; animation-duration: 38s;"></div>
+<div class="cloud" style="top: 200px; left: -200px; width: 240px; height: 100px; animation-duration: 45s;"></div>
+
+<!-- HEARTS -->
+<script>
+function spawnHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random() * 90 + "vw";
+  heart.style.bottom = "0px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 8000);
+}
+setInterval(spawnHeart, 1200);
+</script>
+
 </body>
 </html>
