@@ -76,7 +76,7 @@ document.getElementById("darkToggle").addEventListener("click", () => {
    Background music
 --------------------------------*/
 const bgm = document.getElementById("bgm");
-bgm.src = "birthday-bgmusic.mp3"; // your file name
+bgm.src = "bgm.mp3";  // <-- FIXED TO YOUR FILE NAME
 
 let musicOn = false;
 
