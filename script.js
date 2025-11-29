@@ -1,0 +1,229 @@
+/* =========================
+   Tiny Whispers — script.js
+   ========================= */
+
+/* CONFIG */
+const CONFIG = {
+  assetsPath: 'assets',          // optional folder where you upload bgm.mp3
+  bgmFile: 'bgm.mp3',            // optional background music file (place at assets/bgm.mp3)
+  typingSoundDataURL: 'data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YQAAAAA='
+};
+
+/* UTIL — DOM helpers */
+const $ = sel => document.querySelector(sel);
+const $$ = sel => document.querySelectorAll(sel);
+
+/* ——— Loading overlay ——— */
+window.addEventListener('load', () => {
+  // hide loading overlay
+  const loading = $('#loading');
+  if (loading) loading.style.display = 'none';
+
+  // start small init
+  initClouds();
+  initCounters();
+  initMascot();
+  initAffirmations();
+  initTypingSound();
+});
+
+/* ——— Cloud generator (positions several fluffy clouds) ——— */
+function initClouds(){
+  const container = document.getElementById('clouds');
+  if(!container) return;
+  // create 6 clouds with random sizes and vertical positions
+  for(let i=0;i<6;i++){
+    const c = document.createElement('div');
+    c.className = 'cloud';
+    const w = 120 + Math.random()*200;
+    const h = Math.round(w*0.55);
+    c.style.width = w + 'px';
+    c.style.height = h + 'px';
+    c.style.left = (-200 - Math.random()*200) + 'px';
+    c.style.top = (8 + Math.random()*78) + 'vh';
+    c.style.opacity = 0.6 + Math.random()*0.3;
+    c.style.animationDuration = (30 + Math.random()*40) + 's';
+    container.appendChild(c);
+  }
+}
+
+/* ——— Basic counters (localStorage) ——— */
+function initCounters(){
+  // visits (increment once per page load)
+  const visitsKey = 'tw_visits_v1';
+  let visits = Number(localStorage.getItem(visitsKey) || 0);
+  visits++;
+  localStorage.setItem(visitsKey, visits);
+  const vEl = $('#visitCount') || $('#vCount');
+  if(vEl) vEl.textContent = visits;
+
+  // sent count
+  const sendsKey = 'tw_sends_v1';
+  let sends = Number(localStorage.getItem(sendsKey) || 0);
+  const sentEl = $('#sentCount');
+  if(sentEl) sentEl.textContent = sends;
+
+  // when form submitted, bump sends and persist
+  const form = $('#tinyForm');
+  if(form){
+    form.addEventListener('submit', (e) => {
+      // small visual & update counts
+      sends++;
+      localStorage.setItem(sendsKey, sends);
+      if(sentEl) sentEl.textContent = sends;
+
+      // play soft confirm sound if available (handled in confetti routine)
+      // show confetti then allow form to submit (short delay)
+      e.preventDefault();
+      playConfirmSequence(form);
+    });
+  }
+}
+
+/* ——— Confetti & heart rain on submit, then submit the form ——— */
+function playConfirmSequence(form){
+  spawnHearts(10);
+  throwConfetti(26);
+  // short delay to let the animation be seen, then submit
+  setTimeout(()=> form.submit(), 900);
+}
+
+function spawnHearts(n){
+  for(let i=0;i<n;i++){
+    setTimeout(()=> {
+      const h = document.createElement('div');
+      h.className = 'heart';
+      h.innerText = '💗';
+      h.style.left = (5 + Math.random()*90) + 'vw';
+      h.style.fontSize = (14 + Math.random()*18)+'px';
+      h.style.zIndex = 1400;
+      h.style.animationDuration = (4200 + Math.random()*3000) + 'ms';
+      document.body.appendChild(h);
+      setTimeout(()=> h.remove(), 9000);
+    }, i*70);
+  }
+}
+
+function throwConfetti(n){
+  for(let i=0;i<n;i++){
+    const el = document.createElement('div');
+    el.className = 'confetti';
+    el.style.left = (10 + Math.random()*80) + 'vw';
+    el.style.top = (-10 - Math.random()*10) + 'vh';
+    el.style.width = (6 + Math.random()*12)+'px';
+    el.style.height = el.style.width;
+    el.style.background = ['#ff9edb','#c79aff','#ffd4f4','#fff6ea'][Math.floor(Math.random()*4)];
+    el.style.borderRadius = '2px';
+    el.style.zIndex = 1300;
+    el.style.opacity = 0.95;
+    el.style.animation = `drop ${900 + Math.random()*700}ms forwards ease`;
+    document.body.appendChild(el);
+    setTimeout(()=> el.remove(), 1800);
+  }
+}
+
+/* ——— Typing sound (very short, unobtrusive) ——— */
+let typingAudio = null;
+function initTypingSound(){
+  typingAudio = new Audio(CONFIG.typingSoundDataURL);
+  typingAudio.volume = 0.18;
+  const inputs = $$('input[type="text"], textarea');
+  inputs.forEach(el => {
+    el.addEventListener('input', ()=> {
+      // restart short beep
+      try{ typingAudio.currentTime = 0; typingAudio.play(); }catch(e){}
+    });
+  });
+}
+
+/* ——— Mascot movement & micro interactions ——— */
+function initMascot(){
+  const mascot = document.getElementById('mascot');
+  if(!mascot) return;
+  // change mascot occasionally (still bunny)
+  setInterval(()=> {
+    // little blink/tilt
+    mascot.style.transform = 'translateY(-8px) rotate(4deg)';
+    setTimeout(()=> mascot.style.transform = '', 520);
+  }, 3800);
+
+  // peek when typing starts
+  const txt = $('#message');
+  if(txt){
+    txt.addEventListener('focus', ()=> {
+      mascot.style.transform = 'translateY(-12px) rotate(-3deg) scale(1.02)';
+      setTimeout(()=> mascot.style.transform = '', 700);
+    });
+  }
+}
+
+/* ——— Affirmation rotation ——— */
+function initAffirmations(){
+  const lines = [
+    "You matter — even the tiny things.",
+    "It's safe to whisper here.",
+    "Small truths are still truths.",
+    "A little thought can mean a lot.",
+    "Thank you for being brave."
+  ];
+  const el = $('#affirmation');
+  if(!el) return;
+  let i = 0;
+  function rotate(){
+    el.style.opacity = 0;
+    setTimeout(()=>{
+      el.textContent = lines[i];
+      i = (i+1) % lines.length;
+      el.style.opacity = 1;
+    }, 300);
+  }
+  rotate();
+  setInterval(rotate, 4200);
+}
+
+/* ——— Loading / assets (bgm) & toolbar controls ——— */
+(function initAudioAndToolbar(){
+  const bgmEl = $('#bgm');
+  const musicToggle = $('#musicToggle') || $('#musicToggle'); // may be empty on some pages
+  // try to load bgm from /assets/bgm.mp3 if present, else do nothing
+  if(bgmEl){
+    // attempt to set src to assets path — user may upload bgm.mp3
+    const testSrc = `${CONFIG.assetsPath}/${CONFIG.bgmFile}`;
+    // set; if file missing, playing will fail silently
+    bgmEl.src = testSrc;
+    bgmEl.volume = 0.22;
+  }
+
+  // toolbar buttons
+  const darkBtn = document.getElementById('darkToggle');
+  if(darkBtn) darkBtn.addEventListener('click', ()=> document.body.classList.toggle('dark'));
+
+  const musicBtn = document.getElementById('musicToggle');
+  if(musicBtn){
+    musicBtn.addEventListener('click', () => {
+      if(!bgmEl) return;
+      if(bgmEl.paused){ bgmEl.play().catch(()=>{}); musicBtn.textContent = '🔊'; } 
+      else { bgmEl.pause(); musicBtn.textContent = '🔈'; }
+    });
+  }
+
+  const helpBtn = document.getElementById('helpBtn');
+  const helpModal = document.getElementById('helpModal');
+  const helpClose = document.getElementById('helpClose');
+  if(helpBtn && helpModal){
+    helpBtn.addEventListener('click', ()=> helpModal.classList.add('show'));
+    helpClose && helpClose.addEventListener('click', ()=> helpModal.classList.remove('show'));
+    helpModal.addEventListener('click', (ev)=> { if(ev.target===helpModal) helpModal.classList.remove('show'); });
+  }
+})();
+
+/* ——— small polyfill: ensure drop keyframe exists ——— */
+(function injectDropKeyframe(){
+  const s = document.createElement('style');
+  s.innerHTML = '@keyframes drop{0%{transform:translateY(0);opacity:1}100%{transform:translateY(110vh);opacity:0}}';
+  document.head.appendChild(s);
+})();
+
+/* helper to get DOM safely */
+function $(sel){ return document.querySelector(sel); }
+function $$(sel){ return Array.from(document.querySelectorAll(sel)); }
