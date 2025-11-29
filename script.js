@@ -1,5 +1,5 @@
 /* =========================
-   Tiny Whispers — CLEAN script.js
+   Tiny Whispers — CLEAN script.js (SAFE)
    ========================= */
 
 /* CONFIG */
@@ -8,13 +8,13 @@ const CONFIG = {
   bgmFile: 'bgm.mp3'
 };
 
-/* UTIL — DOM helpers */
-const $ = sel => document.querySelector(sel);
-const $$ = sel => document.querySelectorAll(sel);
+/* UTIL — DOM helpers (renamed to avoid "$" conflicts) */
+const qs = sel => document.querySelector(sel);
+const qsa = sel => document.querySelectorAll(sel);
 
 /* ——— Loading overlay ——— */
 window.addEventListener('load', () => {
-  const loading = $('#loading');
+  const loading = qs('#loading');
   if (loading) loading.style.display = 'none';
 
   initClouds();
@@ -50,15 +50,15 @@ function initCounters(){
   let visits = Number(localStorage.getItem(visitsKey) || 0);
   visits++;
   localStorage.setItem(visitsKey, visits);
-  const vEl = $('#visitCount');
+  const vEl = qs('#visitCount');
   if(vEl) vEl.textContent = visits;
 
   const sendsKey = 'tw_sends_v1';
   let sends = Number(localStorage.getItem(sendsKey) || 0);
-  const sentEl = $('#sentCount');
+  const sentEl = qs('#sentCount');
   if(sentEl) sentEl.textContent = sends;
 
-  const form = $('#tinyForm');
+  const form = qs('#tinyForm');
   if(form){
     form.addEventListener('submit', (e) => {
       sends++;
@@ -115,12 +115,12 @@ function throwConfetti(n){
 /* ——— Typing sound ——— */
 let typingAudio = null;
 function initTypingSound(){
-  const beep = $('#typeBeep');
+  const beep = qs('#typeBeep');
   if(!beep) return;
   typingAudio = beep;
   typingAudio.volume = 0.18;
 
-  $$('#message, #codename').forEach(el => {
+  qsa('#message, #codename').forEach(el => {
     el.addEventListener('input', ()=> {
       try{
         typingAudio.currentTime = 0;
@@ -132,7 +132,7 @@ function initTypingSound(){
 
 /* ——— Mascot animation ——— */
 function initMascot(){
-  const mascot = $('#mascot');
+  const mascot = qs('#mascot');
   if(!mascot) return;
 
   setInterval(()=> {
@@ -140,7 +140,7 @@ function initMascot(){
     setTimeout(()=> mascot.style.transform = '', 520);
   }, 3800);
 
-  const txt = $('#message');
+  const txt = qs('#message');
   if(txt){
     txt.addEventListener('focus', ()=> {
       mascot.style.transform = 'translateY(-12px) rotate(-3deg) scale(1.02)';
@@ -159,7 +159,7 @@ function initAffirmations(){
     "Thank you for being brave."
   ];
 
-  const el = $('#affirmation');
+  const el = qs('#affirmation');
   if(!el) return;
 
   let i = 0;
@@ -178,12 +178,12 @@ function initAffirmations(){
 
 /* ——— Toolbar & audio ——— */
 (function initAudioAndToolbar(){
-  const bgmEl = $('#bgm');
-  const darkBtn = $('#darkToggle');
-  const musicBtn = $('#musicToggle');
-  const helpBtn = $('#helpBtn');
-  const helpModal = $('#helpModal');
-  const helpClose = $('#helpClose');
+  const bgmEl = qs('#bgm');
+  const darkBtn = qs('#darkToggle');
+  const musicBtn = qs('#musicToggle');
+  const helpBtn = qs('#helpBtn');
+  const helpModal = qs('#helpModal');
+  const helpClose = qs('#helpClose');
 
   if(bgmEl){
     bgmEl.src = `${CONFIG.assetsPath}/${CONFIG.bgmFile}`;
