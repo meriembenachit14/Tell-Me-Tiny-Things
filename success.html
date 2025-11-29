@@ -1,81 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tiny Whisper Sent 💌</title>
-  <link rel="icon" href="favicon.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whisper Sent</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
 
-  <!-- Floating clouds -->
-  <div id="clouds" class="clouds" aria-hidden="true"></div>
+<body class="success-body">
 
-  <main class="wrap">
-    <section class="card box">
-      <div class="mascot" aria-hidden="true" style="font-size:48px;margin-bottom:6px;">🐰</div>
+  <div class="success-wrapper">
+    <div class="success-card">
 
-      <h1>Whisper Delivered 💌</h1>
-      <p class="lead">
-        Your whisper goes straight to the receiver’s inbox — safely and privately.
+      <div class="success-icon">💌</div>
+
+      <h1 class="success-title">Whisper Sent ✨</h1>
+
+      <p class="success-message">
+        Your whisper goes straight to the receiver’s inbox, safely and privately.
       </p>
 
-      <p style="margin-top:6px;color:var(--muted);font-size:14px;">
-        Thank you for sharing something tiny today.
-      </p>
+      <a href="index.html" class="success-btn">Send Another</a>
 
-      <div style="margin-top:18px;">
-        <a href="index.html" class="btn primary">Send Another</a>
-      </div>
-    </section>
-  </main>
-
-  <!-- Hearts celebration -->
-  <script>
-    function spawnHearts(n){
-      for(let i=0;i<n;i++){
-        setTimeout(()=>{
-          const h=document.createElement('div');
-          h.className='heart';
-          h.innerText='💗';
-          h.style.left=(6+Math.random()*88)+'vw';
-          h.style.fontSize=(14+Math.random()*20)+'px';
-          const dur=6+Math.random()*4;
-          h.style.animation=`rise ${dur}s linear forwards`;
-          document.body.appendChild(h);
-          setTimeout(()=>h.remove(),dur*1000+300);
-        },i*80);
-      }
-    }
-    spawnHearts(20);
-  </script>
-
-  <!-- Reuse cloud float animation -->
-  <script>
-    function generateClouds(){
-      const ctn=document.getElementById('clouds');
-      if(!ctn) return;
-      const presets=[
-        {left:'10%',top:'12vh',cls:'large'},
-        {left:'70%',top:'8vh',cls:'med'},
-        {left:'18%',top:'32vh',cls:'med'},
-        {left:'80%',top:'65vh',cls:'small'},
-        {left:'6%',top:'78vh',cls:'small'},
-        {left:'50%',top:'50vh',cls:'large'}
-      ];
-      presets.forEach(p=>{
-        const d=document.createElement('div');
-        d.className='cloud '+p.cls;
-        d.style.left=p.left; d.style.top=p.top;
-        const t=20+Math.random()*30;
-        const delay=Math.random()*5;
-        d.style.animation=`floatCloud ${t}s ease-in-out ${delay}s infinite`;
-        ctn.appendChild(d);
-      });
-    }
-    generateClouds();
-  </script>
+    </div>
+  </div>
 
 </body>
 </html>
