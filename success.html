@@ -1,50 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Whisper Sent 💌 — Tiny Whispers</title>
-<link rel="icon" type="image/png" href="favicon.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tiny Thing Sent 💌</title>
 <style>
-  :root{--pink:#ffb6e6;--lav:#d9c8ff;--text:#6b3e85;}
-  html,body{height:100%;margin:0;font-family:"Poppins",system-ui; background:linear-gradient(135deg,#fff6fb,#f9f4ff); color:var(--text); display:flex; align-items:center; justify-content:center; padding:20px;}
-  .box{background:rgba(255,255,255,0.92);padding:36px;border-radius:28px;text-align:center;max-width:520px;border:1px solid rgba(255,210,240,0.6);box-shadow:0 18px 44px rgba(200,140,220,0.12);backdrop-filter:blur(6px)}
-  .emoji{font-size:64px;animation:bounce 2s infinite;margin-bottom:8px}
-  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-  h1{margin:6px 0 8px;font-size:26px;background:linear-gradient(90deg,#b25bff,#ff8ec4);-webkit-background-clip:text;color:transparent}
-  p{color:#8a66a6;margin:0 0 12px}
-  .btn{display:inline-block;padding:12px 18px;border-radius:16px;background:linear-gradient(135deg,var(--pink),var(--lav));color:#fff;text-decoration:none;font-weight:700;box-shadow:0 12px 28px rgba(210,150,255,0.2)}
-  /* confetti */
-  .conf{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:hidden;z-index:900}
-  .conf span{position:absolute;font-size:18px;opacity:0;transform:translateY(-10px);animation:confA 1600ms forwards}
-  @keyframes confA{0%{opacity:1;transform:translateY(-10px) scale(.9)}100%{opacity:0;transform:translateY(120vh) scale(1)}}
+body{
+  margin:0;
+  font-family:"Poppins",sans-serif;
+  background:linear-gradient(135deg,#ffe9f7,#fff3fe);
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#8a3fa0;
+}
+.box{
+  background:rgba(255,255,255,0.92);
+  padding:38px;
+  border-radius:26px;
+  text-align:center;
+  border:2px solid #ffdff4;
+  box-shadow:0 16px 40px rgba(230,140,210,0.15);
+  max-width:460px;
+}
+.emoji{
+  font-size:60px;
+  animation:float 2s infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+a.btn{
+  display:inline-block;
+  margin-top:18px;
+  padding:12px 20px;
+  background:#ff9edb;
+  color:white;
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:600;
+  box-shadow:0 10px 24px rgba(255,140,200,0.15);
+}
+a.btn:hover{ transform:translateY(-3px); }
 </style>
 </head>
 <body>
-  <div class="box" role="status" aria-live="polite">
-    <div class="emoji">💌🫧</div>
-    <h1>Thanks — your whisper arrived</h1>
-    <p>Softly received. Thank you for sharing something tiny and true.</p>
-    <a class="btn" href="index.html">Send Another Whisper</a>
+
+  <div class="box">
+    <div class="emoji">💌✨</div>
+    <h2>Your tiny thing was sent!</h2>
+    <p>Thank you for sharing your tiny thought.</p>
+    <a class="btn" href="index.html">Send another</a>
   </div>
 
-  <div class="conf" id="confetti"></div>
-
-<script>
-/* little pastel confetti (emoji + shapes) */
-const confetti = document.getElementById('confetti');
-const pieces = ['💗','🌸','🫧','✨','🧸'];
-for(let i=0;i<24;i++){
-  const e=document.createElement('span');
-  e.innerText = pieces[Math.floor(Math.random()*pieces.length)];
-  e.style.left = (5 + Math.random()*90) + 'vw';
-  e.style.top = (-6 - Math.random()*8) + 'vh';
-  e.style.fontSize = (12 + Math.random()*20) + 'px';
-  e.style.animationDelay = (Math.random()*300) + 'ms';
-  confetti.appendChild(e);
-}
-/* auto-remove confetti after animation */
-setTimeout(()=> confetti.remove(), 1900);
-</script>
 </body>
 </html>
